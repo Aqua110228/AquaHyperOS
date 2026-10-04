@@ -113,6 +113,14 @@ jobs:
         unzip -q kotlin-compiler-1.8.0.zip
         echo "$PWD/kotlinc/bin" >> $GITHUB_PATH
     
+    - name: 下载 AndroidX Preference
+      run: |
+        mkdir -p libs
+        wget -q https://repo1.maven.org/maven2/androidx/preference/preference/1.1.1/preference-1.1.1.aar -O libs/preference.aar
+        cd libs
+        unzip -q preference.aar classes.jar
+        mv classes.jar androidx-preference.jar
+    
     - name: 编译 Kotlin 源码
       run: |
         mkdir -p build/classes
@@ -122,7 +130,7 @@ jobs:
         
         # 编译所有 Kotlin 文件
         kotlinc \
-          -classpath "$ANDROID_HOME/platforms/android-30/android.jar:libs/xposed-api.jar" \
+          -classpath "$ANDROID_HOME/platforms/android-30/android.jar:libs/xposed-api.jar:libs/androidx-preference.jar" \
           -d build/classes \
           -jvm-target 1.8 \
           -verbose \
