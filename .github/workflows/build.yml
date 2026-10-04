@@ -42,7 +42,7 @@ jobs:
         mkdir -p libs
         
         # 下载 Xposed API
-        wget https://api-github.jitpack.io/com/github/rovo89/XposedBridge/82/XposedBridge-82.jar -O libs/xposed-api.jar
+        wget https://jitpack.io/com/github/rovo89/XposedBridge/82/XposedBridge-82.jar -O libs/xposed-api.jar
         
         # 下载 AndroidX Preference
         wget https://repo1.maven.org/maven2/androidx/preference/preference/1.1.1/preference-1.1.1.aar -O libs/preference.aar
