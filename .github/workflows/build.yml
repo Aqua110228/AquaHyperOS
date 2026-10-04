@@ -191,8 +191,8 @@ jobs:
     
     - name: 上传 APK 到 Release
       uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
       with:
-        tag_name: 26w40d
         files: AquaHyperOS.apk
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
