@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace 'com.aqua.hyperos'
-    compileSdk 34
+    compileSdk 30
 
     defaultConfig {
         applicationId "com.aqua.hyperos"
-        minSdk 33
-        targetSdk 34
+        minSdk 30
+        targetSdk 30
         versionCode 1
         versionName "1.0.0"
     }
