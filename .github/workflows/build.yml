@@ -40,6 +40,8 @@ jobs:
     - name: 创建 Xposed API 存根
       run: |
         mkdir -p stubs/de/robv/android/xposed
+        mkdir -p libs
+        mkdir -p build/stubs
         
         # 创建最小的 Xposed 接口存根
         cat > stubs/de/robv/android/xposed/IXposedHookLoadPackage.java << 'EOF'
