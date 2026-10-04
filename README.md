@@ -104,6 +104,13 @@ app/src/main/java/com/aqua/hyperos/
 
 ## 版本历史
 
+### 26w40c (2024-10-04)
+**紧急修复版本**
+- 修复 xposed_init 文件格式问题（添加换行符）
+- 删除错误位置的重复 AndroidManifest.xml
+- 确保 LSPosed 能正确读取模块配置
+- **如果 26w40b 无法识别，请使用此版本**
+
 ### 26w40b (2024-10-04)
 **重要修复版本**
 - 修复 LSPosed 无法识别模块的问题
@@ -116,7 +123,7 @@ app/src/main/java/com/aqua/hyperos/
 - 实现核心功能模块
 - 添加完整日志系统
 - **已知问题**：缺少 Xposed 入口配置，LSPosed 无法识别
-- **请使用 26w40b 或更高版本**
+- **请使用 26w40c 或更高版本**
 
 ## 注意事项
 
