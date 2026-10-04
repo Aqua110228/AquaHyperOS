@@ -4,7 +4,6 @@ plugins {
 }
 
 android {
-    namespace 'com.aqua.hyperos'
     compileSdk 30
 
     defaultConfig {
