@@ -15,14 +15,6 @@ android {
         versionName "1.0.0"
     }
 
-    sourceSets {
-        main {
-            manifest.srcFile 'src/main/AndroidManifest.xml'
-            java.srcDirs = ['src/main/java']
-            res.srcDirs = ['src/main/res']
-        }
-    }
-
     buildTypes {
         release {
             minifyEnabled false
@@ -37,6 +29,14 @@ android {
     
     kotlinOptions {
         jvmTarget = '17'
+    }
+
+    sourceSets {
+        main {
+            java.srcDirs = ['src/main/java', 'src/main/kotlin', '../module']
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+            res.srcDirs = ['src/main/res', '../module/res']
+        }
     }
 
 
