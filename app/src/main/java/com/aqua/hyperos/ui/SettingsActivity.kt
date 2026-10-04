@@ -266,7 +266,7 @@ class SettingsActivity : Activity() {
         }
         container.addView(labelView)
         
-        SeekBar(this).apply {
+        val seekBar = SeekBar(this).apply {
             max = setting.max - setting.min
             progress = prefs.getInt(setting.key, setting.defaultValue) - setting.min
             
