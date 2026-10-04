@@ -1,4 +1,4 @@
-name: Build APK (Direct Compilation)
+name: Build APK (Direct Compilation - No Xposed Runtime)
 
 on:
   push:
@@ -30,42 +30,93 @@ jobs:
         export ANDROID_HOME=$HOME/android-sdk
         export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools
         
-        yes | sdkmanager --licenses
+        yes | sdkmanager --licenses || true
         sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3"
         
         echo "ANDROID_HOME=$ANDROID_HOME" >> $GITHUB_ENV
         echo "$ANDROID_HOME/platform-tools" >> $GITHUB_PATH
         echo "$ANDROID_HOME/build-tools/30.0.3" >> $GITHUB_PATH
     
-    - name: 下载依赖
+    - name: 创建 Xposed API 存根
       run: |
-        mkdir -p libs
+        mkdir -p stubs/de/robv/android/xposed
         
-        # 下载 Xposed API（从 GitHub releases）
-        wget https://github.com/rovo89/XposedBridge/releases/download/v82/api-82.jar -O libs/xposed-api.jar
+        # 创建最小的 Xposed 接口存根
+        cat > stubs/de/robv/android/xposed/IXposedHookLoadPackage.java << 'EOF'
+        package de.robv.android.xposed;
+        import de.robv.android.xposed.callbacks.XC_LoadPackage;
+        public interface IXposedHookLoadPackage {
+            void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable;
+        }
+        EOF
         
-        # 下载 AndroidX Preference
-        wget https://repo1.maven.org/maven2/androidx/preference/preference/1.1.1/preference-1.1.1.aar -O libs/preference.aar
+        mkdir -p stubs/de/robv/android/xposed/callbacks
+        cat > stubs/de/robv/android/xposed/callbacks/XC_LoadPackage.java << 'EOF'
+        package de.robv.android.xposed.callbacks;
+        public class XC_LoadPackage {
+            public static class LoadPackageParam {
+                public String packageName;
+                public ClassLoader classLoader;
+            }
+        }
+        EOF
         
-        # 解压 AAR 获取 classes.jar
-        cd libs
-        unzip -q preference.aar classes.jar
-        mv classes.jar preference.jar
+        cat > stubs/de/robv/android/xposed/XC_MethodHook.java << 'EOF'
+        package de.robv.android.xposed;
+        public abstract class XC_MethodHook {
+            public static class MethodHookParam {
+                public Object thisObject;
+                public Object[] args;
+                public Object result;
+                public Throwable throwable;
+                public void setResult(Object result) { this.result = result; }
+                public Object getResult() { return result; }
+            }
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {}
+            protected void afterHookedMethod(MethodHookParam param) throws Throwable {}
+        }
+        EOF
+        
+        cat > stubs/de/robv/android/xposed/XposedHelpers.java << 'EOF'
+        package de.robv.android.xposed;
+        public class XposedHelpers {
+            public static Class<?> findClass(String className, ClassLoader classLoader) { return null; }
+            public static Class<?> findClassIfExists(String className, ClassLoader classLoader) { return null; }
+            public static Object findAndHookMethod(Class<?> clazz, String methodName, Object... parameterTypesAndCallback) { return null; }
+            public static Object findAndHookMethod(String className, ClassLoader classLoader, String methodName, Object... parameterTypesAndCallback) { return null; }
+            public static Object findMethodExact(Class<?> clazz, String methodName, Class<?>... parameterTypes) { return null; }
+            public static Object callMethod(Object obj, String methodName, Object... args) { return null; }
+            public static Object getObjectField(Object obj, String fieldName) { return null; }
+            public static void setObjectField(Object obj, String fieldName, Object value) {}
+            public static boolean getBooleanField(Object obj, String fieldName) { return false; }
+        }
+        EOF
+        
+        cat > stubs/de/robv/android/xposed/XposedBridge.java << 'EOF'
+        package de.robv.android.xposed;
+        public class XposedBridge {
+            public static void log(String text) {}
+            public static void log(Throwable t) {}
+        }
+        EOF
+        
+        # 编译存根
+        javac -d build/stubs $(find stubs -name "*.java")
+        jar cf libs/xposed-api.jar -C build/stubs .
     
     - name: 下载 Kotlin 编译器
       run: |
-        wget https://github.com/JetBrains/kotlin/releases/download/v1.8.0/kotlin-compiler-1.8.0.zip
+        wget -q https://github.com/JetBrains/kotlin/releases/download/v1.8.0/kotlin-compiler-1.8.0.zip
         unzip -q kotlin-compiler-1.8.0.zip
-        export PATH=$PATH:$PWD/kotlinc/bin
         echo "$PWD/kotlinc/bin" >> $GITHUB_PATH
     
     - name: 编译 Kotlin 源码
       run: |
-        mkdir -p build/classes
+        mkdir -p build/classes libs
         
         # 编译所有 Kotlin 文件
         kotlinc \
-          -classpath "$ANDROID_HOME/platforms/android-30/android.jar:libs/xposed-api.jar:libs/preference.jar" \
+          -classpath "$ANDROID_HOME/platforms/android-30/android.jar:libs/xposed-api.jar" \
           -d build/classes \
           -jvm-target 1.8 \
           $(find app/src/main/java -name "*.kt")
@@ -73,8 +124,6 @@ jobs:
     - name: 编译 DEX
       run: |
         mkdir -p build/dex
-        
-        # 使用 d8 编译成 DEX
         d8 \
           --lib $ANDROID_HOME/platforms/android-30/android.jar \
           --output build/dex \
@@ -84,28 +133,14 @@ jobs:
       run: |
         mkdir -p build/apk
         cd build/apk
-        
-        # 复制 DEX
         cp ../dex/classes.dex .
-        
-        # 复制 AndroidManifest.xml
         cp ../../app/src/main/AndroidManifest.xml .
-        
-        # 复制资源文件
         mkdir -p res
         cp -r ../../app/src/main/res/* res/ 2>/dev/null || true
-        
-        # 打包成 APK
         zip -r AquaHyperOS-unsigned.apk classes.dex AndroidManifest.xml res/
-        
-        # 对齐
         zipalign -f 4 AquaHyperOS-unsigned.apk AquaHyperOS-aligned.apk
-        
-        # 签名
         keytool -genkey -v -keystore release.keystore -alias release -keyalg RSA -keysize 2048 -validity 10000 -storepass android -keypass android -dname "CN=AquaHyperOS"
-        
         apksigner sign --ks release.keystore --ks-pass pass:android --key-pass pass:android --out AquaHyperOS.apk AquaHyperOS-aligned.apk
-        
         mv AquaHyperOS.apk ../../
     
     - name: 上传 APK
