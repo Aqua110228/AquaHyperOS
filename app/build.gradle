@@ -1,5 +1,6 @@
+// 使用 library 而不是 application 来避免 AGP 复杂性
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'kotlin-android'
 }
 
