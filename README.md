@@ -104,10 +104,19 @@ app/src/main/java/com/aqua/hyperos/
 
 ## 版本历史
 
-### beta-26w01a
+### 26w40b (2024-10-04)
+**重要修复版本**
+- 修复 LSPosed 无法识别模块的问题
+- 添加 MainHook.kt 入口类
+- 添加 xposed_init 配置文件
+- 模块现在可以正常被 LSPosed 检测和激活
+
+### 26w40a (已弃用)
 - 初始版本
 - 实现核心功能模块
 - 添加完整日志系统
+- **已知问题**：缺少 Xposed 入口配置，LSPosed 无法识别
+- **请使用 26w40b 或更高版本**
 
 ## 注意事项
 
