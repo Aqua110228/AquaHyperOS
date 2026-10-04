@@ -117,10 +117,8 @@ jobs:
       run: |
         mkdir -p libs
         echo "下载 AndroidX Preference..."
-        wget https://repo1.maven.org/maven2/androidx/preference/preference/1.1.1/preference-1.1.1.aar -O libs/preference.aar || {
-          echo "下载失败，尝试备用源..."
-          wget https://dl.google.com/dl/android/maven2/androidx/preference/preference/1.1.1/preference-1.1.1.aar -O libs/preference.aar
-        }
+        # 使用 Google Maven Repository
+        wget https://dl.google.com/android/maven2/androidx/preference/preference/1.2.0/preference-1.2.0.aar -O libs/preference.aar
         cd libs
         ls -lh preference.aar
         unzip -q preference.aar classes.jar || echo "警告：解压可能不完整"
