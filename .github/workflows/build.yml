@@ -177,16 +177,17 @@ jobs:
         # 验证 APK
         ls -lh ../../AquaHyperOS.apk
     
-    - name: 上传 APK
+    - name: 上传 APK 到 Artifacts
       uses: actions/upload-artifact@v4
       with:
         name: AquaHyperOS-APK
         path: build/AquaHyperOS.apk
+        retention-days: 90
     
-    - name: 创建 Release
-      if: startsWith(github.ref, 'refs/tags/')
+    - name: 上传 APK 到 Release
       uses: softprops/action-gh-release@v1
       with:
+        tag_name: beta-26w01a
         files: build/AquaHyperOS.apk
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
