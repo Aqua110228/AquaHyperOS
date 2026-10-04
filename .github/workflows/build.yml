@@ -114,13 +114,17 @@ jobs:
     
     - name: 编译 Kotlin 源码
       run: |
-        mkdir -p build/classes libs
+        mkdir -p build/classes
+        
+        # 验证依赖存在
+        ls -lh libs/xposed-api.jar
         
         # 编译所有 Kotlin 文件
         kotlinc \
           -classpath "$ANDROID_HOME/platforms/android-30/android.jar:libs/xposed-api.jar" \
           -d build/classes \
           -jvm-target 1.8 \
+          -verbose \
           $(find app/src/main/java -name "*.kt")
     
     - name: 编译 DEX
