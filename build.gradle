@@ -1,52 +1,58 @@
-// 最简化的构建配置
+// 完全不使用 Android Gradle Plugin
+// 使用纯 Kotlin 编译 + 手动打包
+
 buildscript {
     repositories {
         google()
         mavenCentral()
     }
-}
-
-plugins {
-    id 'com.android.library'
-    id 'kotlin-android'
-}
-
-android {
-    compileSdkVersion 30
-    
-    defaultConfig {
-        minSdkVersion 30
-        targetSdkVersion 30
-    }
-    
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
-    
-    // 禁用所有可能导致问题的功能
-    buildFeatures {
-        aidl = false
-        renderScript = false
-        resValues = false
-        shaders = false
-        buildConfig = false
-        viewBinding = false
+    dependencies {
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0'
     }
 }
 
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
+apply plugin: 'java'
+apply plugin: 'kotlin'
+
+repositories {
+    google()
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+sourceSets {
+    main {
+        java.srcDirs = ['app/src/main/java']
     }
 }
 
 dependencies {
     compileOnly 'de.robv.android.xposed:api:82'
+    compileOnly files("$System.env.ANDROID_HOME/platforms/android-30/android.jar")
     implementation 'androidx.preference:preference:1.1.1'
 }
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+// 打包任务
+task packageAar(type: Zip) {
+    archiveFileName = 'AquaHyperOS.aar'
+    destinationDirectory = file("$buildDir/outputs")
+    
+    from("$buildDir/classes/kotlin/main") {
+        into 'classes'
+    }
+    
+    from('app/src/main') {
+        include 'AndroidManifest.xml'
+        include 'res/**'
+    }
+}
+
+packageAar.dependsOn compileKotlin
