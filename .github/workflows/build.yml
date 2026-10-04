@@ -116,10 +116,16 @@ jobs:
     - name: 下载 AndroidX Preference
       run: |
         mkdir -p libs
-        wget -q https://repo1.maven.org/maven2/androidx/preference/preference/1.1.1/preference-1.1.1.aar -O libs/preference.aar
+        echo "下载 AndroidX Preference..."
+        wget https://repo1.maven.org/maven2/androidx/preference/preference/1.1.1/preference-1.1.1.aar -O libs/preference.aar || {
+          echo "下载失败，尝试备用源..."
+          wget https://dl.google.com/dl/android/maven2/androidx/preference/preference/1.1.1/preference-1.1.1.aar -O libs/preference.aar
+        }
         cd libs
-        unzip -q preference.aar classes.jar
+        ls -lh preference.aar
+        unzip -q preference.aar classes.jar || echo "警告：解压可能不完整"
         mv classes.jar androidx-preference.jar
+        ls -lh androidx-preference.jar
     
     - name: 编译 Kotlin 源码
       run: |
