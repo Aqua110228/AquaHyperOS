@@ -1,0 +1,133 @@
+uniform half2 uResolution;
+uniform half2 uInputResolution;
+uniform half2 uSize;
+uniform half uTime;// nouse
+uniform shader uTex;// nouse
+uniform shader uTex1;// nouse
+
+uniform half uGlareWidth;// intelliLightPass
+//uniform half uEdgeHighlight;
+uniform half uEdgeHighlightProgress;
+uniform half uEdgeHighlightDim;
+uniform half uLightness;
+uniform half2 uOrigin;
+uniform half uMin;
+uniform half uMax;
+uniform half uSdfRadius;
+uniform half uAlpha;
+
+half3 blendScreen(half3 base, half3 blend) {
+  return 1.0 - (1.0 - base) * (1.0 - blend);
+}
+
+half4 blendAlpha(half4 src, half4 dst) {
+  half3 color = src.rgb + (1.0 - src.a) * dst.rgb;
+  half alpha = src.a + dst.a * (1.0 - src.a);
+  return half4(color, alpha);
+}
+
+half rbx( in half2 p, in half2 b, in half4 r ) {
+  r.xy = (p.x>0.0)?r.xy : r.zw;
+  r.x  = (p.y>0.0)?r.x  : r.y;
+  half2 q = abs(p)-b+r.x;
+  return min(max(q.x,q.y),0.0) + length(max(q,0.0)) - r.x;
+}
+
+// 0 pe    pf pr
+//    ______          vp
+//   /      \
+//  /        \______  vr
+// /                  vi
+
+half pulse( half x, half pe, half pf, half pr, half vi, half vr, half vp) {
+  half v = min(vp, mix(vi, vp, smoothstep(0.0, pe, x)));
+  v = min(v, mix(vp, vr, smoothstep(pf, pr, x)));
+  v += vi;
+  return v;
+}
+
+half4 main(vec2 fragCoord){
+  half2 vUv = fragCoord / uResolution;
+  //提前退出计算
+  half xInRange = step(0.25, vUv.x) * step(vUv.x, 0.75);
+  half yInRange = step(0.25, vUv.y) * step(vUv.y, 0.75);
+  if(xInRange*yInRange != 0.) {
+    return half4(0.,0.,0.,0.);
+  }
+
+  half2 vUv_rvs = half2(vUv.x, 1.0 - vUv.y);
+  half2 uv = vUv_rvs - 0.5;  // 用于后续计算的uv使用y轴翻转的，与GL保持一致
+
+//  if (0.495 - abs(uv.x) < 1.0 / uResolution.x || 0.495 - abs(uv.y) < 1.0 / uResolution.y) {
+//    return half4(1.0, 0.0, 0.0, 1.0);
+//  }
+
+  uv.x *= uResolution.x / uResolution.y;
+
+  //-0.45, 1.00 --+
+  // |            |
+  // |     uv     |
+  // |            |
+  // +-- 0.45,-1.00
+
+  half2 tSt = vUv - 0.5;  // 用于采样的使用AGSL的未反转UV，避免出现采样纹理上下翻转
+  tSt /= half2(0.45, 1.0);
+  tSt *= 0.45;
+  tSt += 0.5;
+
+
+  // 1. sdf
+  half4 r = half4((uSdfRadius + uGlareWidth) / uResolution.y);
+  half2 s = half2((uSize.x + 2.0 * uGlareWidth) / uResolution.y * 0.5, (uSize.y + 2.0 * uGlareWidth) / uResolution.y * 0.5);
+  half box = rbx(uv, s, r);
+  half sdf = box;
+
+  // 2. round corner
+  half ss = smoothstep(1.0 / uResolution.y, -1.0 / uResolution.y, sdf);
+  //提前返回
+  if(ss <= 0.00001) {
+    return half4(0.,0.,0.,0.);
+  }
+
+  half4 color = uTex1.eval(tSt * uInputResolution);
+  color *= smoothstep(1.0 / uResolution.y, -1.0 / uResolution.y, sdf);
+
+  // 3. flickering
+  half luminance = dot(color.rgb, half3(0.299, 0.587, 0.114));
+  half staticPower = 0.5;
+  half flickerPower = staticPower * smoothstep(0.5, 0.7, luminance);
+  half power = mix(staticPower, flickerPower, uEdgeHighlightProgress);
+  half k = uResolution.y / (3.11 * 223.0);
+
+  // half factor = clamp((luminance - 0.3) / (0.7 - 0.3), 0.0, 1.0);
+  half factor = smoothstep(0.3, 0.7, luminance);
+  // half exceed = mix(-uMin, -uMax, factor);
+  half exceed = mix(uMin, uMax, factor) / 100.0 * k;
+  half lane = - abs(sdf + uGlareWidth / uResolution.y) * k;
+  half mask = exp(- lane * lane / exceed);
+
+  color *= mask;
+
+  // 4. edge highlight
+  half edgeGlow = exp(lane * 200.0) * smoothstep(1e-3, -1e-3, lane);
+
+  half2 st3 = vUv - 0.5;
+  st3.y = -st3.y;
+  half theta = atan(st3.y / abs(st3.x)) / 3.14 + 0.5;
+  half t = theta + uEdgeHighlightProgress;
+  t = mix(t - 1.0, 1.0, uEdgeHighlightProgress);
+  half f = pulse(t, 0.7, 0.7, 1.0, 0.2, 1.0, 1.2);
+
+  edgeGlow *= f;
+
+  color.rgb = mix(color.rgb, color.rgb + power, edgeGlow);
+
+  color *= mix(1.0, 0.0, uEdgeHighlightDim);
+
+  color = mix(half4(0.0), color, clamp(f, 0.0, 1.0));
+
+  half4 fragColor = color;
+  fragColor *= uAlpha;
+
+  return fragColor;
+}

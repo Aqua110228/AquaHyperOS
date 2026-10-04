@@ -1,0 +1,138 @@
+{
+    "type": "urn:aiot-spec-v3:com.mi.phones:device:phone:0:1.0",
+    "description": "xiaomi-settings/mobiledata ddf",
+    "protocol-version": "3.0",
+    "class": "MiPhone",
+    "dynamic": 0,
+    "ddfid": 11665410,
+    "modules": [
+        {
+            "iid": 1,
+            "type": "urn:aiot-spec-v3:com.mi.phones:module:[com.android.settings]:0:1.0",
+            "description": "settings module",
+            "name": "com.android.settings",
+            "services": [
+                {
+                    "iid": 1,
+                    "type": "urn:aiot-spec-v3:com.mi.phones:service:[com.android.settings/mobiledata]:0:1.0",
+                    "description": "mobile data service",
+                    "name": "mobiledata",
+                    "actions": [
+                        {
+                            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/mobiledata/switchmobiledatamode]:0:1.0",
+                            "description": "开启/关闭移动数据",
+                            "in": [
+                            
+                                {
+                                    "format": "boolean",
+                                    "name": "enable",
+                                    "description": "开启/关闭移动数据"
+                                }
+                            ],
+                            "out": [
+                                {
+                                    "format": "int32",
+                                    "name": "status",
+                                    "description": "执行状态",
+                                    "value-list": [
+                                        {
+                                            "value": 0,
+                                            "description": "切换成功"
+                                        },
+                                        {
+                                            "value": -1,
+                                            "description": "切换失败"
+                                        },
+                                        {
+                                            "value": -2,
+                                            "description": "请插入sim卡"
+                                        },
+                                        {
+                                            "value": -10,
+                                            "description": "已经是打开/关闭状态"
+                                        },
+                                        {
+                                            "value": -11,
+                                            "description": "当前设备不支持移动网络"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/mobiledata/getmobiledatamode]:0:1.0",
+                            "description": "查询移动数据状态",
+                            "in": [],
+                            "out": [
+                                {
+                                    "format": "int32",
+                                    "name": "status",
+                                    "description": "执行状态",
+                                    "value-list": [
+                                        {
+                                            "value": 0,
+                                            "description": "执行成功"
+                                        },
+                                        {
+                                            "value": -1,
+                                            "description": "执行失败"
+                                        },
+                                        {
+                                            "value": -2,
+                                            "description": "请插入sim卡"
+                                        },
+                                        {
+                                            "value": -11,
+                                            "description": "当前设备不支持移动网络"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "format": "int32",
+                                    "name": "result",
+                                    "description": "移动数据状态",
+                                    "value-list": [
+                                        {
+                                            "value": 0,
+                                            "description": "已关闭"
+                                        },
+                                        {
+                                            "value": 1,
+                                            "description": "已开启"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/mobiledata/jumpmobiledata]:0:1.0",
+                            "description": "跳转移动网络设置页",
+                            "in": [],
+                            "out": [
+                                {
+                                    "format": "int32",
+                                    "name": "status",
+                                    "description": "跳转状态",
+                                    "value-list": [
+                                        {
+                                            "value": 0,
+                                            "description": "跳转成功"
+                                        },
+                                        {
+                                            "value": -1,
+                                            "description": "跳转失败"
+                                        },
+                                        {
+                                            "value": -11,
+                                            "description": "当前设备不支持移动网络"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Comprehensive RadioButton and RadioGroup Demo
+    
+    This XML file demonstrates all major features of the FlutterRadioButton widget:
+    - Basic RadioGroup with mutual exclusion
+    - Text styling (color, size, style, typeface, alignment)
+    - Compound drawables (icons around text)
+    - Different states (checked, disabled, enabled)
+    - Accessibility attributes (contentDescription, screenReaderFocusable)
+    - Visual effects (alpha, scale, elevation)
+    - Button customization (tint colors)
+    - Layout variations (horizontal, vertical)
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FF2C2C2C">
+
+    <!-- 
+        SECTION 1: Basic RadioGroup with Vertical Orientation
+        Demonstrates: Basic radio button functionality with mutual exclusion
+        Requirements: 1.1 (core functionality), 18.1 (group integration)
+    -->
+    <RadioGroup
+        android:id="@+id/radio_group_basic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:checkedButton="@id/radio_option1">
+
+        <!-- Basic RadioButton with text and checked state -->
+        <RadioButton
+            android:id="@+id/radio_option1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Option 1 - Default Checked"
+            android:textColor="#FFFFFFFF"
+            android:textSize="16dp"
+            android:checked="true"
+            android:contentDescription="First option, currently selected"
+            android:screenReaderFocusable="true" />
+
+        <!-- RadioButton with bold text styling -->
+        <RadioButton
+            android:id="@+id/radio_option2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Option 2 - Bold Text"
+            android:textColor="#FFFFFFFF"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:contentDescription="Second option with bold text"
+            android:screenReaderFocusable="true" />
+
+        <!-- RadioButton with hint text (displays when text is empty) -->
+        <RadioButton
+            android:id="@+id/radio_option3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Option 3 (hint text shown)"
+            android:textColorHint="#FFAAAAAA"
+            android:textSize="16dp"
+            android:contentDescription="Third option with hint text"
+            android:screenReaderFocusable="true" />
+    </RadioGroup>
+
+    <!-- 
+        SECTION 2: Horizontal RadioGroup with Text Size Variations
+        Demonstrates: Horizontal layout and different text sizes
+        Requirements: 3.1 (text styling), 18.1 (group orientation)
+    -->
+    <RadioGroup
+        android:id="@+id/radio_group_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:checkedButton="@id/radio_small">
+
+        <!-- Small text size (14dp) -->
+        <RadioButton
+            android:id="@+id/radio_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Small"
+            android:textColor="#FFFFFFFF"
+            android:textSize="14dp"
+            android:checked="true"
+            android:contentDescription="Small text size option" />
+
+        <!-- Medium text size (16dp) -->
+        <RadioButton
+            android:id="@+id/radio_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Medium"
+            android:textColor="#FFFFFFFF"
+            android:textSize="16dp"
+            android:contentDescription="Medium text size option" />
+
+        <!-- Large text size (18dp) -->
+        <RadioButton
+            android:id="@+id/radio_large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Large"
+            android:textColor="#FFFFFFFF"
+            android:textSize="18dp"
+            android:contentDescription="Large text size option" />
+    </RadioGroup>
+
+    <!-- 
+        SECTION 3: RadioGroup with Custom Button Tints
+        Demonstrates: Button tint customization for themed appearances
+        Requirements: 2.1 (button customization), 3.1 (text color)
+    -->
+    <RadioGroup
+        android:id="@+id/radio_group_styled"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="#FF3C3C3C">
+
+        <!-- RadioButton with red theme (button and text) -->
+        <RadioButton
+            android:id="@+id/radio_red"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Red Theme"
+            android:textColor="#FFFF5555"
+            android:textSize="16dp"
+            android:buttonTint="#FFFF5555"
+            android:checked="true"
+            android:contentDescription="Red theme option" />
+
+        <!-- RadioButton with green theme -->
+        <RadioButton
+            android:id="@+id/radio_green"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Green Theme"
+            android:textColor="#FF55FF55"
+            android:textSize="16dp"
+            android:buttonTint="#FF55FF55"
+            android:contentDescription="Green theme option" />
+
+        <!-- RadioButton with blue theme -->
+        <RadioButton
+            android:id="@+id/radio_blue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Blue Theme"
+            android:textColor="#FF5555FF"
+            android:textSize="16dp"
+            android:buttonTint="#FF5555FF"
+            android:contentDescription="Blue theme option" />
+    </RadioGroup>
+
+    <!-- 
+        SECTION 4: RadioGroup Demonstrating Enabled/Disabled States
+        Demonstrates: Different interaction states (enabled vs disabled)
+        Requirements: 1.1 (state management), 1.5 (disabled state)
+    -->
+    <RadioGroup
+        android:id="@+id/radio_group_disabled"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Enabled RadioButton (normal interaction) -->
+        <RadioButton
+            android:id="@+id/radio_enabled"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enabled Option (clickable)"
+            android:textColor="#FFFFFFFF"
+            android:textSize="16dp"
+            android:enabled="true"
+            android:checked="true"
+            android:contentDescription="Enabled option, can be selected"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <!-- Disabled RadioButton (no interaction) -->
+        <RadioButton
+            android:id="@+id/radio_disabled"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Disabled Option (not clickable)"
+            android:textColor="#FF888888"
+            android:textSize="16dp"
+            android:enabled="false"
+            android:contentDescription="Disabled option, cannot be selected"
+            android:clickable="false" />
+    </RadioGroup>
+
+    <!-- 
+        SECTION 5: RadioGroup with Text Styling Variations
+        Demonstrates: Various text styles (bold, italic, typeface, alignment)
+        Requirements: 3.1 (text styling), 4.1 (text alignment)
+    -->
+    <RadioGroup
+        android:id="@+id/radio_group_text_styles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="#FF3C3C3C">
+
+        <!-- RadioButton with bold text -->
+        <RadioButton
+            android:id="@+id/radio_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bold Text Style"
+            android:textColor="#FFFFFFFF"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:checked="true"
+            android:contentDescription="Bold text style option" />
+
+        <!-- RadioButton with italic text -->
+        <RadioButton
+            android:id="@+id/radio_italic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Italic Text Style"
+            android:textColor="#FFFFFFFF"
+            android:textSize="16dp"
+            android:textStyle="italic"
+            android:contentDescription="Italic text style option" />
+
+        <!-- RadioButton with bold and italic -->
+        <RadioButton
+            android:id="@+id/radio_bold_italic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bold + Italic Style"
+            android:textColor="#FFFFFFFF"
+            android:textSize="16dp"
+            android:textStyle="bold|italic"
+            android:contentDescription="Bold and italic text style option" />
+
+        <!-- RadioButton with monospace typeface -->
+        <RadioButton
+            android:id="@+id/radio_monospace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Monospace Typeface"
+            android:textColor="#FFFFFFFF"
+            android:textSize="16dp"
+            android:typeface="monospace"
+            android:contentDescription="Monospace typeface option" />
+
+        <!-- RadioButton with all caps -->
+        <RadioButton
+            android:id="@+id/radio_allcaps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="all caps text"
+            android:textColor="#FFFFFFFF"
+            android:textSize="16dp"
+            android:textAllCaps="true"
+            android:contentDescription="All caps text option" />
+
+        <!-- RadioButton with letter spacing -->
+        <RadioButton
+            android:id="@+id/radio_spacing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Letter Spacing"
+            android:textColor="#FFFFFFFF"
+            android:textSize="16dp"
+            android:letterSpacing="0.2"
+            android:contentDescription="Letter spacing option" />
+    </RadioGroup>
+
+    <!-- 
+        SECTION 6: RadioGroup with Text Alignment Options
+        Demonstrates: Text gravity and alignment properties
+        Requirements: 4.1 (text alignment), 4.2 (gravity)
+    -->
+    <RadioGroup
+        android:id="@+id/radio_group_alignment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- RadioButton with center gravity -->
+        <RadioButton
+            android:id="@+id/radio_center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Centered Text"
+            android:textColor="#FFFFFFFF"
+            android:textSize="16dp"
+            android:gravity="center"
+            android:checked="true"
+            android:contentDescription="Center aligned text option" />
+
+        <!-- RadioButton with end gravity -->
+        <RadioButton
+            android:id="@+id/radio_end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="End Aligned Text"
+            android:textColor="#FFFFFFFF"
+            android:textSize="16dp"
+            android:gravity="end"
+            android:contentDescription="End aligned text option" />
+
+        <!-- RadioButton with start gravity -->
+        <RadioButton
+            android:id="@+id/radio_start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Start Aligned Text"
+            android:textColor="#FFFFFFFF"
+            android:textSize="16dp"
+            android:gravity="start"
+            android:contentDescription="Start aligned text option" />
+    </RadioGroup>
+
+    <!-- 
+        SECTION 7: RadioGroup with Visual Transformations
+        Demonstrates: Alpha, scale, rotation, and elevation effects
+        Requirements: 11.1-11.9 (visual effects and transformations)
+    -->
+    <RadioGroup
+        android:id="@+id/radio_group_transforms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="#FF3C3C3C">
+
+        <!-- RadioButton with alpha (opacity) -->
+        <RadioButton
+            android:id="@+id/radio_alpha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Semi-transparent (alpha=0.7)"
+            android:textColor="#FFFFFFFF"
+            android:textSize="16dp"
+            android:alpha="0.7"
+            android:checked="true"
+            android:contentDescription="Semi-transparent radio button" />
+
+        <!-- RadioButton with scale transformation -->
+        <RadioButton
+            android:id="@+id/radio_scale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Scaled (1.2x)"
+            android:textColor="#FFFFFFFF"
+            android:textSize="16dp"
+            android:scaleX="1.2"
+            android:scaleY="1.2"
+            android:contentDescription="Scaled radio button" />
+
+        <!-- RadioButton with elevation (shadow) -->
+        <RadioButton
+            android:id="@+id/radio_elevation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Elevated (8dp shadow)"
+            android:textColor="#FFFFFFFF"
+            android:textSize="16dp"
+            android:elevation="8dp"
+            android:contentDescription="Elevated radio button with shadow" />
+
+        <!-- RadioButton with rotation -->
+        <RadioButton
+            android:id="@+id/radio_rotation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rotated (5 degrees)"
+            android:textColor="#FFFFFFFF"
+            android:textSize="16dp"
+            android:rotation="5"
+            android:contentDescription="Rotated radio button" />
+    </RadioGroup>
+
+    <!-- 
+        SECTION 8: RadioGroup with Compound Drawables
+        Demonstrates: Icons/drawables positioned around text
+        Requirements: 5.1-5.9 (compound drawables support)
+        Note: In actual implementation, drawable references would point to image assets
+    -->
+    <RadioGroup
+        android:id="@+id/radio_group_drawables"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- RadioButton with left drawable (icon before text) -->
+        <RadioButton
+            android:id="@+id/radio_drawable_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Icon on Left"
+            android:textColor="#FFFFFFFF"
+            android:textSize="16dp"
+            android:drawableLeft="@drawable/ic_widget_exit"
+            android:drawablePadding="8dp"
+            android:checked="true"
+            android:contentDescription="Radio button with left icon" />
+
+        <!-- RadioButton with right drawable (icon after text) -->
+        <RadioButton
+            android:id="@+id/radio_drawable_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Icon on Right"
+            android:textColor="#FFFFFFFF"
+            android:textSize="16dp"
+            android:drawableRight="@drawable/ic_widget_exit"
+            android:drawablePadding="8dp"
+            android:contentDescription="Radio button with right icon" />
+
+        <!-- RadioButton with start drawable (respects RTL) -->
+        <RadioButton
+            android:id="@+id/radio_drawable_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Icon at Start (RTL-aware)"
+            android:textColor="#FFFFFFFF"
+            android:textSize="16dp"
+            android:drawableStart="@drawable/ic_widget_exit"
+            android:drawablePadding="8dp"
+            android:contentDescription="Radio button with start icon" />
+
+        <!-- RadioButton with drawable tint -->
+        <RadioButton
+            android:id="@+id/radio_drawable_tint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tinted Icon"
+            android:textColor="#FFFF5555"
+            android:textSize="16dp"
+            android:drawableLeft="@drawable/ic_widget_exit"
+            android:drawablePadding="8dp"
+            android:drawableTint="#FFFF5555"
+            android:contentDescription="Radio button with tinted icon" />
+    </RadioGroup>
+
+    <!-- 
+        SECTION 9: RadioGroup with Accessibility Features
+        Demonstrates: Comprehensive accessibility attributes
+        Requirements: 10.1-10.7 (accessibility properties)
+    -->
+    <RadioGroup
+        android:id="@+id/radio_group_accessibility"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="#FF3C3C3C">
+
+        <!-- RadioButton with detailed content description -->
+        <RadioButton
+            android:id="@+id/radio_a11y_detailed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Detailed Description"
+            android:textColor="#FFFFFFFF"
+            android:textSize="16dp"
+            android:checked="true"
+            android:contentDescription="This option provides detailed accessibility information for screen readers"
+            android:screenReaderFocusable="true"
+            android:focusable="true" />
+
+        <!-- RadioButton marked as accessibility heading -->
+        <RadioButton
+            android:id="@+id/radio_a11y_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Accessibility Heading"
+            android:textColor="#FFFFFFFF"
+            android:textSize="16dp"
+            android:contentDescription="This is marked as an accessibility heading"
+            android:accessibilityHeading="true"
+            android:screenReaderFocusable="true" />
+
+        <!-- RadioButton with live region (announces changes) -->
+        <RadioButton
+            android:id="@+id/radio_a11y_live"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Live Region"
+            android:textColor="#FFFFFFFF"
+            android:textSize="16dp"
+            android:contentDescription="Changes to this option will be announced immediately"
+            android:accessibilityLiveRegion="polite"
+            android:screenReaderFocusable="true" />
+
+        <!-- RadioButton with traversal order control -->
+        <RadioButton
+            android:id="@+id/radio_a11y_traversal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Custom Traversal Order"
+            android:textColor="#FFFFFFFF"
+            android:textSize="16dp"
+            android:contentDescription="This option has custom accessibility traversal order"
+            android:screenReaderFocusable="true"
+            android:importantForAccessibility="yes" />
+    </RadioGroup>
+
+    <!-- 
+        SECTION 10: RadioGroup with Dimension and Sizing
+        Demonstrates: Width, height, and size constraints
+        Requirements: 6.1-6.6 (dimension and sizing properties)
+    -->
+    <RadioGroup
+        android:id="@+id/radio_group_sizing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- RadioButton with explicit dimensions -->
+        <RadioButton
+            android:id="@+id/radio_explicit_size"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:text="Explicit Size (200x60)"
+            android:textColor="#FFFFFFFF"
+            android:textSize="16dp"
+            android:checked="true"
+            android:contentDescription="Radio button with explicit dimensions" />
+
+        <!-- RadioButton with minimum dimensions -->
+        <RadioButton
+            android:id="@+id/radio_min_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Min Size"
+            android:textColor="#FFFFFFFF"
+            android:textSize="16dp"
+            android:minWidth="150dp"
+            android:minHeight="48dp"
+            android:contentDescription="Radio button with minimum dimensions" />
+
+        <!-- RadioButton with padding -->
+        <RadioButton
+            android:id="@+id/radio_padding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="With Padding"
+            android:textColor="#FFFFFFFF"
+            android:textSize="16dp"
+            android:padding="16dp"
+            android:background="#FF555555"
+            android:contentDescription="Radio button with padding" />
+    </RadioGroup>
+
+</LinearLayout>

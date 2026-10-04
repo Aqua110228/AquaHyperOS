@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Simple GridLayout Example -->
+<GridLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:columnCount="2"
+    android:rowCount="3"
+    android:orientation="horizontal"
+    android:useDefaultMargins="true"
+    android:padding="8dp"
+    android:background="#FFFFFF">
+
+    <TextView
+        android:text="Cell 1"
+        android:textSize="16dp"
+        android:padding="16dp"
+        android:background="#E3F2FD" />
+
+    <TextView
+        android:text="Cell 2"
+        android:textSize="16dp"
+        android:padding="16dp"
+        android:background="#F3E5F5" />
+
+    <TextView
+        android:text="Cell 3"
+        android:textSize="16dp"
+        android:padding="16dp"
+        android:background="#E8F5E9" />
+
+    <TextView
+        android:text="Cell 4"
+        android:textSize="16dp"
+        android:padding="16dp"
+        android:background="#FFF3E0" />
+
+    <TextView
+        android:text="Cell 5"
+        android:textSize="16dp"
+        android:padding="16dp"
+        android:background="#FCE4EC" />
+
+    <TextView
+        android:text="Cell 6"
+        android:textSize="16dp"
+        android:padding="16dp"
+        android:background="#E0F2F1" />
+
+</GridLayout>

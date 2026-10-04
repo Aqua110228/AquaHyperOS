@@ -1,0 +1,59 @@
+<svg width="438" height="288" viewBox="0 0 438 288" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 国际版 Pad「桌面搜索」设置预览图（横向）。
+       来源 Figma 设计稿导出，已剔除 flutter_svg 不支持的节点：
+       <foreignObject> + backdrop-filter blur 层、data-figma-bg-blur-radius 属性、
+       defs 中配套的 bgblur_*_clip_path。底层为纯线性渐变（无纹理），
+       模糊层删除后仅由半透明白色矩形还原观感，与设计稿一致。 -->
+  <rect x="6" y="6" width="426" height="276" rx="16" fill="url(#paint0_linear_13_37466)"/>
+
+  <!-- 桌面图标示意：首屏大小部件 -->
+  <rect x="57.4546" y="26.6699" width="42" height="42" rx="8.90909" fill="white" fill-opacity="0.25"/>
+  <rect x="113.455" y="26.6699" width="42" height="42" rx="8.90909" fill="white" fill-opacity="0.25"/>
+  <rect x="57.4546" y="82.6699" width="98" height="42" rx="8.90909" fill="white" fill-opacity="0.25"/>
+  <rect x="170.455" y="26.6699" width="98" height="98" rx="8.90909" fill="white" fill-opacity="0.25"/>
+  <rect x="283.455" y="26.6699" width="98" height="98" rx="8.90909" fill="white" fill-opacity="0.25"/>
+
+  <!-- 桌面图标示意：第一行 -->
+  <rect x="67.4546" y="139.801" width="21.6364" height="21.6364" rx="6.36364" fill="white" fill-opacity="0.25"/>
+  <rect x="123.351" y="139.801" width="21.6364" height="21.6364" rx="6.36364" fill="white" fill-opacity="0.25"/>
+  <rect x="179.247" y="139.801" width="21.6364" height="21.6364" rx="6.36364" fill="white" fill-opacity="0.25"/>
+  <rect x="235.144" y="139.801" width="21.6364" height="21.6364" rx="6.36364" fill="white" fill-opacity="0.25"/>
+  <rect x="291.04" y="139.801" width="21.6364" height="21.6364" rx="6.36364" fill="white" fill-opacity="0.25"/>
+  <rect x="346.937" y="139.801" width="21.6364" height="21.6364" rx="6.36364" fill="white" fill-opacity="0.25"/>
+
+  <!-- 桌面图标示意：第二行 -->
+  <rect x="67.4546" y="188" width="21.6364" height="21.6364" rx="6.36364" fill="white" fill-opacity="0.25"/>
+  <rect x="123.351" y="188" width="21.6364" height="21.6364" rx="6.36364" fill="white" fill-opacity="0.25"/>
+  <rect x="179.247" y="188" width="21.6364" height="21.6364" rx="6.36364" fill="white" fill-opacity="0.25"/>
+  <rect x="235.144" y="188" width="21.6364" height="21.6364" rx="6.36364" fill="white" fill-opacity="0.25"/>
+  <rect x="291.04" y="188" width="21.6364" height="21.6364" rx="6.36364" fill="white" fill-opacity="0.25"/>
+  <rect x="346.937" y="188" width="21.6364" height="21.6364" rx="6.36364" fill="white" fill-opacity="0.25"/>
+
+  <!-- 页面指示器 -->
+  <g clip-path="url(#clip0_13_37466)">
+    <circle opacity="0.8" cx="1.90909" cy="1.90909" r="1.90909" transform="matrix(-1 0 0 1 214.045 218.909)" fill="white"/>
+    <circle opacity="0.3" cx="1.90909" cy="1.90909" r="1.90909" transform="matrix(-1 0 0 1 222.954 218.909)" fill="white"/>
+    <circle opacity="0.3" cx="1.90909" cy="1.90909" r="1.90909" transform="matrix(-1 0 0 1 231.863 218.909)" fill="white"/>
+  </g>
+
+  <!-- Dock：底板 + 内嵌 QSB 搜索框 + Dock 图标 -->
+  <g>
+    <rect x="93" y="233.728" width="252.727" height="34.3636" rx="12.7273" fill="white" fill-opacity="0.15"/>
+    <rect x="99.3636" y="242.909" width="100" height="16" rx="8" fill="white" fill-opacity="0.25"/>
+    <rect x="205.727" y="240.091" width="21.6364" height="21.6364" rx="6.36364" fill="white" fill-opacity="0.25"/>
+    <rect x="233.727" y="240.091" width="21.6364" height="21.6364" rx="6.36364" fill="white" fill-opacity="0.25"/>
+    <rect x="261.727" y="240.091" width="21.6364" height="21.6364" rx="6.36364" fill="white" fill-opacity="0.25"/>
+    <rect x="289.727" y="240.091" width="21.6364" height="21.6364" rx="6.36364" fill="white" fill-opacity="0.25"/>
+    <rect x="317.727" y="240.091" width="21.6364" height="21.6364" rx="6.36364" fill="white" fill-opacity="0.25"/>
+  </g>
+
+  <defs>
+    <linearGradient id="paint0_linear_13_37466" x1="219" y1="6" x2="219" y2="282" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4170FF"/>
+      <stop offset="1" stop-color="#5ABAFF"/>
+    </linearGradient>
+    <clipPath id="clip0_13_37466">
+      <rect width="21.6364" height="3.81818" fill="white" transform="translate(210.227 218.909)"/>
+    </clipPath>
+  </defs>
+</svg>

@@ -1,0 +1,2609 @@
+{
+  "type": "urn:aiot-spec-v3:com.mi.phones:device:phones:0:1.0",
+  "description": "settings",
+  "protocol-version": "3.0",
+  "class": "MiPhone",
+  "dynamic": 0,
+  "ddfid": 7733255,
+  "data-type-defs": {
+    "file-info": {
+      "data-type": "struct",
+      "fields": {
+        "id": {
+          "format": "int32",
+          "description": "唯一id",
+          "max-length": 255
+        },
+        "titleId": {
+          "format": "string",
+          "description": "标题"
+        },
+        "summaryId": {
+          "format": "string",
+          "description": "副标题"
+        },
+        "selected": {
+          "format": "boolean",
+          "description": "选中状态"
+        }
+      }
+    },
+    "file-list": {
+      "data-type": "array",
+      "items": {
+        "item": {
+          "format": "$ref/data-type-defs/file-info"
+        }
+      }
+    }
+  },
+  "modules": {
+    "iid": 1,
+    "type": "urn:aiot-spec-v3:com.mi.phones:module:[com.android.settings]:0:1.0",
+    "description": "settings module",
+    "name": "com.android.settings",
+    "services": [
+      {
+        "iid": 1,
+        "type": "urn:aiot-spec-v3:com.mi.phones:service:[com.android.settings/settings]:0:1.0",
+        "description": "settings service",
+        "name": "settings",
+        "actions": [
+          {
+            "iid": 1,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/settings/switchairphonemode]:0:1.0",
+            "description": "switch airphone mode",
+            "in": [
+              {
+                "format": "boolean",
+                "name": "enable",
+                "description": "开启/关闭飞行模式"
+              }
+            ],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "切换成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "切换失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "飞行模式当前已经是该状态，无需切换"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 2,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/settings/jumpwireless]:0:1.0",
+            "description": "jump wireless",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "跳转成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "跳转失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "已经在当前页面"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 3,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/settings/getairphonemode]:0:1.0",
+            "description": "get airphone mode",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "执行成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "执行失败"
+                  }
+                ]
+              },
+              {
+                "format": "int32",
+                "name": "result",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "已关闭"
+                  },
+                  {
+                    "value": 1,
+                    "description": "已打开"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 4,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/settings/switchlocationmode]:0:1.0",
+            "description": "switch location mode",
+            "in": [
+              {
+                "format": "boolean",
+                "name": "enable",
+                "description": "开启/关闭定位服务"
+              }
+            ],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "切换成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "切换失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "定位服务当前已经是该状态，无需切换"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 5,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/settings/getlocation]:0:1.0",
+            "description": "get location",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "执行成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "执行失败"
+                  }
+                ]
+              },
+              {
+                "format": "int32",
+                "name": "result",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "已关闭"
+                  },
+                  {
+                    "value": 1,
+                    "description": "已打开"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 6,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/settings/jumplocation]:0:1.0",
+            "description": "jump location",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "跳转成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "跳转失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "已经在当前页面"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 7,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/settings/jumpaccessibility]:0:1.0",
+            "description": "jump accessibility",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "跳转成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "跳转失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "已经在当前页面"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 8,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/settings/switchtalkbackmode]:0:1.0",
+            "description": "switch talkback mode",
+            "in": [
+              {
+                "format": "boolean",
+                "name": "enable",
+                "description": "开启/关闭TalkBack"
+              }
+            ],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "切换成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "切换失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "TalkBack当前已经是该状态，无需切换"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 9,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/settings/gettalkback]:0:1.0",
+            "description": "get talkback",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "执行成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "执行失败"
+                  }
+                ]
+              },
+              {
+                "format": "int32",
+                "name": "result",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "已关闭"
+                  },
+                  {
+                    "value": 1,
+                    "description": "已打开"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 10,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/settings/jumpmainsettings]:0:1.0",
+            "description": "jump mainsettings",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "跳转成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "跳转失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "已经在当前页面"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 11,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/settings/jumpmydevice]:0:1.0",
+            "description": "jump mydevice",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "跳转成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "跳转失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "已经在当前页面"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 12,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/settings/switchnfcmode]:0:1.0",
+            "description": "switch nfc mode",
+            "in": [
+              {
+                "format": "boolean",
+                "name": "enable",
+                "description": "开启/关闭NFC开关"
+              }
+            ],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "切换成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "切换失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "NFC当前已经是该状态，无需切换"
+                  },
+                  {
+                    "value": -11,
+                    "description": "设备不支持NFC"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 13,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/settings/getnfc]:0:1.0",
+            "description": "get nfc",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "执行成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "执行失败"
+                  }
+                ]
+              },
+              {
+
+                "format": "int32",
+                "name": "result",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "已关闭"
+                  },
+                  {
+                    "value": 1,
+                    "description": "已打开"
+                  },
+                  {
+                    "value": -11,
+                    "description": "设备不支持NFC"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 14,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/settings/jumpnfc]:0:1.0",
+            "description": "jump nfc",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "跳转成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "跳转失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "已经在当前页面"
+                  },
+                  {
+                    "value": -11,
+                    "description": "设备不支持NFC"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 15,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/settings/jumptalkback]:0:1.0",
+            "description": "jump talkback",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "跳转成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "跳转失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "已经在当前页面"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 16,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/settings/switchautorotationmode]:0:1.0",
+            "description": "switch auto rotation",
+            "in": [
+              {
+                "format": "boolean",
+                "name": "enable",
+                "description": "开启/关闭方向锁定"
+              }
+            ],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "切换成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "切换失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "方向锁定当前已经是该状态，无需切换"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 17,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/settings/getautorotation]:0:1.0",
+            "description": "get autorotation",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "执行成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "执行失败"
+                  }
+                ]
+              },
+              {
+                "format": "int32",
+                "name": "result",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "已关闭"
+                  },
+                  {
+                    "value": 1,
+                    "description": "已打开"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 18,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/settings/switch_onehandedmode]:0:1.0",
+            "description": "switch onehanded mode",
+            "in": [
+              {
+                "format": "boolean",
+                "name": "enable",
+                "description": "开启/关闭单手模式"
+              }
+            ],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "切换成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "切换失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "切换失败，开关已是目标状态"
+                  },
+                  {
+                    "value": -11,
+                    "description": "切换失败，该机型不支持单手模式"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 19,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/settings/get_onehandedmode]:0:1.0",
+            "description": "查询单手模式状态",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行状态",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "查询成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "查询失败"
+                  },
+                  {
+                    "value": -11,
+                    "description": "查询失败，该机型不支持单手模式"
+                  }
+                ]
+              },
+              {
+                "format": "int32",
+                "name": "result",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "已关闭"
+                  },
+                  {
+                    "value": 1,
+                    "description": "已打开"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 20,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/settings/jump_onehandedmode_setting]:0:1.0",
+            "description": "跳转至单手模式设置页",
+            "in": [],
+            "out": [
+              {
+                "name": "status",
+                "format": "int32",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "跳转成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "跳转失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "已在单手模式设置页面"
+                  },
+                  {
+                    "value": -11,
+                    "description": "跳转失败，该机型不支持单手模式"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 21,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/settings/jumpotherpersonalsettings]:0:1.0",
+            "description": "jump other personal settings",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "跳转成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "跳转失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "已经在当前页面"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 22,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/settings/jumpdatetimesettings]:0:1.0",
+            "description": "jump date time settings",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "跳转成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "跳转失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "已经在当前页面"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 23,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/settings/switch24hour]:0:1.0",
+            "description": "switch 24 hour",
+            "in": [
+              {
+                "format": "boolean",
+                "name": "enable",
+                "description": "开启/关闭24小时制"
+              }
+            ],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "切换成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "切换失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "24小时制已经是该状态，无需切换"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 24,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/settings/get24hour]:0:1.0",
+            "description": "get 24 hour",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "执行成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "执行失败"
+                  }
+                ]
+              },
+              {
+                "format": "int32",
+                "name": "result",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "已关闭"
+                  },
+                  {
+                    "value": 1,
+                    "description": "已打开"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 25,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/settings/jumpaccountsettings]:0:1.0",
+            "description": "jump account settings",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "跳转成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "跳转失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "已经在当前页面"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 26,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/settings/getsyncwifionly]:0:1.0",
+            "description": "get sync wifi only",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "执行成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "执行失败"
+                  },
+                  {
+                    "value": -11,
+                    "description": "设备不支持"
+                  }
+                ]
+              },
+              {
+                "format": "int32",
+                "name": "result",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "已关闭"
+                  },
+                  {
+                    "value": 1,
+                    "description": "已打开"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 27,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/settings/jumpmasterclear]:0:1.0",
+            "description": "jump master clear",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "跳转成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "跳转失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "已经在当前页面"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 28,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/settings/getdevicemarketname]:0:1.0",
+            "description": "get device market name",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "执行成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "执行失败"
+                  }
+                ]
+              },
+              {
+                "format": "string",
+                "name": "name",
+                "description": "设备型号/设备市场名"
+              }
+            ]
+          },
+          {
+            "iid": 29,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/settings/getaccountautosync]:0:1.0",
+            "description": "get account auto sync",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "执行成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "执行失败"
+                  },
+                  {
+                    "value": -11,
+                    "description": "当前不支持查询"
+                  }
+                ]
+              },
+              {
+                "format": "int32",
+                "name": "result",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "已关闭"
+                  },
+                  {
+                    "value": 1,
+                    "description": "已打开"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 30,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/settings/switchcoolfan]:0:1.0",
+            "description": "switch cool fan",
+            "in": [
+              {
+                "format": "boolean",
+                "name": "enable",
+                "description": "开启/关闭散热风扇"
+              }
+            ],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "切换成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "切换失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "散热风扇已经是该状态，无需切换"
+                  },
+                  {
+                    "value": -11,
+                    "description": "设备不支持散热风扇"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 31,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/settings/getcoolfan]:0:1.0",
+            "description": "get cool fan",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "执行成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "执行失败"
+                  },
+                  {
+                    "value": -11,
+                    "description": "设备不支持散热风扇"
+                  }
+                ]
+              },
+              {
+                "format": "int32",
+                "name": "result",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "已关闭"
+                  },
+                  {
+                    "value": 1,
+                    "description": "已打开"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 32,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/settings/jumpcoolfansettings]:0:1.0",
+            "description": "jump cool fan settings",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "跳转成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "跳转失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "已经在当前页面"
+                  },
+                  {
+                    "value": -11,
+                    "description": "跳转失败，设备不支持散热风扇"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 33,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/settings/setfanmode]:0:1.0",
+            "description": "set fan mode",
+            "in": [
+              {
+                "format": "int32",
+                "name": "type",
+                "description": "散热风扇模式",
+                "value-list": [
+                  {
+                    "value": 1,
+                    "description": "智能调频"
+                  },
+                  {
+                    "value": 2,
+                    "description": "高速强冷"
+                  },
+                  {
+                    "value": 3,
+                    "description": "静谧模式"
+                  }
+                ]
+              }
+            ],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "切换成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "切换失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "散热风扇模式当前已经是该状态，无需切换"
+                  },
+                  {
+                    "value": -11,
+                    "description": "设备不支持调节散热风扇模式"
+                  }
+                ]
+              },
+              {
+                "format": "$ref/data-type-defs/file-list",
+                "name": "list",
+                "description": "散热风扇模式列表"
+              }
+            ]
+          },
+          {
+            "iid": 34,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/settings/getfanmode]:0:1.0",
+            "description": "get fan mode",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "执行成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "执行失败"
+                  },
+                  {
+                    "value": -11,
+                    "description": "设备不支持"
+                  },
+                  {
+                    "value": -110,
+                    "description": "散热风扇未开启，无法获取风扇模式"
+                  }
+                ]
+              },
+              {
+                "format": "$ref/data-type-defs/file-list",
+                "name": "list",
+                "description": "散热风扇模式列表"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "iid": 2,
+        "type": "urn:aiot-spec-v3:com.mi.phones:service:[com.android.settings/display]:0:1.0",
+        "description": "display service",
+        "name": "display",
+        "actions": [
+          {
+            "iid": 1,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/display/turnonadaptivecolors]:0:1.0",
+            "description": "切换真彩显示",
+            "in": [
+              {
+                "format": "boolean",
+                "name": "enable",
+                "description": "开关激活状态"
+              }
+            ],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "切换成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "切换失败,真彩模式已经是开启/关闭状态，无需切换"
+                  },
+                  {
+                    "value": -10,
+                    "description": "抱歉，当前设备不支持真彩显示功能"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 2,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/display/jumpscreeneffect]:0:1.0",
+            "description": "跳转到色彩风格页面",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "跳转成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "跳转失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "已经在当前页面"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 3,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/display/jumppapermode]:0:1.0",
+            "description": "跳转到护眼模式页面",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "跳转成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "跳转失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "已经在当前页面"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 4,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/display/switcheyehabbitprompt]:0:1.0",
+            "description": "切换用眼健康提醒",
+            "in": [
+              {
+                "format": "boolean",
+                "name": "enable",
+                "description": "开启关闭视觉健康提醒"
+              }
+            ],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "切换成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "切换失败,视觉健康提醒已经是开启/关闭状态，无需切换"
+                  },
+                  {
+                    "value": -8,
+                    "description": "抱歉，当前设备不支持视觉健康提醒功能"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 5,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/display/selectscreeneffect]:0:1.0",
+            "description": "选择色彩风格",
+            "in": [
+              {
+                "format": "int32",
+                "name": "type",
+                "description": "选择色彩风格的类型",
+                "value-list": [
+                  {
+                    "value": 1,
+                    "description": "选择生动"
+                  },
+                  {
+                    "value": 2,
+                    "description": "选择鲜艳"
+                  },
+                  {
+                    "value": 3,
+                    "description": "选择专业原色"
+                  },
+                  {
+                    "value": 4,
+                    "description": "选择高级模式"
+                  }
+                ]
+              }
+            ],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "切换成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "切换失败"
+                  },
+                  {
+                    "value": -9,
+                    "description": "您开启了全局护眼模式，暂时无法调整屏幕色彩"
+                  },
+                  {
+                    "value": -11,
+                    "description": "当前设备不支持"
+                  }
+                ]
+              },
+              {
+                "format": "$ref/data-type-defs/file-list",
+                "name": "list",
+                "description": "色彩风格列表"
+              }
+            ]
+          },
+          {
+            "iid": 6,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/display/switchpapermode]:0:1.0",
+            "description": "switch papermode",
+            "in": [
+              {
+                "format": "boolean",
+                "name": "enable",
+                "description": "开启/关闭护眼模式"
+              }
+            ],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "切换成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "切换失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "护眼模式当前已经是该状态，无需切换"
+                  }
+                ]
+              },
+              {
+                "format": "$ref/data-type-defs/file-list",
+                "name": "list",
+                "description": "护眼模式列表"
+              }
+            ]
+          },
+          {
+            "iid": 7,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/display/setpapermodetype]:0:1.0",
+            "description": "set paper mode type",
+            "in": [
+              {
+                "format": "int32",
+                "name": "type",
+                "description": "节律护眼/经典护眼",
+                "value-list": [
+                  {
+                    "value": 1,
+                    "description": "纸质护眼"
+                  },
+                  {
+                    "value": 2,
+                    "description": "节律护眼"
+                  },
+                  {
+                    "value": 3,
+                    "description": "经典护眼"
+                  }
+                ]
+              }
+            ],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "切换成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "切换失败"
+                  },
+                  {
+                    "value": -11,
+                    "description": "当前设备不支持该护眼模式"
+                  }
+                ]
+              },
+              {
+                "format": "$ref/data-type-defs/file-list",
+                "name": "list",
+                "description": "护眼模式列表"
+              }
+            ]
+          },
+          {
+            "iid": 8,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/display/setpapermodescheduled]:0:1.0",
+            "description": "set paper mode scheduled",
+            "in": [
+              {
+                "format": "int32",
+                "name": "type",
+                "description": "定时",
+                "value-list": [
+                  {
+                    "value": 1,
+                    "description": "日出日落模式"
+                  },
+                  {
+                    "value": 2,
+                    "description": "自定义时间"
+                  }
+                ]
+              }
+            ],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "执行成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "执行失败"
+                  },
+                  {
+                    "value": 10,
+                    "description": "打开日出日落模式且播报开启定位"
+                  }
+                ]
+              },
+              {
+                "format": "$ref/data-type-defs/file-list",
+                "name": "list",
+                "description": "定时开启护眼模式列表"
+              }
+            ]
+          },
+          {
+            "iid": 9,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/display/getpapermode]:0:1.0",
+            "description": "get paper mode",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "执行成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "执行失败"
+                  }
+                ]
+              },
+              {
+                "format": "int32",
+                "name": "result",
+                "description": "查询结果",
+                "value-list": [
+                  {
+                    "value": -1,
+                    "description": "护眼模式未开启"
+                  },
+                  {
+                    "value": 1,
+                    "description": "纸质护眼"
+                  },
+                  {
+                    "value": 2,
+                    "description": "节律护眼"
+                  },
+                  {
+                    "value": 3,
+                    "description": "经典护眼"
+                  }
+                ]
+              },
+              {
+                "format": "$ref/data-type-defs/file-list",
+                "name": "list",
+                "description": "护眼模式列表"
+              }
+            ]
+          },
+          {
+            "iid": 10,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/display/getscreeneffect]:0:1.0",
+            "description": "get screen effect",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "执行成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "执行失败"
+                  }
+                ]
+              },
+              {
+                "format": "int32",
+                "name": "result",
+                "description": "查询结果",
+                "value-list": [
+                  {
+                    "value": 1,
+                    "description": "选择生动"
+                  },
+                  {
+                    "value": 2,
+                    "description": "选择鲜艳"
+                  },
+                  {
+                    "value": 3,
+                    "description": "选择专业原色"
+                  },
+                  {
+                    "value": 4,
+                    "description": "选择高级模式"
+                  },
+                  {
+                    "value": -9,
+                    "description": "您开启了全局护眼模式，暂时无法查询屏幕色彩"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 11,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/display/adjustfontsize]:0:1.0",
+            "description": "adjust font size",
+            "in": [
+              {
+                "format": "int",
+                "name": "size",
+                "description": "字体大小调整为X%"
+              }
+            ],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "调节成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "调节失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "字体大小当前已经是该状态，无需切换"
+                  },
+                  {
+                    "value": -109,
+                    "description": "不支持该档位字体大小"
+                  },
+                  {
+                    "value": -110,
+                    "description": "已在字体调节页面，请自己操作一下吧"
+                  },
+                  {
+                    "value": -111,
+                    "description": "极简模式不支持"
+                  },
+                  {
+                    "value": -112,
+                    "description": "非主空间不支持（多用户/分身空间）"
+                  }
+                ]
+              },
+              {
+                "format": "$ref/data-type-defs/file-list",
+                "name": "list",
+                "description": "字体大小范围列表"
+              }
+            ]
+          },
+          {
+            "iid": 12,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/display/getfontsize]:0:1.0",
+            "description": "get font size",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "执行成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "执行失败"
+                  },
+                  {
+                    "value": -110,
+                    "description": "已在字体调节页面，请自己操作一下吧"
+                  },
+                  {
+                    "value": -111,
+                    "description": "极简模式不支持"
+                  },
+                  {
+                    "value": -112,
+                    "description": "非主空间不支持（多用户/分身空间）"
+                  }
+                ]
+              },
+              {
+                "format": "$ref/data-type-defs/file-list",
+                "name": "list",
+                "description": "字体大小范围列表"
+              }
+            ]
+          },
+          {
+            "iid": 13,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/display/jumpfontpage]:0:1.0",
+            "description": "jump font page",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "跳转成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "跳转失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "已经在当前页面"
+                  },
+                  {
+                    "value": -111,
+                    "description": "极简模式不支持"
+                  },
+                  {
+                    "value": -112,
+                    "description": "非主空间不支持（多用户/分身空间）"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "iid": 1,
+        "type": "urn:aiot-spec-v3:com.mi.phones:service:[com.android.settings/foldSettings]:0:1.0",
+        "description": "foldSettings service",
+        "name": "foldSettings",
+        "actions": [
+          {
+            "iid": 1,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/foldSettings/gotoflipscreen]:0:1.0",
+            "description": "打开外屏设置页面",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "跳转页面成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "跳转页面失败"
+                  },
+                  {
+                    "value": -4,
+                    "description": "抱歉，当前设备不支持外屏设置"
+                  },
+                  {
+                    "value": -10,
+                    "description": "已经在当前页面"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "iid": 1,
+        "type": "urn:aiot-spec-v3:com.mi.phones:service:[com.android.settings/sound]:0:1.0",
+        "description": "sound service",
+        "name": "sound",
+        "actions": [
+          {
+            "iid": 1,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/sound/jumpsound]:0:1.0",
+            "description": "jump sound",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "跳转页面成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "跳转页面失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "已经在当前页面"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 2,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/sound/switchsilentmode]:0:1.0",
+            "description": "switch silent mode",
+            "in": [
+              {
+                "format": "boolean",
+                "name": "enable",
+                "description": "开启/关闭静音模式"
+              }
+            ],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "切换成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "切换失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "静音模式当前已经是该状态，无需切换"
+                  }
+                ]
+              },
+              {
+                "description": "是否上岛",
+                "name": "island",
+                "format": "int32",
+                "value-list": [
+                  {
+                    "value": -1,
+                    "description": "不上岛"
+                  },
+                  {
+                    "value": 1,
+                    "description": "摘要态"
+                  },
+                  {
+                    "value": 2,
+                    "description": "展开态"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 3,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/sound/getsilentmode]:0:1.0",
+            "description": "get silent mode",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "执行成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "执行失败"
+                  }
+                ]
+              },
+              {
+                "format": "int32",
+                "name": "result",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "已关闭"
+                  },
+                  {
+                    "value": 1,
+                    "description": "已打开"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 4,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/sound/switchzenmode]:0:1.0",
+            "description": "switch zen mode",
+            "in": [
+              {
+                "format": "boolean",
+                "name": "enable",
+                "description": "开启/关闭勿扰模式"
+              }
+            ],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "切换成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "切换失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "勿扰模式当前已经是该状态，无需切换"
+                  }
+                ]
+              },
+              {
+                "description": "是否上岛",
+                "name": "island",
+                "format": "int32",
+                "value-list": [
+                  {
+                    "value": -1,
+                    "description": "不上岛"
+                  },
+                  {
+                    "value": 1,
+                    "description": "摘要态"
+                  },
+                  {
+                    "value": 2,
+                    "description": "展开态"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 5,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/sound/getzenmode]:0:1.0",
+            "description": "get zen mode",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "执行成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "执行失败"
+                  }
+                ]
+              },
+              {
+                "format": "int32",
+                "name": "result",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "已关闭"
+                  },
+                  {
+                    "value": 1,
+                    "description": "已打开"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 6,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/sound/jumpzenmode]:0:1.0",
+            "description": "jump zenmode",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "跳转页面成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "跳转页面失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "已经在当前页面"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 7,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/sound/switchvibratewhenringingmode]:0:1.0",
+            "description": "switch vibrate when ringing mode",
+            "in": [
+              {
+                "format": "boolean",
+                "name": "enable",
+                "description": "开启/关闭响铃时振动模式"
+              }
+            ],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "切换成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "切换失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "响铃时振动模式当前已经是该状态，无需切换"
+                  },
+                  {
+                    "value": -11,
+                    "description": "当前机型不支持响铃时振动模式"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 8,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/sound/getvibratewhenringingmode]:0:1.0",
+            "description": "get vibrate when ringing mode",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "执行成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "执行失败"
+                  },
+                  {
+                    "value": -11,
+                    "description": "当前机型不支持该功能"
+                  }
+                ]
+              },
+              {
+                "format": "int32",
+                "name": "result",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "已关闭"
+                  },
+                  {
+                    "value": 1,
+                    "description": "已打开"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 9,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/sound/switchvibratewhensilentmode]:0:1.0",
+            "description": "switch vibrate when silent mode",
+            "in": [
+              {
+                "format": "boolean",
+                "name": "enable",
+                "description": "开启/关闭静音时振动模式"
+              }
+            ],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "切换成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "切换失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "静音时振动模式当前已经是该状态，无需切换"
+                  },
+                  {
+                    "value": -11,
+                    "description": "当前机型不支持静音时振动模式"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 10,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/sound/getvibratewhensilentmode]:0:1.0",
+            "description": "get vibrate when silent mode",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "执行成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "执行失败"
+                  },
+                  {
+                    "value": -11,
+                    "description": "当前机型不支持该功能"
+                  }
+                ]
+              },
+              {
+                "format": "int32",
+                "name": "result",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "已关闭"
+                  },
+                  {
+                    "value": 1,
+                    "description": "已打开"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 11,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/sound/jumpcoolsoundphone]:0:1.0",
+            "description": "jump cool sound phone",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "跳转页面成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "跳转页面失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "已经在当前页面"
+                  },
+                  {
+                    "value": -11,
+                    "description": "当前机型不支持跳转该页面"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 12,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/sound/adjustvolumepercent]:0:1.0",
+            "description": "adjust volume percent",
+            "in": [
+              {
+                "format": "int",
+                "name": "type",
+                "description": "音频类型",
+                "value-list": [
+                  {
+                    "value": 2,
+                    "description": "铃声音量"
+                  },
+                  {
+                    "value": 3,
+                    "description": "媒体音量"
+                  },
+                  {
+                    "value": 4,
+                    "description": "闹钟音量"
+                  },
+                  {
+                    "value": 11,
+                    "description": "小爱音量"
+                  }
+                ]
+              },
+              {
+                "format": "int",
+                "name": "volume",
+                "description": "调节音量为X%",
+                "value-range": [0, 100, 1]
+              }
+            ],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "调节成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "调节失败"
+                  }
+                ]
+              },
+              {
+                "format": "int",
+                "name": "volume",
+                "description": "当前音量"
+              }
+            ]
+          },
+          {
+            "iid": 13,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/sound/adjustvolumeincrement]:0:1.0",
+            "description": "adjust volume increment",
+            "in": [
+              {
+                "format": "int",
+                "name": "type",
+                "description": "音频类型",
+                "value-list": [
+                  {
+                    "value": 2,
+                    "description": "铃声音量"
+                  },
+                  {
+                    "value": 3,
+                    "description": "媒体音量"
+                  },
+                  {
+                    "value": 4,
+                    "description": "闹钟音量"
+                  },
+                  {
+                    "value": 11,
+                    "description": "小爱音量"
+                  }
+                ]
+              },
+              {
+                "format": "int",
+                "name": "volume",
+                "description": "调大调小",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "调小"
+                  },
+                  {
+                    "value": 1,
+                    "description": "调大"
+                  }
+                ]
+              }
+            ],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "调节成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "调节失败"
+                  }
+                ]
+              },
+              {
+                "format": "int",
+                "name": "volume",
+                "description": "当前音量"
+              }
+            ]
+          },
+          {
+            "iid": 14,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/sound/adjustvolumeextrema]:0:1.0",
+            "description": "adjust volume extrema",
+            "in": [
+              {
+                "format": "int",
+                "name": "type",
+                "description": "音频类型",
+                "value-list": [
+                  {
+                    "value": 2,
+                    "description": "铃声音量"
+                  },
+                  {
+                    "value": 3,
+                    "description": "媒体音量"
+                  },
+                  {
+                    "value": 4,
+                    "description": "闹钟音量"
+                  },
+                  {
+                    "value": 11,
+                    "description": "小爱音量"
+                  }
+                ]
+              },
+              {
+                "format": "int",
+                "name": "volume",
+                "description": "最大最小",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "最小"
+                  },
+                  {
+                    "value": 1,
+                    "description": "最大"
+                  }
+                ]
+              }
+            ],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "调节成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "调节失败"
+                  }
+                ]
+              },
+              {
+                "format": "int",
+                "name": "volume",
+                "description": "当前音量"
+              }
+            ]
+          },
+          {
+            "iid": 15,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/sound/adjustvolumezero]:0:1.0",
+            "description": "adjust volume zero",
+            "in": [
+              {
+                "format": "int",
+                "name": "type",
+                "description": "音频类型",
+                "value-list": [
+                  {
+                    "value": 2,
+                    "description": "铃声音量"
+                  },
+                  {
+                    "value": 3,
+                    "description": "媒体音量"
+                  },
+                  {
+                    "value": 4,
+                    "description": "闹钟音量"
+                  },
+                  {
+                    "value": 11,
+                    "description": "小爱音量"
+                  }
+                ]
+              },
+              {
+                "format": "int",
+                "name": "volume",
+                "description": "关闭音量",
+                "value": 1
+              }
+            ],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "调节成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "调节失败"
+                  }
+                ]
+              },
+              {
+                "format": "int",
+                "name": "volume",
+                "description": "当前音量"
+              }
+            ]
+          },
+          {
+            "iid": 16,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/sound/getvolume]:0:1.0",
+            "description": "get volume",
+            "in": [
+              {
+                "format": "int",
+                "name": "type",
+                "description": "音频类型",
+                "value-list": [
+                  {
+                    "value": 2,
+                    "description": "铃声音量"
+                  },
+                  {
+                    "value": 3,
+                    "description": "媒体音量"
+                  },
+                  {
+                    "value": 4,
+                    "description": "闹钟音量"
+                  },
+                  {
+                    "value": 11,
+                    "description": "小爱音量"
+                  }
+                ]
+              }
+            ],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "执行成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "执行失败"
+                  }
+                ]
+              },
+              {
+                "format": "int",
+                "name": "volume",
+                "description": "当前音量"
+              }
+            ]
+          },
+          {
+            "iid": 17,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/sound/getvibrate]:0:1.0",
+            "description": "get vibrate",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "执行成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "执行失败"
+                  },
+                  {
+                    "value": -11,
+                    "description": "当前机型不支持该功能"
+                  }
+                ]
+              },
+              {
+                "format": "int32",
+                "name": "ringingmode",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "已关闭"
+                  },
+                  {
+                    "value": 1,
+                    "description": "已打开"
+                  },
+                  {
+                    "value": -11,
+                    "description": "当前机型不支持该功能"
+                  }
+                ]
+              },
+              {
+                "format": "int32",
+                "name": "silentmode",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "已关闭"
+                  },
+                  {
+                    "value": 1,
+                    "description": "已打开"
+                  },
+                  {
+                    "value": -11,
+                    "description": "当前机型不支持该功能"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,537 @@
+{
+  "100%": {
+    "progress": 1,
+    "particle_count": 9.52,
+    "particle_size": 1.41,
+    "particle_color": [
+      0.482,
+      0.482,
+      0.482,
+      1
+    ],
+    "beam1_point_f": [
+      196,
+      406
+    ],
+    "beam1_line_y": 143,
+    "beam1_highband": 0.18,
+    "beam1_e": 1.85,
+    "beam1_rgb": [
+      1,
+      1,
+      1
+    ],
+    "beam1_scale_x": 4.75,
+    "beam1_alpha": 2.08,
+    "beam1_shift": 0,
+    "beam1_dispersion": 1,
+    "beam2_point_f": [
+      196,
+      121
+    ],
+    "beam2_line_y": 108,
+    "beam2_highband": 0.24,
+    "beam2_e": 14.26,
+    "beam2_rgb": [
+      1,
+      1,
+      1
+    ],
+    "beam2_scale_x": 2.56,
+    "beam2_alpha": 1.62,
+    "beam2_shift": 0,
+    "beam2_dispersion": 1,
+    "beam3_point_f": [
+      196,
+      414
+    ],
+    "beam3_line_y": 305,
+    "beam3_highband": 0.82,
+    "beam3_e": 10.5,
+    "beam3_rgb": [
+      0.331,
+      0.54,
+      1
+    ],
+    "beam3_scale_x": 5.43,
+    "beam3_alpha": 1.03,
+    "beam3_shift": 0,
+    "beam3_dispersion": 1,
+    "beam4_point_f": [
+      196,
+      45
+    ],
+    "beam4_line_y": 100,
+    "beam4_highband": 0.1,
+    "beam4_e": 1,
+    "beam4_rgb": [
+      1,
+      1,
+      1
+    ],
+    "beam4_scale_x": 1.54,
+    "beam4_alpha": 0,
+    "beam4_shift": 0,
+    "beam4_dispersion": 1,
+    "beam5_point_f": [
+      196,
+      335
+    ],
+    "beam5_line_y": 410,
+    "beam5_highband": 0.53,
+    "beam5_e": 30.16,
+    "beam5_rgb": [
+      1,
+      1,
+      1
+    ],
+    "beam5_scale_x": 4.53,
+    "beam5_alpha": 3.27,
+    "beam5_shift": 0,
+    "beam5_dispersion": 1,
+    "beam6_point_f": [
+      196,
+      33
+    ],
+    "beam6_line_y": 252,
+    "beam6_highband": 0.44,
+    "beam6_e": 1.64,
+    "beam6_rgb": [
+      1,
+      1,
+      0.9215686274509803
+    ],
+    "beam6_scale_x": 2.75,
+    "beam6_alpha": 3.59,
+    "beam6_shift": 0.45,
+    "beam6_dispersion": 0.66
+  },
+  "75%": {
+    "progress": 0.75,
+    "particle_count": 3.46,
+    "particle_size": 1.87,
+    "particle_color": [
+      0.482,
+      0.482,
+      0.482,
+      1
+    ],
+    "beam1_point_f": [
+      196,
+      229
+    ],
+    "beam1_line_y": 190,
+    "beam1_highband": 0.11,
+    "beam1_e": 1.85,
+    "beam1_rgb": [
+      1,
+      1,
+      1
+    ],
+    "beam1_scale_x": 4.03,
+    "beam1_alpha": 0.06,
+    "beam1_shift": 0,
+    "beam1_dispersion": 1,
+    "beam2_point_f": [
+      196,
+      206
+    ],
+    "beam2_line_y": 292,
+    "beam2_highband": 0.5,
+    "beam2_e": 8.27,
+    "beam2_rgb": [
+      1,
+      1,
+      1
+    ],
+    "beam2_scale_x": 1.79,
+    "beam2_alpha": 1.2,
+    "beam2_shift": 0,
+    "beam2_dispersion": 1,
+    "beam3_point_f": [
+      196,
+      257
+    ],
+    "beam3_line_y": 334,
+    "beam3_highband": 0.82,
+    "beam3_e": 9.48,
+    "beam3_rgb": [
+      0.331,
+      0.54,
+      1
+    ],
+    "beam3_scale_x": 3.52,
+    "beam3_alpha": 0.49,
+    "beam3_shift": 0,
+    "beam3_dispersion": 1,
+    "beam4_point_f": [
+      196,
+      45
+    ],
+    "beam4_line_y": 140,
+    "beam4_highband": 0.1,
+    "beam4_e": 1,
+    "beam4_rgb": [
+      1,
+      1,
+      1
+    ],
+    "beam4_scale_x": 1.54,
+    "beam4_alpha": 0,
+    "beam4_shift": 0,
+    "beam4_dispersion": 1,
+    "beam5_point_f": [
+      196,
+      242
+    ],
+    "beam5_line_y": 410,
+    "beam5_highband": 0.57,
+    "beam5_e": 40,
+    "beam5_rgb": [
+      1,
+      1,
+      1
+    ],
+    "beam5_scale_x": 5.66,
+    "beam5_alpha": 3.03,
+    "beam5_shift": 0,
+    "beam5_dispersion": 1,
+    "beam6_point_f": [
+      196,
+      31
+    ],
+    "beam6_line_y": 241,
+    "beam6_highband": 0.41,
+    "beam6_e": 1.59,
+    "beam6_rgb": [
+      1,
+      1,
+      1
+    ],
+    "beam6_scale_x": 2.67,
+    "beam6_alpha": 2.98,
+    "beam6_shift": 0,
+    "beam6_dispersion": 0.15
+  },
+  "50%": {
+    "progress": 0.5265654648956357,
+    "particle_count": 0,
+    "particle_size": 0,
+    "particle_color": [
+      0.482,
+      0.482,
+      0.482,
+      1
+    ],
+    "beam1_point_f": [
+      196,
+      166
+    ],
+    "beam1_line_y": 122,
+    "beam1_highband": 0.11,
+    "beam1_e": 1.85,
+    "beam1_rgb": [
+      1,
+      1,
+      1
+    ],
+    "beam1_scale_x": 4.503681214421252,
+    "beam1_alpha": 0,
+    "beam1_shift": 0,
+    "beam1_dispersion": 1,
+    "beam2_point_f": [
+      196,
+      125.56356736242887
+    ],
+    "beam2_line_y": 62.30929791271355,
+    "beam2_highband": 0.5,
+    "beam2_e": 8.27,
+    "beam2_rgb": [
+      1,
+      1,
+      1
+    ],
+    "beam2_scale_x": 1.3073814041745733,
+    "beam2_alpha": 1.2,
+    "beam2_shift": 0,
+    "beam2_dispersion": 1,
+    "beam3_point_f": [
+      196,
+      27.309297912713543
+    ],
+    "beam3_line_y": 329.53130929791274,
+    "beam3_highband": 0.8334060721062618,
+    "beam3_e": 10.391612903225806,
+    "beam3_rgb": [
+      0.331,
+      0.54,
+      1
+    ],
+    "beam3_scale_x": 3.770246679316888,
+    "beam3_alpha": 0.9815559772296014,
+    "beam3_shift": 0,
+    "beam3_dispersion": 1,
+    "beam4_point_f": [
+      196,
+      0
+    ],
+    "beam4_line_y": 0,
+    "beam4_highband": 0,
+    "beam4_e": 1,
+    "beam4_rgb": [
+      1,
+      1,
+      1
+    ],
+    "beam4_scale_x": 0,
+    "beam4_alpha": 0,
+    "beam4_shift": 0,
+    "beam4_dispersion": 0,
+    "beam5_point_f": [
+      196,
+      149.05123339658448
+    ],
+    "beam5_line_y": 413.5749525616698,
+    "beam5_highband": 0.5253130929791272,
+    "beam5_e": 40,
+    "beam5_rgb": [
+      1,
+      1,
+      1
+    ],
+    "beam5_scale_x": 5.09,
+    "beam5_alpha": 2.2435104364326377,
+    "beam5_shift": 0,
+    "beam5_dispersion": 1,
+    "beam6_point_f": [
+      196,
+      26
+    ],
+    "beam6_line_y": 276,
+    "beam6_highband": 0.4,
+    "beam6_e": 1.25,
+    "beam6_rgb": [
+      1,
+      1,
+      1
+    ],
+    "beam6_scale_x": 1.55,
+    "beam6_alpha": 2.46,
+    "beam6_shift": 0,
+    "beam6_dispersion": 0.015939278937381444
+  },
+  "25%": {
+    "progress": 0.25,
+    "particle_count": 0,
+    "particle_size": 0,
+    "particle_color": [
+      0.482,
+      0.482,
+      0.482,
+      1
+    ],
+    "beam1_point_f": [
+      196,
+      242
+    ],
+    "beam1_line_y": 209,
+    "beam1_highband": 0.19,
+    "beam1_e": 1.85,
+    "beam1_rgb": [
+      1,
+      1,
+      1
+    ],
+    "beam1_scale_x": 4.01,
+    "beam1_alpha": 1.62,
+    "beam1_shift": 0,
+    "beam1_dispersion": 1,
+    "beam2_point_f": [
+      196,
+      0
+    ],
+    "beam2_line_y": 0,
+    "beam2_highband": 0,
+    "beam2_e": 5.5,
+    "beam2_rgb": [
+      1,
+      1,
+      1
+    ],
+    "beam2_scale_x": 0,
+    "beam2_alpha": 0,
+    "beam2_shift": 0,
+    "beam2_dispersion": 0,
+    "beam3_point_f": [
+      196,
+      0
+    ],
+    "beam3_line_y": 346,
+    "beam3_highband": 0.85,
+    "beam3_e": 13.83,
+    "beam3_rgb": [
+      0.331,
+      0.54,
+      1
+    ],
+    "beam3_scale_x": 3.54,
+    "beam3_alpha": 0,
+    "beam3_shift": 0,
+    "beam3_dispersion": 1,
+    "beam4_point_f": [
+      196,
+      0
+    ],
+    "beam4_line_y": 0,
+    "beam4_highband": 0,
+    "beam4_e": 0,
+    "beam4_rgb": [
+      1,
+      1,
+      1
+    ],
+    "beam4_scale_x": 0,
+    "beam4_alpha": 0,
+    "beam4_shift": 0,
+    "beam4_dispersion": 0,
+    "beam5_point_f": [
+      196,
+      572
+    ],
+    "beam5_line_y": 405,
+    "beam5_highband": 0.7,
+    "beam5_e": 40,
+    "beam5_rgb": [
+      1,
+      1,
+      1
+    ],
+    "beam5_scale_x": 5.66,
+    "beam5_alpha": 2.15,
+    "beam5_shift": 0,
+    "beam5_dispersion": 1,
+    "beam6_point_f": [
+      196,
+      14
+    ],
+    "beam6_line_y": 198,
+    "beam6_highband": 0.39,
+    "beam6_e": 1.6,
+    "beam6_rgb": [
+      1,
+      1,
+      1
+    ],
+    "beam6_scale_x": 3.46,
+    "beam6_alpha": 2.3,
+    "beam6_shift": 0.03,
+    "beam6_dispersion": 0
+  },
+  "0%": {
+    "progress": 0,
+    "particle_count": 0,
+    "particle_size": 0,
+    "particle_color": [
+      0.482,
+      0.482,
+      0.482,
+      1
+    ],
+    "beam1_point_f": [
+      196,
+      171
+    ],
+    "beam1_line_y": 190,
+    "beam1_highband": 0.11,
+    "beam1_e": 1.85,
+    "beam1_rgb": [
+      1,
+      1,
+      1
+    ],
+    "beam1_scale_x": 4.48,
+    "beam1_alpha": 0,
+    "beam1_shift": 0,
+    "beam1_dispersion": 1,
+    "beam2_point_f": [
+      196,
+      97
+    ],
+    "beam2_line_y": 102,
+    "beam2_highband": 0,
+    "beam2_e": 6.98,
+    "beam2_rgb": [
+      1,
+      1,
+      1
+    ],
+    "beam2_scale_x": 1.79,
+    "beam2_alpha": 0,
+    "beam2_shift": 0,
+    "beam2_dispersion": 1,
+    "beam3_point_f": [
+      196,
+      0
+    ],
+    "beam3_line_y": 0,
+    "beam3_highband": 0,
+    "beam3_e": 0,
+    "beam3_rgb": [
+      0.331,
+      0.54,
+      1
+    ],
+    "beam3_scale_x": 0,
+    "beam3_alpha": 0,
+    "beam3_shift": 0,
+    "beam3_dispersion": 0,
+    "beam4_point_f": [
+      196,
+      0
+    ],
+    "beam4_line_y": 0,
+    "beam4_highband": 0,
+    "beam4_e": 0,
+    "beam4_rgb": [
+      1,
+      1,
+      1
+    ],
+    "beam4_scale_x": 0,
+    "beam4_alpha": 0,
+    "beam4_shift": 0,
+    "beam4_dispersion": 0,
+    "beam5_point_f": [
+      196,
+      348
+    ],
+    "beam5_line_y": 409,
+    "beam5_highband": 0.51,
+    "beam5_e": 40,
+    "beam5_rgb": [
+      1,
+      1,
+      1
+    ],
+    "beam5_scale_x": 5.66,
+    "beam5_alpha": 0,
+    "beam5_shift": 0,
+    "beam5_dispersion": 1,
+    "beam6_point_f": [
+      196,
+      14
+    ],
+    "beam6_line_y": 214,
+    "beam6_highband": 0.4,
+    "beam6_e": 1.6,
+    "beam6_rgb": [
+      1,
+      1,
+      1
+    ],
+    "beam6_scale_x": 3.18,
+    "beam6_alpha": 0,
+    "beam6_shift": 0.03,
+    "beam6_dispersion": 0
+  }
+}

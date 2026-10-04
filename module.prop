@@ -1,0 +1,6 @@
+name=AquaHyperOS
+version=1.0.0
+versionCode=1
+author=AquaHyperOS Team
+description=HyperOS 深度定制模块 - 状态栏、控制中心、锁屏、主题等全方位自定义
+minApi=33

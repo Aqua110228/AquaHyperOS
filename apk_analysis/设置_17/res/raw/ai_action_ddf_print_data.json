@@ -1,0 +1,50 @@
+{
+  "type": "urn:aiot-spec-v3:com.mi.phones:device:phones:0:1.0",
+  "description": "settings print ddf",
+  "protocol-version": "3.0",
+  "class": "MiPhone",
+  "dynamic": 0,
+  "ddfid": 12189697,
+  "modules": {
+    "iid": 1,
+    "type": "urn:aiot-spec-v3:com.mi.phones:module:[com.android.settings]:0:1.0",
+    "description": "settings print module",
+    "name": "com.android.settings",
+    "services": [
+      {
+        "iid": 1,
+        "type": "urn:aiot-spec-v3:com.mi.phones:service:[com.android.settings/print]:0:1.0",
+        "description": "print service",
+        "name": "print",
+        "actions": [
+          {
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/print/open_print_settings]:0:1.0",
+            "description": "打开打印设置页面",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "跳转成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "跳转失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "跳转失败，已在当前页面"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

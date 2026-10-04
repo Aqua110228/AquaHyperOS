@@ -1,0 +1,193 @@
+{
+  "type": "urn:aiot-spec-v3:com.mi.phones:device:phones:0:1.0",
+  "description": "input method setting",
+  "protocol-version": "3.0",
+  "class": "MiPhone",
+  "dynamic": 0,
+  "ddfid": 11468801,
+  "data-type-defs":
+  {
+    "file-info":
+    {
+      "data-type": "struct",
+      "fields":
+      {
+        "inputMethodName":
+        {
+          "format": "string",
+          "description": "输入法名称"
+        },
+        "inputMethodId":
+        {
+          "format": "string",
+          "description": "输入法ID"
+        },
+        "selected":
+        {
+          "format": "bool",
+          "description": "是否选中当前输入法"
+        }
+      }
+    },
+    "file-list":
+    {
+      "data-type": "array",
+      "items":
+      {
+        "item":
+        {
+          "format": "$ref/data-type-defs/file-info"
+        }
+      }
+    }
+  },
+  "modules":
+  [
+    {
+      "iid": 1,
+      "type": "urn:aiot-spec-v3:com.mi.phones:module:[com.android.settings]:0:1.0",
+      "description": "input method setting module",
+      "name": "com.android.settings",
+      "services":
+      [
+        {
+          "iid": 1,
+          "type": "urn:aiot-spec-v3:com.mi.phones:service:[com.android.settings/inputmethod]:0:1.0",
+          "description": "input method setting service",
+          "name": "input method",
+          "actions":
+          [
+            {
+              "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/inputmethod/switchinputmethod]:0:1.0",
+              "description": "切换成指定ID的输入法",
+              "in":
+              [
+                {
+                  "format": "string",
+                  "name": "inputMethodId",
+                  "description": "选中输入法ID（通过查询支持输入法列表接口获取ID）"
+                }
+              ],
+              "out":
+              [
+                {
+                  "format": "int32",
+                  "name": "status",
+                  "description": "执行状态",
+                  "value-list":
+                  [
+                    {
+                      "value": 0,
+                      "description": "切换成功"
+                    },
+                    {
+                      "value": -1,
+                      "description": "切换失败"
+                    },
+                    {
+                      "value": 1,
+                      "description": "已经是当前输入法"
+                    }
+                  ]
+                },
+                {
+                  "format": "$ref/data-type-defs/file-list",
+                  "name": "list",
+                  "description": "支持的输入法列表"
+                }
+              ]
+            },
+            {
+              "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/inputmethod/jumpinputmethodmanager]:0:1.0",
+              "description": "跳转到输入法管理",
+              "in":
+              [],
+              "out":
+              [
+                {
+                  "format": "int32",
+                  "name": "status",
+                  "description": "执行状态",
+                  "value-list":
+                  [
+                    {
+                      "value": 0,
+                      "description": "跳转成功"
+                    },
+                    {
+                      "value": -1,
+                      "description": "跳转失败"
+                    },
+                    {
+                      "value": 1,
+                      "description": "已经是当前页面"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/inputmethod/queryinputmethod]:0:1.0",
+              "description": "查询支持输入法列表",
+              "in":
+              [],
+              "out":
+              [
+                {
+                  "format": "int32",
+                  "name": "status",
+                  "description": "执行状态",
+                  "value-list":
+                  [
+                    {
+                      "value": 0,
+                      "description": "查询成功"
+                    },
+                    {
+                      "value": -1,
+                      "description": "查询失败"
+                    }
+                  ]
+                },
+                {
+                  "format": "$ref/data-type-defs/file-list",
+                  "name": "list",
+                  "description": "支持的输入法列表"
+                }
+              ]
+            },
+            {
+              "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/inputmethod/jumplanguageandinputmethod]:0:1.0",
+              "description": "跳转到语言与输入法",
+              "in":
+              [],
+              "out":
+              [
+                {
+                  "format": "int32",
+                  "name": "status",
+                  "description": "执行状态",
+                  "value-list":
+                  [
+                    {
+                      "value": 0,
+                      "description": "跳转成功"
+                    },
+                    {
+                      "value": -1,
+                      "description": "跳转失败"
+                    },
+                    {
+                      "value": 1,
+                      "description": "已经是当前页面"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

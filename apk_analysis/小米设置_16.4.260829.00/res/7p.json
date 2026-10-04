@@ -1,0 +1,426 @@
+{
+  "type": "urn:aiot-spec-v3:com.mi.phones:device:phones:0:1.0",
+  "description": "xiaomi-settings ddf",
+  "protocol-version": "3.0",
+  "class": "MiPhone",
+  "dynamic": 0,
+  "ddfid": 8192003,
+  "data-type-defs": {
+    "file-info": {
+      "data-type": "struct",
+      "fields": {
+        "id": {
+          "format": "int32",
+          "description": "唯一id",
+          "max-length": 255
+        },
+        "titleId": {
+          "format": "string",
+          "description": "标题"
+        },
+        "value": {
+          "format": "int32",
+          "description": "数值"
+        },
+        "selected": {
+          "format": "boolean",
+          "description": "选中状态"
+        }
+      }
+    },
+    "file-list": {
+      "data-type": "array",
+      "items": {
+        "item": {
+          "format": "$ref/data-type-defs/file-info"
+        }
+      }
+    }
+  },
+  "modules": {
+    "iid": 1,
+    "type": "urn:aiot-spec-v3:com.mi.phones:module:[com.xiaomi.misettings]:0:1.0",
+    "description": "start misettings",
+    "name": "com.xiaomi.misettings",
+    "services":[
+      {
+        "iid": 1,
+        "type": "urn:aiot-spec-v3:com.mi.phones:service:[com.xiaomi.misettings/misettings]:0:1.0",
+        "description": "misettings service",
+        "name": "misettings",
+        "actions": [
+          {
+            "iid": 1,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.xiaomi.misettings/misettings/jumptoscreentimemanager]:0:1.0",
+            "description": "jump to screentimemanager",
+            "in": [
+            ],
+            "out": [
+              {
+                "name": "status",
+                "description": "执行状态",
+                "format": "int32",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "执行成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "执行失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "在当前页面，无需跳转"
+                  },
+                  {
+                    "value": -103,
+                    "description": "CTA未授权，执行失败"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 2,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.xiaomi.misettings/misettings/usagelimit]:0:1.0",
+            "description": "限制设备使用时间",
+            "in": [
+              {
+                "name": "usagelimit",
+                "description": "设备使用限制",
+                "format": "string",
+                "valueList": [
+                  {"value": "weekday", "description": "工作日状态"},
+                  {"value": "weekend", "description": "节假日状态"},
+                  {"value": "allday", "description": "每天"}
+                ]
+              },
+              {
+                "name": "duration",
+                "description": "持续时间",
+                "format": "date_string"
+              }
+            ],
+            "out": [
+              {
+                "name": "status",
+                "description": "执行状态",
+                "format": "int32",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "执行成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "缺少频次参数及时间参数，执行失败继续询问"
+                  },
+                  {
+                    "value": -2,
+                    "description": "缺少时间参数，执行失败继续询问"
+                  },
+                  {
+                    "value": -3,
+                    "description": "时间参数不符要求，执行失败"
+                  },
+                  {
+                    "value": -4,
+                    "description": "儿童端不支持该模式，执行失败"
+                  },
+                  {
+                    "value": -103,
+                    "description": "CTA未授权，执行失败"
+                  }
+                ]
+              },
+              {
+                "format": "$ref/data-type-defs/file-list",
+                "name": "list",
+                "description": "设备限制列表"
+              }
+            ]
+          },
+          {
+            "iid": 3,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.xiaomi.misettings/misettings/jumptousagelimit]:0:1.0",
+            "description": "跳转限制设备使用时间页面",
+            "in": [
+            ],
+            "out": [
+              {
+                "name": "status",
+                "description": "执行状态",
+                "format": "int32",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "执行成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "执行失败"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 4,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.xiaomi.misettings/misettings/focus]:0:1.0",
+            "description": "开启专注模式",
+            "in": [
+              {
+                "name": "focus",
+                "description": "进入专注模式(分钟)",
+                "format": "int32",
+                "value-range": [20, 180, 1]
+              }
+            ],
+            "out": [
+              {
+                "name": "status",
+                "description": "执行状态",
+                "format": "int32",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "执行成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "执行失败"
+                  },
+                  {
+                    "value": -2,
+                    "description": "时间参数不符要求，执行失败"
+                  },
+                  {
+                    "value": -3,
+                    "description": "当前设备不支持，执行失败"
+                  },
+                  {
+                    "value": -103,
+                    "description": "CTA未授权，执行失败"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 5,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.xiaomi.misettings/misettings/supportfocus]:0:1.0",
+            "description": "查询是否支持专注模式",
+            "in": [
+            ],
+            "out": [
+              {
+                "name": "status",
+                "description": "执行状态",
+                "format": "int32",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "执行专注模式action"
+                  },
+                  {
+                    "value": -3,
+                    "description": "当前设备不支持，执行失败"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 6,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.xiaomi.misettings/misettings/refreshrate]:0:1.0",
+            "description": "屏幕刷新率",
+            "in": [
+              {
+                "name": "refreshrate1",
+                "description": "选择屏幕刷新率（二选一）",
+                "format": "int32"
+              },
+              {
+                "name": "refreshrate2",
+                "format": "int32",
+                "description": "选择屏幕刷新率（二选一）",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "默认（推荐）"
+                  },
+                  {
+                    "value": 1,
+                    "description": "最小"
+                  },
+                  {
+                    "value": 2,
+                    "description": "最大"
+                  }
+                ]
+              }
+            ],
+            "out": [
+              {
+                "name": "status",
+                "description": "执行状态",
+                "format": "int32",
+                "value-list": [
+
+                  {
+                    "value": 0,
+                    "description": "执行成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "执行失败"
+                  },
+                  {
+                    "value": -2,
+                    "description": "设备不支持当前query的刷新率模式，执行失败"
+                  }
+                ]
+              },
+              {
+                "format": "$ref/data-type-defs/file-list",
+                "name": "list",
+                "description": "屏幕刷新率列表"
+              }
+            ]
+          },
+          {
+            "iid": 7,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.xiaomi.misettings/misettings/jumptorefreshrate]:0:1.0",
+            "description": "跳转屏幕刷新率设置页面",
+            "in": [
+            ],
+            "out": [
+              {
+                "name": "status",
+                "description": "执行状态",
+                "format": "int32",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "执行成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "执行失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "在当前页面，无需跳转"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "iid": 8,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.xiaomi.misettings/misettings/query_refreshrate]:0:1.0",
+            "description": "查询屏幕刷新率",
+            "in": [
+            ],
+            "out": [
+              {
+                "name": "status",
+                "description": "执行状态",
+                "format": "int32",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "执行成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "执行失败"
+                  }
+                ]
+              },
+              {
+                "format": "$ref/data-type-defs/file-list",
+                "name": "list",
+                "description": "屏幕刷新率列表"
+              }
+            ]
+          },
+          {
+            "iid": 9,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.xiaomi.misettings/misettings/getscreentime]:0:1.0",
+            "description": "get screentime",
+            "in": [
+            ],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "执行成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "执行失败"
+                  },
+                  {
+                    "value": -103,
+                    "description": "CTA未授权，执行失败"
+                  }
+                ]
+              },
+              {
+                "format": "string",
+                "name": "time",
+                "description": "今日屏幕使用时长"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "iid": 2,
+        "type": "urn:aiot-spec-v3:com.mi.phones:service:[com.xiaomi.misettings/clock]:0:1.0",
+        "description": "misettings service",
+        "name": "misettings",
+        "actions": [
+          {
+            "iid": 1,
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.xiaomi.misettings/clock/jumptoclock]:0:1.0",
+            "description": "jump to clock",
+            "in": [
+            ],
+            "out": [
+              {
+                "name": "status",
+                "description": "执行状态",
+                "format": "int32",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "执行成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "执行失败"
+                  },
+                  {
+                    "value": -10,
+                    "description": "在当前页面，无需跳转"
+                  },
+                  {
+                    "value": -11,
+                    "description": "当前页面不支持跳转"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

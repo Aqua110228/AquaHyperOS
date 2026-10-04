@@ -1,0 +1,227 @@
+{
+    "type": "urn:aiot-spec-v3:com.mi.phones:device:phones:0:1.0",
+    "description": "",
+    "protocol-version": "3.0",
+    "class": "MiPhone",
+    "dynamic": 0,
+    "ddfid": 7798785,
+    "modules": [
+      {
+      "iid": 1,
+      "type": "urn:aiot-spec-v3:com.mi.phones:module:[com.android.settings]:0:1.0",
+      "description": "settings module",
+      "name": "com.android.settings",
+      "services": [
+        {
+        "iid": 1,
+        "type": "urn:aiot-spec-v3:com.mi.phones:service:[com.android.settings/wifi]:0:1.0",
+        "description": "wifi service",
+        "name": "wifi",
+        "actions": [
+          {
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/wifi/switchwifimode]:0:1.0",
+            "description": "开启关闭Wi-Fi",
+            "in": [
+              {
+                "format": "boolean",
+                "name": "enable",
+                "description": "开启/关闭Wi-Fi"
+              }
+            ],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行状态",
+                "value-list": [
+                {
+                    "value": 0,
+                    "description": "切换成功"
+                },
+                {
+                    "value": -1,
+                    "description": "切换失败，Wi-Fi当前已经是该状态，无需切换"
+                }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/wifi/getwifimode]:0:1.0",
+            "description": "查询当前Wi-Fi状态",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行状态",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "执行成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "执行失败"
+                  }
+                ]
+              },
+              {
+                "format": "int32",
+                "name": "result",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "已关闭"
+                  },
+                  {
+                    "value": 1,
+                    "description": "已打开"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/wifi/jumpwifi]:0:1.0",
+            "description": "跳转到Wi-Fi设置页面",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行状态",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "跳转成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "跳转失败"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "iid": 2,
+        "type": "urn:aiot-spec-v3:com.mi.phones:service:[com.android.settings/tether]:0:1.0",
+        "description": "tether service",
+        "name": "tether",
+        "actions": [
+          {
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/tether/switchtethermode]:0:1.0",
+            "description": "开启关闭个人热点",
+            "in": [
+              {
+                "format": "boolean",
+                "name": "enable",
+                "description": "开启/关闭个人热点"
+              }
+            ],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行状态",
+                "value-list": [
+                {
+                    "value": 0,
+                    "description": "切换成功"
+                },
+                {
+                    "value": -1,
+                    "description": "切换失败，个人热点当前已经是该状态，无需切换"
+                }
+                ]
+              },
+              {
+                "description": "是否上岛",
+                "name": "island",
+                "format": "int32",
+                "value-list": [
+                  {
+                    "value": -1,
+                    "description": "不上岛"
+                  },
+                  {
+                    "value": 1,
+                    "description": "摘要态"
+                  },
+                  {
+                    "value": 2,
+                    "description": "展开态"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/tether/gettethermode]:0:1.0",
+            "description": "查询当前个人热点状态",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行状态",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "执行成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "执行失败"
+                  }
+                ]
+              },
+              {
+                "format": "int32",
+                "name": "result",
+                "description": "执行结果",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "已关闭"
+                  },
+                  {
+                    "value": 1,
+                    "description": "已打开"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/tether/jumptether]:0:1.0",
+            "description": "跳转到个人热点设置页面",
+            "in": [],
+            "out": [
+              {
+                "format": "int32",
+                "name": "status",
+                "description": "执行状态",
+                "value-list": [
+                  {
+                    "value": 0,
+                    "description": "跳转成功"
+                  },
+                  {
+                    "value": -1,
+                    "description": "跳转失败"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+       }
+      ]
+     }
+    ]
+  }

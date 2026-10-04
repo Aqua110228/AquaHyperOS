@@ -1,0 +1,14 @@
+[
+  {
+    "name": "home_settings",
+    "descriptions": {"zh": "小米桌面设置工具，支持查询和修改桌面设置项。当用户说开启无字模式、关闭图标文字、隐藏应用名称、仅小部件无字、锁定桌面布局、固定桌面、自动填充空位、双击锁屏、切换经典模式、切换抽屉模式、切换极简模式、修改桌面网格、设置上滑手势、设置下拉手势、开关负一屏等桌面相关设置时调用。支持的设置项包括：无字模式（关闭/全部无字/仅小部件无字）、自动填充空位、锁定桌面布局、双击锁屏、桌面网格布局、上滑手势、下拉手势、负一屏开关、桌面模式（经典模式/抽屉模式/极简模式）"},
+    "method": "handleSettingsTool",
+    "class": "com.miui.home.miclaw.LauncherToolService",
+    "paramCount": 3,
+    "params": [
+      {"name": "action", "type": "string", "descriptions": {"zh": "操作类型：get 查询当前设置值，set 修改设置值"}, "required": true, "index": 0},
+      {"name": "target", "type": "string", "descriptions": {"zh": "目标设置项：no_word_model(无字模式：关闭/全部无字/仅小部件无字)、auto_fill_empty(自动填充空位)、lock_layout(锁定桌面布局/固定桌面)、double_tap_lock(双击锁屏)、screen_grid(桌面网格布局)、slide_up_gesture(上滑手势)、pull_down_gesture(下拉手势)、personal_assistant(负一屏)、launcher_mode(桌面模式/经典模式/抽屉模式/极简模式)"}, "required": true, "index": 1},
+      {"name": "value", "type": "string", "descriptions": {"zh": "设置值：布尔类型传 true/false，无字模式传 off(关闭)/all(全部无字)/widget_only(仅小部件无字)，网格布局传如 4x6，上滑手势传 global_search/content_center/no_action，下拉手势传 pull_down_global_search/notification_bar，桌面模式传 desktop(经典)/drawer(抽屉)/elderlyMan(极简/老人)"}, "required": false, "index": 2}
+    ]
+  }
+]

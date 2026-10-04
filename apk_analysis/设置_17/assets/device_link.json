@@ -1,0 +1,83 @@
+{
+  "thyme": {
+    "deviceNo": "thyme",
+    "h5Url": "https://web.vip.miui.com/page/info/mio/mio/singleBoard?boardId=25039700&ref=setting_product",
+    "mioUrl": "mio://vipaccount.miui.com/product/detail?id=28&name=小米10S&ref=setting_product"
+  },
+  "vangogh": {
+    "deviceNo": "vangogh",
+    "h5Url": "https://web.vip.miui.com/page/info/mio/mio/singleBoard?boardId=19303094&ref=setting_product",
+    "mioUrl": "mio://vipaccount.miui.com/product/detail?id=15&name=小米10青春版&ref=setting_product"
+  },
+  "umi": {
+    "deviceNo": "umi",
+    "h5Url": "https://web.vip.miui.com/page/info/mio/mio/singleBoard?boardId=17862742&ref=setting_product",
+    "mioUrl": "mio://vipaccount.miui.com/product/detail?id=14&name=小米10&ref=setting_product"
+  },
+  "cetus": {
+    "deviceNo": "cetus",
+    "h5Url": "https://web.vip.miui.com/page/info/mio/mio/singleBoard?boardId=25449055&ref=setting_product",
+    "mioUrl": "mio://vipaccount.miui.com/product/detail?id=1403&name=小米 MIX Fold&ref=setting_product"
+  },
+  "venus": {
+    "deviceNo": "venus",
+    "h5Url": "https://web.vip.miui.com/page/info/mio/mio/singleBoard?boardId=23377339&ref=setting_product",
+    "mioUrl": "mio://vipaccount.miui.com/product/detail?id=19&name=小米11&ref=setting_product"
+  },
+  "cas": {
+    "deviceNo": "cas",
+    "h5Url": "https://web.vip.miui.com/page/info/mio/mio/singleBoard?boardId=21423013&ref=setting_product",
+    "mioUrl": "mio://vipaccount.miui.com/product/detail?id=13&name=小米10至尊纪念版&ref=setting_product"
+  },
+  "star": {
+    "deviceNo": "star",
+    "h5Url": "https://web.vip.miui.com/page/info/mio/mio/singleBoard?boardId=25686841&ref=setting_product",
+    "mioUrl": "mio://vipaccount.miui.com/product/detail?id=1398&name=小米11 Ultra&ref=setting_product"
+  },
+  "mars": {
+    "deviceNo": "mars",
+    "h5Url": "https://web.vip.miui.com/page/info/mio/mio/singleBoard?boardId=25418696&ref=setting_product",
+    "mioUrl": "mio://vipaccount.miui.com/product/detail?id=1399&name=小米11 Pro&ref=setting_product"
+  },
+  "chopin": {
+    "deviceNo": "chopin",
+    "h5Url": "https://web.vip.miui.com/page/info/mio/mio/singleBoard?boardId=26819709&ref=setting_product",
+    "mioUrl": "mio://vipaccount.miui.com/product/detail?id=1515&name=Redmi Note 10/10 Pro&ref=setting_product"
+  },
+
+  "cupid": {
+    "deviceNo": "cupid",
+    "h5Url": "https://web.vip.miui.com/page/info/mio/mio/singleBoard?boardId=32858635&ref=setting_product",
+    "mioUrl": "mio://vipaccount.miui.com/product/detail?id=11337&name=小米12"
+  },
+  "psyche": {
+    "deviceNo": "psyche",
+    "h5Url": "https://web.vip.miui.com/page/info/mio/mio/singleBoard?boardId=33527642&ref=setting_product",
+    "mioUrl": "mio://vipaccount.miui.com/product/detail?id=13104&name=小米12X"
+  },
+  "zeus": {
+    "deviceNo": "zeus",
+    "h5Url": "https://web.vip.miui.com/page/info/mio/mio/singleBoard?boardId=33709331&ref=setting_product",
+    "mioUrl": "mio://vipaccount.miui.com/product/detail?id=13094&name=小米12 Pro"
+  },
+  "mona": {
+    "deviceNo": "mona",
+    "h5Url": "https://web.vip.miui.com/page/info/mio/mio/singleBoard?boardId=30984196&ref=setting_product",
+    "mioUrl": "mio://vipaccount.miui.com/product/detail?id=12631&name=Xiaomi Civi"
+  },
+  "alioth": {
+    "deviceNo": "alioth",
+    "h5Url": "https://web.vip.miui.com/page/info/mio/mio/singleBoard?boardId=24077521&ref=setting_product",
+    "mioUrl": "mio://vipaccount.miui.com/product/detail?id=26&name=Redmi K40"
+  },
+  "ares": {
+    "deviceNo": "ares",
+    "h5Url": "https://web.vip.miui.com/page/info/mio/mio/singleBoard?boardId=25892907&ref=setting_product",
+    "mioUrl": "mio://vipaccount.miui.com/product/detail?id=1481&name=Redmi K40 游戏增强版"
+  },
+  "odin": {
+    "deviceNo": "odin",
+    "h5Url": "https://web.vip.miui.com/page/info/mio/mio/singleBoard?boardId=28145510&ref=setting_product",
+    "mioUrl": "mio://vipaccount.miui.com/product/detail?id=12456&name=小米MIX 4"
+  }
+}

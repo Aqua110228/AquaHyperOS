@@ -1,0 +1,881 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<appfunctions>
+    <appfunction>
+        <id>com.miui.home.settings.GetDeviceStateMetadataCallee#getDeviceStateMetadata</id>
+        <enabledByDefault>true</enabledByDefault>
+        <parameters>
+            <dataTypeMetadata>
+                <dataTypeReference>com.google.android.appfunctions.schema.devicestate.v1.GetDeviceStateMetadataParams</dataTypeReference>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>11</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <isRequired>true</isRequired>
+            <name>getDeviceStateMetadataParams</name>
+        </parameters>
+        <response>
+            <id>unused</id>
+            <valueType>
+                <dataTypeReference>com.google.android.appfunctions.schema.devicestate.v1.DeviceStateMetadataResponse</dataTypeReference>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>11</type>
+            </valueType>
+        </response>
+        <schemaCategory>device_state</schemaCategory>
+        <schemaName>getDeviceStateMetadata</schemaName>
+        <schemaVersion>1</schemaVersion>
+        <functionId>com.miui.home.settings.GetDeviceStateMetadataCallee#getDeviceStateMetadata</functionId>
+    </appfunction>
+    <appfunction>
+        <id>com.miui.home.settings.GetUncategorizedDeviceStateCallee#getUncategorizedDeviceState</id>
+        <enabledByDefault>true</enabledByDefault>
+        <parameters>
+            <dataTypeMetadata>
+                <dataTypeReference>com.google.android.appfunctions.schema.devicestate.v1.GetUncategorizedDeviceStateParams</dataTypeReference>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>11</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <isRequired>true</isRequired>
+            <name>getUncategorizedDeviceStateParams</name>
+        </parameters>
+        <response>
+            <id>unused</id>
+            <valueType>
+                <dataTypeReference>com.google.android.appfunctions.schema.devicestate.v1.DeviceStateResponse</dataTypeReference>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>11</type>
+            </valueType>
+        </response>
+        <schemaCategory>device_state</schemaCategory>
+        <schemaName>getUncategorizedDeviceState</schemaName>
+        <schemaVersion>1</schemaVersion>
+        <functionId>com.miui.home.settings.GetUncategorizedDeviceStateCallee#getUncategorizedDeviceState</functionId>
+    </appfunction>
+    <appfunction>
+        <id>com.miui.home.settings.SetDeviceStateCallee#setDeviceStateItem</id>
+        <enabledByDefault>true</enabledByDefault>
+        <parameters>
+            <dataTypeMetadata>
+                <dataTypeReference>com.google.android.appfunctions.schema.devicestate.v1.SetDeviceStateItemParams</dataTypeReference>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>11</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <isRequired>true</isRequired>
+            <name>setDeviceStateItemParams</name>
+        </parameters>
+        <response>
+            <id>unused</id>
+            <valueType>
+                <dataTypeReference>com.google.android.appfunctions.schema.devicestate.v1.SetDeviceStateItemResponse</dataTypeReference>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>11</type>
+            </valueType>
+        </response>
+        <schemaCategory>device_state</schemaCategory>
+        <schemaName>setDeviceStateItem</schemaName>
+        <schemaVersion>1</schemaVersion>
+        <functionId>com.miui.home.settings.SetDeviceStateCallee#setDeviceStateItem</functionId>
+    </appfunction>
+    <AppFunctionComponentMetadataDocument>
+        <dataTypes>
+            <dataTypeMetadata>
+                <id>unused</id>
+                <isNullable>true</isNullable>
+                <objectQualifiedName>com.google.android.appfunctions.schema.devicestate.v1.GetDeviceStateMetadataParams</objectQualifiedName>
+                <description>Represents the request that is passed in to get the device state metadata. </description>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>true</isNullable>
+                        <description>
+ Indicates that the request was initiated by the user while the device was unlocked and so the
+ app function should skip the device lock state check before executing the function. This should
+ only be used by the calling agent for scheduled requests and for handling ongoing requests that
+ were started before the device was locked. Defaults to checking for the lock state if not
+ provided.
+</description>
+                        <type>1</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>requestInitiatedWhileUnlocked</name>
+                </properties>
+                <type>3</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <name>com.google.android.appfunctions.schema.devicestate.v1.GetDeviceStateMetadataParams</name>
+        </dataTypes>
+        <dataTypes>
+            <dataTypeMetadata>
+                <id>unused</id>
+                <isNullable>true</isNullable>
+                <objectQualifiedName>com.google.android.appfunctions.schema.devicestate.v1.LocalizedString</objectQualifiedName>
+                <description>Class for a localized string. </description>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <description>English version of the string. </description>
+                        <type>8</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>english</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>true</isNullable>
+                        <description>Localized version of the string. </description>
+                        <type>8</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>localized</name>
+                </properties>
+                <required>english</required>
+                <type>3</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <name>com.google.android.appfunctions.schema.devicestate.v1.LocalizedString</name>
+        </dataTypes>
+        <dataTypes>
+            <dataTypeMetadata>
+                <id>unused</id>
+                <isNullable>true</isNullable>
+                <objectQualifiedName>com.google.android.appfunctions.schema.devicestate.v1.DeviceStateItemMetadata</objectQualifiedName>
+                <description>Class for a device state item. </description>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <description>
+ A unique key identifying this specific setting. This should be passed in to `setDeviceState`
+ app function or one of its variants if the caller wishes to update this preference's value.
+</description>
+                        <type>8</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>key</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <description>A String identifying this specific setting. MUST be designed to be understood by LLMs </description>
+                        <type>8</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>purpose</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <dataTypeReference>com.google.android.appfunctions.schema.devicestate.v1.LocalizedString</dataTypeReference>
+                        <id>unused</id>
+                        <isNullable>true</isNullable>
+                        <description>Name from the UI - optional. </description>
+                        <type>11</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>name</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>true</isNullable>
+                        <description>
+ The sensitivity of the preference, could be one of "REQUIRES_CONFIRMATION" or
+ "MUST_PROVIDE_UNDO" or can be null.
+</description>
+                        <type>8</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>sensitivity</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>true</isNullable>
+                        <description>Whether this item is settable or not. </description>
+                        <type>1</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>writable</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>true</isNullable>
+                        <description>
+ A string representation of the possible values this setting can be set to. The following are
+ example values, note that it does not have to be strictly limited to the provided format in the
+ examples:
+ - For wifi toggle possibleValue="{\"type\": \"Toggle\", \"valueType'\": \"BOOLEAN\" }"
+ - For screen timeout possibleValue="{\"type\": \"PredeterminedFinite\", \"valueType\":
+   \"INTEGER\", \"values\": [ \"15\", \"30\", \"60\", \"120\", \"300\"]}",
+ - For brightness levels possibleValue="{\"type\": \"Range\", \"valueType\": \"INTEGER\",
+   \"start\": \"0\", \"end\": \"100\", \"step\": \"1\" }".
+</description>
+                        <type>8</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>possibleValues</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>true</isNullable>
+                        <description>
+ Optional natural language hints or instructions for the LLM on how to interpret the `key` and
+ `possibleValues`. This can clarify units, scales, valid ranges, relationships to other
+ settings, or constraints. Examples:
+ - "Value is a percentage (0-100)."
+ - "Enum values: 'ENABLED', 'DISABLED', 'ASK'."
+ - "Scale from 0 (off) to 10 (max)."
+ - "This setting is only effective if 'master.switch.key' is enabled."
+ - "This setting can be changed by the device care app, package name: com.oem.devicecare" Use
+   clear, LLM-interpretable language.
+</description>
+                        <type>8</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>hintText</name>
+                </properties>
+                <required>key</required>
+                <required>purpose</required>
+                <type>3</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <name>com.google.android.appfunctions.schema.devicestate.v1.DeviceStateItemMetadata</name>
+        </dataTypes>
+        <dataTypes>
+            <dataTypeMetadata>
+                <id>unused</id>
+                <isNullable>true</isNullable>
+                <objectQualifiedName>com.google.android.appfunctions.schema.devicestate.v1.PerScreenMetadata</objectQualifiedName>
+                <description>
+ A list of screen metadata, logically grouped by the Settings screen or area where they appear.
+</description>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <description>
+ Optional natural language description providing context about this group of settings. Useful
+ for the LLM to understand the purpose or scope of this screen/section. Use LLM-interpretable
+ language. Avoid internal jargon. Can include additional hints that would be interpretable by
+ the LLM
+</description>
+                        <type>8</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>description</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>true</isNullable>
+                        <description>
+ Intent uri for the screen, or the nearest parent screen that makes sense.
+
+ &lt;p&gt;For the link to be functional, the provided [intentUri] &lt;strong&gt;must&lt;/strong&gt; be resolvable
+ by an [android.content.Intent] with the action [android.content.Intent#ACTION_VIEW].
+</description>
+                        <type>8</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>intentUri</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <itemType>
+                            <id>unused</id>
+                            <isNullable>false</isNullable>
+                            <type>8</type>
+                        </itemType>
+                        <description>
+ If set, this indicates that this is a generic metadata representation of a screen that is
+ duplicated per item e.g. Sim settings screen and Apps settings screens are duplicated per
+ app/sim, but only one screen metadata will be returned.
+
+ For non generic screens, this will be set to empty.
+
+ For generic metadata screens, this explains the type items the screen is deduplicating, e.g.
+ that it's a per-package screen in case of the App settings screen.
+</description>
+                        <type>10</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>itemizationTypes</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <itemType>
+                            <dataTypeReference>com.google.android.appfunctions.schema.devicestate.v1.DeviceStateItemMetadata</dataTypeReference>
+                            <id>unused</id>
+                            <isNullable>false</isNullable>
+                            <type>11</type>
+                        </itemType>
+                        <description>List of device state items on the screen. </description>
+                        <type>10</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>deviceStateItemsMetadata</name>
+                </properties>
+                <required>description</required>
+                <type>3</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <name>com.google.android.appfunctions.schema.devicestate.v1.PerScreenMetadata</name>
+        </dataTypes>
+        <dataTypes>
+            <dataTypeMetadata>
+                <id>unused</id>
+                <isNullable>true</isNullable>
+                <objectQualifiedName>com.google.android.appfunctions.schema.devicestate.v1.ItemizationDetail</objectQualifiedName>
+                <description>Class for a device state itemization detail. </description>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <description>
+ The key identifying this specific itemization detail, e.g. for package-based itemizations it
+ would be the package name. Note that these should be unique across all itemizationTypes.
+</description>
+                        <type>8</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>key</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <description>
+ The equivalent value for the provided key, e.g. the app name of the package name. Note that
+ these should be unique across all itemizationTypes
+</description>
+                        <type>8</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>value</name>
+                </properties>
+                <required>key</required>
+                <required>value</required>
+                <type>3</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <name>com.google.android.appfunctions.schema.devicestate.v1.ItemizationDetail</name>
+        </dataTypes>
+        <dataTypes>
+            <dataTypeMetadata>
+                <id>unused</id>
+                <isNullable>true</isNullable>
+                <objectQualifiedName>com.google.android.appfunctions.schema.devicestate.v1.ItemizationType</objectQualifiedName>
+                <description>Represents a type of itemization. </description>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <description>The key for this itemization type, e.g., "package" or "sim". </description>
+                        <type>8</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>key</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <itemType>
+                            <dataTypeReference>com.google.android.appfunctions.schema.devicestate.v1.ItemizationDetail</dataTypeReference>
+                            <id>unused</id>
+                            <isNullable>false</isNullable>
+                            <type>11</type>
+                        </itemType>
+                        <description>The list of items for this itemization type. </description>
+                        <type>10</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>values</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>true</isNullable>
+                        <description>Optional hint text for the itemization type, eg to help the LLM understand the value. </description>
+                        <type>8</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>hintText</name>
+                </properties>
+                <required>key</required>
+                <type>3</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <name>com.google.android.appfunctions.schema.devicestate.v1.ItemizationType</name>
+        </dataTypes>
+        <dataTypes>
+            <dataTypeMetadata>
+                <id>unused</id>
+                <isNullable>true</isNullable>
+                <objectQualifiedName>com.google.android.appfunctions.schema.devicestate.v1.DeviceStateMetadataResponse</objectQualifiedName>
+                <description>
+ Represents the metadata of relevant device settings, structured for consumption by an LLM. This
+ serves as the top-level response object when querying device state schema.
+</description>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <itemType>
+                            <dataTypeReference>com.google.android.appfunctions.schema.devicestate.v1.PerScreenMetadata</dataTypeReference>
+                            <id>unused</id>
+                            <isNullable>false</isNullable>
+                            <type>11</type>
+                        </itemType>
+                        <description>List of per-screen device states. </description>
+                        <type>10</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>perScreenMetadata</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <description>
+ The device's locale, represented as a BCP 47 language tag.
+
+ Examples: "en-US", "fr-CA", "zh-Hans-CN".
+</description>
+                        <type>8</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>deviceLocale</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>true</isNullable>
+                        <description>
+ Additional hints for the LLM to help it understand the device / device state that aren't scoped
+ to a specific screen.
+</description>
+                        <type>8</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>globalHintText</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <itemType>
+                            <dataTypeReference>com.google.android.appfunctions.schema.devicestate.v1.ItemizationType</dataTypeReference>
+                            <id>unused</id>
+                            <isNullable>false</isNullable>
+                            <type>11</type>
+                        </itemType>
+                        <description>
+ Provides details for settings that are duplicated across multiple items. For example,
+ notification settings are duplicated for each app.
+
+ Each item in the list represents an "itemization type" (e.g., "package" for per-app or "sim"
+ for per-SIM settings). The `key` in [ItemizationType] is the itemization type, and the `values`
+ list contains all items of that type on the device.
+
+ For the "package" itemization type, the `values` list would contain an [ItemizationDetail] for
+ each app, where `key` is the package name and `value` is the user-friendly app name.
+
+ A [PerScreenMetadata] with a non-empty `itemizationTypes` refers to a generic screen whose
+ settings apply to every item in the corresponding list in this field.
+</description>
+                        <type>10</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>itemizationTypes</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>true</isNullable>
+                        <description>The factory default value of the setting. </description>
+                        <type>8</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>defaultValue</name>
+                </properties>
+                <required>deviceLocale</required>
+                <type>3</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <name>com.google.android.appfunctions.schema.devicestate.v1.DeviceStateMetadataResponse</name>
+        </dataTypes>
+        <dataTypes>
+            <dataTypeMetadata>
+                <id>unused</id>
+                <isNullable>true</isNullable>
+                <objectQualifiedName>com.google.android.appfunctions.schema.devicestate.v1.GetUncategorizedDeviceStateParams</objectQualifiedName>
+                <description>Represents the request that is passed in to get a certain device state. </description>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>true</isNullable>
+                        <description>
+ Indicates that the request was initiated by the user while the device was unlocked and so the
+ app function should skip the device lock state check before executing the function. This should
+ only be used by the calling agent for scheduled requests and for handling ongoing requests that
+ were started before the device was locked. Defaults to checking for the lock state if not
+ provided.
+</description>
+                        <type>1</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>requestInitiatedWhileUnlocked</name>
+                </properties>
+                <type>3</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <name>com.google.android.appfunctions.schema.devicestate.v1.GetUncategorizedDeviceStateParams</name>
+        </dataTypes>
+        <dataTypes>
+            <dataTypeMetadata>
+                <id>unused</id>
+                <isNullable>true</isNullable>
+                <objectQualifiedName>com.google.android.appfunctions.schema.devicestate.v1.DeviceStateItem</objectQualifiedName>
+                <description>Class for a device state item. </description>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>true</isNullable>
+                        <description>
+ A String uniquely identifying this specific setting that matches with the key in the metadata
+ response.
+</description>
+                        <type>8</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>key</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <description>
+ A String identifying what this specific setting does. MUST be designed to be understood by LLMs
+</description>
+                        <type>8</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>purpose</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <dataTypeReference>com.google.android.appfunctions.schema.devicestate.v1.LocalizedString</dataTypeReference>
+                        <id>unused</id>
+                        <isNullable>true</isNullable>
+                        <description>
+ The human-readable name or label for this setting as it appears *exactly* in the Settings UI,
+ localized according to `deviceStateLocale`. Example: "Wi-Fi", "Brightness level", "Show
+ notifications". Optional: Might not always be available or easily scrapable. Primarily useful
+ for display verification or showing back to the user, less critical for LLM logic than the
+ `purpose`. Assumes `LocalizedString` handles the actual localized text.
+</description>
+                        <type>11</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>name</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>true</isNullable>
+                        <description>
+ This JSON string serves as a direct pass-through to LLM It is intended only for consumption by
+ the LLM, and developers are not expected to parse it manually. This is optional - we don't
+ necessarily have the value but we still want to let Gemini know the item exists so it can point
+ the user towards the relevant screen
+</description>
+                        <type>8</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>jsonValue</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>true</isNullable>
+                        <description>The last time this setting was retrieved real time (not from the cache). </description>
+                        <type>6</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>lastUpdatedEpochMillis</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>true</isNullable>
+                        <description>
+ Optional natural language hints or instructions for the LLM on how to interpret the preference
+ and its`jsonValue`. This can clarify units, scales, valid ranges, relationships to other
+ settings, or constraints. Examples:
+ - "Value is a percentage (0-100)."
+ - "Enum values: 'ENABLED', 'DISABLED', 'ASK'."
+ - "Scale from 0 (off) to 10 (max)."
+ - "This setting is only effective if 'master.switch.key' is enabled."
+ - "This setting can be changed by the device care app, package name: com.oem.devicecare" Use
+   clear, LLM-interpretable language.
+</description>
+                        <type>8</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>hintText</name>
+                </properties>
+                <required>purpose</required>
+                <type>3</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <name>com.google.android.appfunctions.schema.devicestate.v1.DeviceStateItem</name>
+        </dataTypes>
+        <dataTypes>
+            <dataTypeMetadata>
+                <id>unused</id>
+                <isNullable>true</isNullable>
+                <objectQualifiedName>com.google.android.appfunctions.schema.devicestate.v1.PerScreenDeviceStates</objectQualifiedName>
+                <description>A list of device states, logically grouped by the Settings screen or area where they appear. </description>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <description>
+ Optional natural language description providing context about this group of settings. Useful
+ for the LLM to understand the purpose or scope of this screen/section. Use LLM-interpretable
+ language. Avoid internal jargon. Can include additional hints that would be interpretable by
+ the LLM
+</description>
+                        <type>8</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>description</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>true</isNullable>
+                        <description>
+ Intent uri for the screen, or the nearest parent screen that makes sense. This can contain
+ "{packageName}" as a placeholder for the relevant package name for the agent to populate.
+
+ Example:
+ intent:#Intent;action=android.settings.APP_NOTIFICATION_SETTINGS;S.android.provider.extra.APP_PACKAGE={packageName};end
+</description>
+                        <type>8</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>intentUri</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <itemType>
+                            <dataTypeReference>com.google.android.appfunctions.schema.devicestate.v1.DeviceStateItem</dataTypeReference>
+                            <id>unused</id>
+                            <isNullable>false</isNullable>
+                            <type>11</type>
+                        </itemType>
+                        <description>List of device state items on the screen. </description>
+                        <type>10</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>deviceStateItems</name>
+                </properties>
+                <required>description</required>
+                <type>3</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <name>com.google.android.appfunctions.schema.devicestate.v1.PerScreenDeviceStates</name>
+        </dataTypes>
+        <dataTypes>
+            <dataTypeMetadata>
+                <id>unused</id>
+                <isNullable>true</isNullable>
+                <objectQualifiedName>com.google.android.appfunctions.schema.devicestate.v1.DeviceStateResponse</objectQualifiedName>
+                <description>
+ Represents the overall state of relevant device settings, structured for consumption by an LLM.
+ This serves as the top-level response object when querying device state.
+</description>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <itemType>
+                            <dataTypeReference>com.google.android.appfunctions.schema.devicestate.v1.PerScreenDeviceStates</dataTypeReference>
+                            <id>unused</id>
+                            <isNullable>false</isNullable>
+                            <type>11</type>
+                        </itemType>
+                        <description>List of per-screen device states. </description>
+                        <type>10</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>perScreenDeviceStates</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <description>
+ The device's locale, represented as a BCP 47 language tag.
+
+ Examples: "en-US", "fr-CA", "zh-Hans-CN".
+</description>
+                        <type>8</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>deviceLocale</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>true</isNullable>
+                        <type>8</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>globalHintText</name>
+                </properties>
+                <required>deviceLocale</required>
+                <type>3</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <name>com.google.android.appfunctions.schema.devicestate.v1.DeviceStateResponse</name>
+        </dataTypes>
+        <dataTypes>
+            <dataTypeMetadata>
+                <id>unused</id>
+                <isNullable>true</isNullable>
+                <objectQualifiedName>com.google.android.appfunctions.schema.devicestate.v1.SetDeviceStateItemParams</objectQualifiedName>
+                <description>Represents the request that is passed in to set a certain device state. </description>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <description>The unique identifier of the setting to change. </description>
+                        <type>8</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>key</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <itemType>
+                            <id>unused</id>
+                            <isNullable>false</isNullable>
+                            <type>8</type>
+                        </itemType>
+                        <description>A list of itemization keys required to identify an itemized preference . </description>
+                        <type>10</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>itemizationKeys</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <description>
+ The new value to set. The caller is responsible for providing the appropriate value type in a
+ String representation (e.g. "True", "0", or a json representation of a custom object).
+</description>
+                        <type>8</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>value</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>true</isNullable>
+                        <description>
+ Indicates that the request was initiated by the user while the device was unlocked and so the
+ app function should skip the device lock state check before executing the function. This should
+ only be used by the calling agent for scheduled requests and for handling ongoing requests that
+ were started before the device was locked. Defaults to checking for the lock state if not
+ provided.
+</description>
+                        <type>1</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>requestInitiatedWhileUnlocked</name>
+                </properties>
+                <required>key</required>
+                <required>value</required>
+                <type>3</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <name>com.google.android.appfunctions.schema.devicestate.v1.SetDeviceStateItemParams</name>
+        </dataTypes>
+        <dataTypes>
+            <dataTypeMetadata>
+                <id>unused</id>
+                <isNullable>true</isNullable>
+                <objectQualifiedName>com.google.android.appfunctions.schema.devicestate.v1.SetDeviceStateItemResponse</objectQualifiedName>
+                <description>
+ Represents the metadata of relevant device settings, structured for consumption by an LLM. This
+ serves as the top-level response object when querying device state schema.
+</description>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <description>Whether the setting has been successfully set. </description>
+                        <type>1</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>isSuccessful</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <description>The current value after the request has been executed. </description>
+                        <type>8</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>currentValue</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>true</isNullable>
+                        <description>
+ The reason it failed to execute e.g. "DISABLED", "RESTRICTED", "UNAVAILABLE", "REQUIRES
+ PERMISSION".
+</description>
+                        <type>8</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>failureReason</name>
+                </properties>
+                <required>isSuccessful</required>
+                <required>currentValue</required>
+                <type>3</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <name>com.google.android.appfunctions.schema.devicestate.v1.SetDeviceStateItemResponse</name>
+        </dataTypes>
+        <id>unused</id>
+    </AppFunctionComponentMetadataDocument>
+</appfunctions>

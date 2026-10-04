@@ -1,0 +1,11 @@
+import "setting.proto";
+
+package syncroot;
+
+option optimize_for = LITE_RUNTIME;
+option java_package = "com.android.settings.backup";
+option java_outer_classname = "SyncRootProtos";
+
+message SyncRoot {
+  optional setting.Settings setting = 7;
+}

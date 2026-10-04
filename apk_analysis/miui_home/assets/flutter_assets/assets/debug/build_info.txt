@@ -1,0 +1,4 @@
+HyperLauncher Build Info
+流水线ID：cdp-pipeline-1789719199812
+HyperLauncher current commit hash: b662870788a3af8e676f08af67801b5768a43b72
+HyperLauncherUI current commit hash: 55b276fd679373c1f99c2af6cd3b5f185f0a9f3c

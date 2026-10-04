@@ -1,0 +1,174 @@
+uniform vec2 uResolution;
+uniform shader uTex;
+uniform shader uTexBattery;
+uniform vec2 uBatterySize;
+uniform vec2 uGlowSize;
+uniform int uRTL;
+
+//uniform vec2 scale;
+
+uniform float uTime;
+uniform float uBatteryPercentage;
+//uniform float uRadius;// 圆角半径
+
+vec4 alphaBlend(vec4 src, vec4 dst) {
+  vec3 color = src.rgb + (1.0 - src.a) * dst.rgb;
+  float alpha = src.a + dst.a * (1.0 - src.a);
+  return vec4(color, alpha);
+}
+
+vec4 screenBlend(vec4 src, vec4 dst) {
+  return vec4(
+    1.0 - (1.0 - src.r) * (1.0 - dst.r),
+    1.0 - (1.0 - src.g) * (1.0 - dst.g),
+    1.0 - (1.0 - src.b) * (1.0 - dst.b),
+    src.a + dst.a * (1.0 - src.a)
+  );
+}
+
+float rbx( in vec2 p, in vec2 b, in vec4 r ) {
+  r.xy = (p.x>0.0)?r.xy : r.zw;
+  r.x  = (p.y>0.0)?r.x  : r.y;
+  vec2 q = abs(p)-b+r.x;
+  return min(max(q.x,q.y),0.0) + length(max(q,0.0)) - r.x;
+}
+
+float srbx(in vec2 p, in vec2 b, in vec4 ns) {
+
+  float n = ns.x;
+
+  if (p.x < 0.0 && p.y > 0.0)      { n = ns.x; }
+  else if (p.x > 0.0 && p.y > 0.0) { n = ns.y; }
+  else if (p.x > 0.0 && p.y < 0.0) { n = ns.z; }
+  else if (p.x < 0.0 && p.y < 0.0) { n = ns.w; }
+
+  // symmetries
+  p = abs(p);
+  p -= b - 0.2; p = clamp(p, 0.0, 1.0);  p *= 5.0;
+  if( p.y>p.x ) p=p.yx;
+  float w = pow(p.x,n) + pow(p.y,n);
+  float c = 2.0*n-2.0;
+  float a = 1.0-1.0/n;
+  return (w-pow(w,a)) * inversesqrt(pow(p.x,c)+pow(p.y,c)) * 2.5;
+}
+
+float radial(in vec2 uv, in vec2 center, in float radius) {
+  float d = distance(uv, center);
+  return clamp(d / radius, 0.0, 1.0);
+}
+
+vec4 gradient(in float t) {
+    vec4 colors[2];//= vec4[2] (
+    colors[0] = vec4(1.000, 0.827, 0.549, 1.000);
+    colors[1] = vec4(1.000, 0.624, 0.020, 1.000);
+    //    );
+
+    float stops[2];// = float[2] (
+    stops[0] = 0.38;
+    stops[1] = 1.00;
+//);
+
+    vec4 color = vec4(0.0);
+
+    // Find the two stops to interpolate between ????  i 为 -1的时候 数组不越界了吗？？？？  i只能是0 啊？？？？？
+//    int i = 0;
+//    for (; i > -1; i--) {
+//        if (t > stops[i]) {
+//            break;
+//        }
+//    }
+
+    float t0 = stops[0];
+    float t1 = stops[1];
+    vec4 c0 = colors[0];
+    vec4 c1 = colors[1];
+
+    // Linear interpolation
+    float factor = clamp((t - t0) / (t1 - t0), 0.0, 1.0);
+
+    return vec4(
+    mix(c0.rgb, c1.rgb, factor),
+    mix(c0.a, c1.a, factor)
+    );
+}
+
+float erf(float x) {
+  x = x * 1.128379167095512574;
+  float xx = x * x;
+  x = x + (0.24295 + (0.03395 + 0.0104 * xx) * xx) * (x * xx);
+  return x / sqrt(1.0 + x * x);
+}
+
+vec4 glow(in vec2 uv) {
+  float w = 0.7385294118 * uBatteryPercentage;
+  float x = 0.1470588235 - 0.015;
+  vec2 p = uv - vec2(w / 2.0 + x, 0.5);
+  p.x *= uResolution.x / uResolution.y;
+
+  float sr = mix(2.0, 1.0, clamp(uBatteryPercentage / 0.3, 0.0, 1.0));
+  float sb = mix(0.6, 1.0, clamp(uBatteryPercentage / 0.3, 0.0, 1.0));
+
+  vec2 b = vec2(w / 2.0, 0.4088235294 / 2.0);
+
+  b *= sb;
+
+  float rmin = 8.0;
+  float rmax = 3.4;
+
+  rmin *= sr;
+  rmax *= sr;
+
+  // 0.5882352941 - w - 0.7385294118
+  // rmax               rmin
+
+  float r = mix(rmin, rmax, clamp((w - 0.5882352941) / (0.7385294118 - 0.5882352941), 0.0, 1.0));
+
+  float sdf = clamp(srbx(p, b, vec4(rmax, r, r, rmax)), 0.0, 2.0);
+
+  float glow = 1.0 - erf(sdf);
+
+  return gradient(radial(p, vec2(0.0), 0.4088235294 / 2.0)) * glow * 0.6;
+}
+
+vec4 battery(in vec2 uv) {
+  float w = 0.7385294118 * uBatteryPercentage;
+  float x = 0.1470588235 - 0.015;
+  vec2 p = uv - vec2(w / 2.0 + x, 0.5);
+  p.x *= uResolution.x / uResolution.y;
+
+  vec2 b = vec2(w / 2.0, 0.4088235294 / 2.0);
+  vec4 r = vec4(0.071942446 / 2.0);
+
+  float sdf = smoothstep(0.004, 0.000, rbx(p, b, r));
+
+  return vec4(1.000, 0.624, 0.020, 1.0) * sdf;
+}
+
+
+vec4 main(vec2 fragCoord){
+    vec2 vUv = fragCoord / uResolution;
+    vUv.x =  uRTL == 0? vUv.x:1. - vUv.x;
+    //    vec4 tex = texture2D(uIconTex, vUv);
+    vec4 tex = uTexBattery.eval(vUv * uBatterySize);
+
+    vec4 icon = vec4(1.00/**tex.a * 0.4*/, 0.624/** tex.a * 0.4*/, 0.020/** tex.a * 0.4*/, tex.a * 0.5);
+    icon.rgb *= icon.a;
+    vec4 b = battery(vUv);
+    b *= tex.a;
+    // b.a *= icon.a;
+    // battery.a *= tex.a;
+
+    vec4 g = glow(vUv);
+
+    if (abs(vUv.x - 0.5) < 0.2 && abs(vUv.y - 0.5) < 0.2) {
+        g *= tex.a;
+    }
+
+    vec4 color = alphaBlend(b, icon);
+    color = screenBlend(g, color);
+    //    color = vec4(screenBlend(g.rgb, icon.rgb, icon.a) * tex.a, tex.a);
+
+    vec4 fragColor = color;
+    //    fragColor = vec4(1.0, 1.0, 0.0, 1.0);
+    return fragColor;
+}

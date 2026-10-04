@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<appfunctions>
+    <appfunction>
+        <function_id>com.miui.home.settings.GetDeviceStateMetadataCallee#getDeviceStateMetadata</function_id>
+        <schema_category>device_state</schema_category>
+        <schema_name>getDeviceStateMetadata</schema_name>
+        <schema_version>1</schema_version>
+        <enabled_by_default>true</enabled_by_default>
+    </appfunction>
+    <appfunction>
+        <function_id>com.miui.home.settings.GetUncategorizedDeviceStateCallee#getUncategorizedDeviceState</function_id>
+        <schema_category>device_state</schema_category>
+        <schema_name>getUncategorizedDeviceState</schema_name>
+        <schema_version>1</schema_version>
+        <enabled_by_default>true</enabled_by_default>
+    </appfunction>
+    <appfunction>
+        <function_id>com.miui.home.settings.SetDeviceStateCallee#setDeviceStateItem</function_id>
+        <schema_category>device_state</schema_category>
+        <schema_name>setDeviceStateItem</schema_name>
+        <schema_version>1</schema_version>
+        <enabled_by_default>true</enabled_by_default>
+    </appfunction>
+</appfunctions>

@@ -1,0 +1,81 @@
+uniform vec2 uResolution;
+uniform float uLightness;
+uniform vec3 uLightColors[11];
+uniform vec2 uLights[11];
+uniform float uPower;
+uniform float uTime;// nouse
+uniform shader uTex;// nouse
+
+
+
+
+
+vec4 main(vec2 fragCoord){
+    vec2 vUv = fragCoord / uResolution;
+    vUv.y = 1.0 - vUv.y;  // agsl和gl的y轴坐标相反
+    // -0.750000, -0.465625 ---------- +
+    // |                               |
+    // |                               |
+    // |          magic ✨✨✨          |
+    // |                               |
+    // |                               |
+    // + ----------- 0.750000, 0.4656250
+    vec2 uv = mix(vec2(-0.750000, 0.4656250), vec2(0.750000, -0.465625), vUv);
+    uv.y *= 2.9644097222;
+
+    uv *= 0.8;
+
+    float mixValue = mix(0.75, 0.775, uLightness);
+
+    vec3 currentColor = vec3(0.0, 0.5884, 1.0);
+    // vec3 currentColor = vec3(1.0, 0.5884, 0.0);
+
+    // 定义11个光源的颜色
+    // vec3 colors[11] = vec3[11](
+    //   vec3(0.7334, 0.392, 1.0),    // 0
+    //   vec3(1.0, 0.1765, 0.333),    // 1
+    //   vec3(1.0, 0.5767, 0.0),      // 2
+    //   vec3(0.0, 0.5884, 1.0),      // 3
+    //   vec3(1.0, 0.5767, 0.0),      // 4
+    //   vec3(0.7334, 0.392, 1.0),    // 5
+    //   vec3(1.0, 0.1765, 0.333),    // 6
+    //   vec3(0.0, 0.5884, 1.0),      // 7
+    //   vec3(1.0, 0.1765, 0.333),    // 8
+    //   vec3(1.0, 0.5767, 0.0),      // 9
+    //   vec3(0.7334, 0.392, 1.0)     // 10
+    // );
+
+    vec2 pos = vec2(uv.x, uv.y);
+
+    // 处理所有光源
+    for (int i = 0; i < 11; i++) {
+        // 计算距离
+        vec2 delta = uLights[i] - pos;
+        float dist = length(delta);
+        float factor = clamp(1.0 - dist, 0.0, 1.0);
+
+        // 平滑过渡
+        float s = smoothstep(0.0, 1.0, factor);
+
+        // 混合颜色
+        vec3 srcColor = uLightColors[i].rgb;
+        // srcColor = mix(uHeadColor.rgb, srcColor, uProgress);
+        vec3 lightColor = srcColor * s;
+        currentColor = currentColor * (1.0 - s) + lightColor;
+    }
+
+    // 限制最大亮度
+    currentColor = min(vec3(1.0), currentColor);
+
+    // 使用power调整亮度
+    float brightness = 1.0 + uPower * 0.2;
+    float luminance = dot(currentColor, vec3(0.2126, 0.7153, 0.0722));
+    vec3 mixColor = mix(vec3(luminance), currentColor, vec3(brightness)) * mixValue;
+
+    vec4 fragColor = vec4(mixColor, 1.0);
+//    vec4 color = test_shader.eval(fragCoord);
+//    fragColor += color;
+//    fragColor = color;
+    fragColor.rgb *= fragColor.a;
+    return fragColor;
+}

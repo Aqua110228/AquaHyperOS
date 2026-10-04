@@ -1,0 +1,28 @@
+{
+  data: [
+    {
+      title: "wifi_settings_title",
+      type: "activity",
+      image: "ic_wifi_settings",
+      intent: "#Intent;component=com.android.settings/.Settings$WifiSettingsActivity;end"
+    },
+    {
+      title: "network_settings_title",
+      type: "activity",
+      image: "ic_settings_dualsim",
+      intent: "#Intent;component=com.android.phone/.settings.MobileNetworkSettings;end"
+    },
+    {
+       title: "airplane_mode",
+       type: "activity",
+       image: "ic_wifi_more_settings",
+       intent: "#Intent;component=com.android.settings/.Settings$WirelessSettingsActivity;end"
+    },
+    {
+       title: "power_usage_summary_title",
+       type: "activity",
+       image: "ic_battery_settings",
+       intent: "#Intent;component=com.android.settings/.Settings$PowerUsageSummaryActivity;end"
+    }
+  ]
+}

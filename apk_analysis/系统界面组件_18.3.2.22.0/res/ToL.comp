@@ -1,0 +1,80 @@
+#version 310 es
+struct Particle {
+    float state;
+    float startTime;
+    float duration;
+    float lifeTime;
+    float scaleFactor;
+    float alpha;
+    float rotateFactor;
+    float preWarmFactor;
+    vec4 param1;
+    vec4 param2;
+    mat4 matrix;
+};
+
+layout(local_size_x = 32, local_size_y = 1, local_size_z = 1) in;
+/*****************************************************************************************/
+
+layout(binding = 0, std430) buffer Particles {
+    Particle particles[];
+};
+
+layout(std140) uniform TimeParam {
+    float time;
+    float deltaTime;
+};
+
+uniform float speed;
+uniform sampler2D perlinNoise;
+
+float hash12(vec2 p) {
+    vec3 p3  = fract(vec3(p.xyx) * .1031);
+    p3 += dot(p3, p3.yzx + 33.33);
+    return fract((p3.x + p3.y) * p3.z);
+}
+
+float random(vec2 st) {
+    return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+}
+
+float rnd(float x) {
+    return fract(sin(dot(vec2(x+47.49,38.2467/(x+2.3)), vec2(12.9898, 78.233)))* (43758.5453));
+}
+
+#define STATE_RUN 2.0
+
+void main() {
+    uint index = gl_GlobalInvocationID.x;
+    float state = particles[index].state;
+    if(state == STATE_RUN) {
+//        float scaleFactor = particles[index].scaleFactor;
+//        float speedScaleX = mix(0.3,0.6, scaleFactor);
+//        float speedScaleY = mix(0.5,1., scaleFactor);
+//        float indexF = float(index);
+//        float xSpeed = 2.*(cos(time*0.01+hash12(vec2(indexF))*10.+scaleFactor*5.+sin(time*0.01-indexF)));
+//        xSpeed = xSpeed*speed*particles[index].param1.x;
+//        float delta = particles[index].preWarmFactor + deltaTime;
+//        particles[index].matrix[3].xyz += vec3(xSpeed*delta*speedScaleX,speed*delta*speedScaleY, 0.);
+        float indexF = float(index);
+        vec2 stx = vec2(0.0, fract(time / 50.0)) + vec2(particles[index].matrix[3].x, particles[index].matrix[3].y) + vec2(indexF/100.0, 0.5);
+//        vec2 istx = vec2(fract(stx));
+        float nx = (texture(perlinNoise, stx).r * 2.0 - 1.5) * 0.03;
+
+        vec2 sty = vec2(0.0, fract(time / 50.0)) + vec2(particles[index].matrix[3].x, particles[index].matrix[3].y) + vec2(indexF/100.0, 0.0);
+//        vec2 isty = vec2((fract(sty)));
+        float ny = smoothstep(0.0, 1.0, texture(perlinNoise, sty).r) * 0.015 + 0.01;
+
+        float scaleCoef = 0.25;
+        vec2 vel = vec2(nx, ny) / mix(0.8, 1.1, (particles[index].matrix[1].y / (0.1*scaleCoef) - (0.1*scaleCoef)) /
+        (0.15*scaleCoef));
+        float delta = particles[index].preWarmFactor + deltaTime;
+        particles[index].matrix[3].xyz += vec3(vel.x * delta * 2.0 * speed, vel.y * delta * speed, 0.);
+        //alpha
+        //y方向超过0.65后，粒子消失
+        float dieProgress = particles[index].matrix[3].y/0.65;
+        dieProgress *= dieProgress;
+        particles[index].alpha = mix(1., 0., dieProgress);
+//        particles[index].matrix[3].xyz += vec3(vel.x * deltaTime * 2.0 * speed, vel.y * deltaTime * speed, 0.);
+    }
+}

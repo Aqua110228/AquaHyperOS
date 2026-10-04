@@ -1,0 +1,23 @@
+# 不要忽略以下文件
+!.github/
+!.github/workflows/
+!.github/workflows/build.yml
+
+# Gradle 相关
+.gradle/
+build/
+local.properties
+
+# IDE
+.idea/
+*.iml
+.DS_Store
+
+# 生成文件
+*.apk
+*.ap_
+*.dex
+*.class
+
+# 日志
+*.log

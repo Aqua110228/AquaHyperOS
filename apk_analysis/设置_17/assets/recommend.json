@@ -1,0 +1,222 @@
+{
+  "verison": 1,
+  "strategy": "",
+  "pages": [
+    {
+      "sourcePageIndex": 1,
+      "items": [
+        {
+          "targetPageIndex": 2,
+          "intent": "#Intent;component=com.android.settings/.SubSettings;S.:settings:show_fragment=com.android.settings.AodAndLockScreenSettings;end"
+        },
+        {
+          "targetPageIndex": 1001,
+          "intent": "#Intent;component=com.android.settings/.SubSettings;S.:settings:show_fragment=com.android.settings.FullScreenDisplaySettings;end"
+        },
+        {
+          "targetPageIndex": 2010,
+          "intent": "#Intent;action=android.intent.action.MAIN;component=com.xiaomi.misubscreenui/.SubscreenSettingsActivity;end"
+        }
+      ]
+    },
+    {
+      "sourcePageIndex": 2,
+      "items": [
+        {
+          "targetPageIndex": 3,
+          "intent": "#Intent;component=com.android.settings/.SubSettings;S.:settings:show_fragment=com.android.settings.security.MiuiSecurityAndPrivacySettings;end"
+        },
+        {
+          "targetPageIndex": 2010,
+          "intent": "#Intent;action=android.intent.action.MAIN;component=com.xiaomi.misubscreenui/.SubscreenSettingsActivity;end"
+        },
+        {
+          "targetPageIndex": 1013,
+          "intent": "theme://zhuti.xiaomi.com/personalize?miback=true&miref=settings#Intent;action=android.intent.action.VIEW;package=com.android.thememanager;end"
+        },
+        {
+          "targetPageIndex": 1014,
+          "intent": "theme://zhuti.xiaomi.com/personalize?miback=true&miref=settings#Intent;action=android.intent.action.VIEW;package=com.android.thememanager;end"
+        },
+        {
+          "targetPageIndex": 1016,
+          "intent": "#Intent;action=miui.tinykeyguard.editor;end"
+        },
+        {
+          "targetPageIndex": 1018,
+          "intent": "#Intent;component=com.android.settings.aon/.VisualPerceptionSettings;end"
+        },
+        {
+          "targetPageIndex": 1019,
+          "intent": "#Intent;component=com.miui.notification/miui.notification.management.activity.LockScreenNotificationsActivity;end"
+        }
+      ]
+    },
+    {
+      "sourcePageIndex": 3,
+      "items": [
+        {
+          "targetPageIndex": 9003,
+          "intent": "#Intent;component=com.android.settings/.SubSettings;S.:settings:show_fragment=com.android.settings.emergency.ui.SosSettings;end"
+        },
+        {
+          "targetPageIndex": 2,
+          "intent": "#Intent;component=com.android.settings/.SubSettings;S.:settings:show_fragment=com.android.settings.AodAndLockScreenSettings;end"
+        },
+        {
+          "targetPageIndex": 1006,
+          "intent": "#Intent;component=com.miui.securitycore/com.miui.securityspace.ui.activity.PrivateSpaceMainActivity;end"
+        },
+        {
+          "targetPageIndex": 5,
+          "intent": "#Intent;action=miui.intent.action.PRIVACY_SETTINGS;end"
+        }
+      ]
+    },
+    {
+      "sourcePageIndex": 4,
+      "items": [
+        {
+          "targetPageIndex": 1020,
+          "intent": "#Intent;action=com.miui.miinput.action.GESTURE_SHORTCUT;end"
+        },
+        {
+          "targetPageIndex": 1021,
+          "intent": "#Intent;component=com.android.settings/.SubSettings;S.:settings:show_fragment=com.android.settings.display.HandyModeFragment;end"
+        },
+        {
+          "targetPageIndex": 1022,
+          "intent": "#Intent;component=com.android.settings/.SubSettings;S.:settings:show_fragment=com.android.settings.aon.VisualPerceptionSettings;end"
+        },
+        {
+          "targetPageIndex": 1023,
+          "intent": "#Intent;action=miui.intent.action.TOUCH_ASSISTANT_SETTINGS;end"
+        },
+        {
+          "targetPageIndex": 1024,
+          "intent": "#Intent;component=com.android.settings/.SubSettings;S.:settings:show_fragment=com.android.settings.MiuiWirelessSettings;end"
+        },
+        {
+          "targetPageIndex": 1007,
+          "intent": "#Intent;component=com.android.settings/.SubSettings;S.:settings:show_fragment=com.android.settings.backup.PrivacySettings;end"
+        },
+        {
+          "targetPageIndex": 1003,
+          "intent": "#Intent;component=com.miui.misound/.HeadsetSettingsActivity;end"
+        },
+        {
+          "targetPageIndex": 1004,
+          "intent": "#Intent;action=com.intent.action.Huanji;launchFlags=0x10000000;package=com.miui.huanji;end"
+        },
+        {
+          "targetPageIndex": 9002,
+          "intent": "#Intent;action=com.miui.home.action.navigation_bar_type_settings;end"
+        },
+        {
+          "targetPageIndex": 1008,
+          "intent": "#Intent;component=com.android.settings/.SubSettings;S.:settings:show_fragment=com.android.settings.MiuiMasterClear;end"
+        },
+        {
+          "targetPageIndex": 1006,
+          "intent": "#Intent;component=com.miui.securitycore/com.miui.securityspace.ui.activity.PrivateSpaceMainActivity;end"
+        },
+        {
+          "targetPageIndex": 9004,
+          "intent": "#Intent;component=com.miui.securitycenter/com.miui.permcenter.settings.PrivacyLabActivity;end"
+        }
+      ]
+    },
+    {
+      "sourcePageIndex": 6,
+      "items": [
+        {
+          "targetPageIndex": 1011,
+          "targetPageTitle": "xiaomi_cloud_service",
+          "intent": "#Intent;action=com.xiaomi.action.MICLOUD_MAIN;package=com.miui.cloudservice;end"
+        }
+      ]
+    },
+    {
+      "sourcePageIndex": 1002,
+      "items": [
+        {
+          "targetPageIndex": 9001,
+          "intent": "#Intent;action=com.miui.cloudservice.settings_search_proxy;S.proxied_type=find_device;end"
+        }
+      ]
+    },
+    {
+      "sourcePageIndex": 1009,
+      "items": [
+        {
+          "targetPageIndex": 2009,
+          "intent": "#Intent;component=com.android.settings/.SubSettings;S.:settings:show_fragment=com.android.settings.inputmethod.PhysicalKeyboardFragment;end"
+        }
+      ]
+    },
+    {
+      "sourcePageIndex": 1010,
+      "items": [
+        {
+          "targetPageIndex": 2008,
+          "intent": "#Intent;component=com.android.settings/.SubSettings;S.:settings:show_fragment=com.android.settings.inputmethod.PhysicalKeyboardFragment;end"
+        }
+      ]
+    },
+    {
+      "sourcePageIndex": 7,
+      "items": [
+        {
+          "targetPageIndex": 2004,
+          "intent": "#Intent;component=com.android.settings/.SubSettings;S.:settings:show_fragment=com.android.settings.accessibility.HapticSettingsFragment;end"
+        }
+      ]
+    },
+    {
+      "sourcePageIndex": 8,
+      "items": [
+        {
+          "targetPageIndex": 1012,
+          "intent": "#Intent;component=com.miui.aod/.settings.NotificationAnimationSelectActivity;end"
+        }
+      ]
+    },
+    {
+      "sourcePageIndex": 9,
+      "items": [
+        {
+          "targetPageIndex": 1015,
+          "intent": "#Intent;action=miui.intent.action.MIRROR_SETTING;package=com.milink.service;end"
+        }
+      ]
+    },
+    {
+      "sourcePageIndex": 2001,
+      "items": [
+        {
+          "targetPageIndex": 2002,
+          "intent": "#Intent;component=com.android.settings/.SubSettings;S.:settings:show_fragment=com.android.settings.KeyShortcutSettingsFragment;end"
+        }
+      ]
+    },
+    {
+      "sourcePageIndex": 2003,
+      "items": [
+        {
+          "targetPageIndex": 3001,
+          "targetPageTitle": "font_settings_jump",
+          "intent": "#Intent;component=com.android.settings/.SubSettings;S.:settings:show_fragment=com.android.settings.display.ScreenZoomFragment;end"
+        }
+      ]
+    },
+    {
+      "sourcePageIndex": 2005,
+      "items": [
+        {
+          "targetPageTitle": "recommend_text_wakeup_xiaoai",
+          "intent": "#Intent;component=com.miui.home/.recents.settings.NavigationBarTypeActivity;end"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+uniform vec2 uResolution;
+uniform shader uTex;
+uniform float uTime;
+uniform vec2 uRippleOrigin;
+uniform float uRippleTime;
+uniform int uRTL;
+
+//uniform float uBatteryPercentage;
+
+vec4 lightenBlend(vec4 src, vec4 dst) {
+    vec3 color = max(src.rgb, dst.rgb);
+    float alpha = src.a + (1.0 - src.a) * dst.a;
+    return vec4(color, alpha);
+}
+
+vec4 addBlend(vec4 src, vec4 dst) {
+    vec3 color = src.rgb + dst.rgb;
+    float alpha = src.a + (1.0 - src.a) + dst.a;
+    return vec4(color, alpha);
+}
+
+float luminance(vec3 color) {
+    return dot(color, vec3(0.299, 0.587, 0.114));
+}
+
+vec3 rainbow(float t) {
+    vec3 c = 1.0 - pow(abs(vec3(t) - vec3(0.65, 0.5, 0.2)) * vec3(3.0, 3.0, 5.0), vec3(1.5, 1.3, 1.7));
+    float u = abs(t - 0.04) * 5.0;
+    c.r = max((0.15 - u * u ), c.r) * 0.8;
+    c.g = (t < 0.5) ? smoothstep(0.04, 0.45, t) : c.g;
+    return clamp(c, 0.0, 1.0);
+}
+
+float bezier(float t, vec2 p1, vec2 p2) {
+    float t2 = t * t;
+    float t3 = t2 * t;
+    float mt = 1.0 - t;
+    float mt2 = mt * mt;
+    float mt3 = mt2 * mt;
+
+    return mt3 * 0.0 +                // P0 (0,0)
+    3.0 * mt2 * t * p1.y +     // P1
+    3.0 * mt * t2 * p2.y +     // P2
+    t3 * 1.0;                  // P3 (1,1)
+}
+
+vec4 main(vec2 fragCoord){
+    vec2 vUv = fragCoord / uResolution;
+    vUv.x = uRTL == 0? vUv.x:1. - vUv.x;
+    vec2 position = vUv;
+
+    position -= uRippleOrigin / uResolution;
+    position.x *= uResolution.x / uResolution.y;
+
+    position /= uResolution.x / uResolution.y;
+
+    vec2 origin = vec2(0.0);
+
+    float d = distance(origin, position);
+
+    float decay = exp(-d * 4.0) * 0.9;
+
+    decay *= smoothstep(0.0, 0.17, d);
+
+    float time = fract(uRippleTime);
+    time = bezier(time, vec2(0.2, 0.0), vec2(0.2, 1.0));
+
+    float t = fract(d - time + 0.2);
+    t = 1.0 - clamp(t * 5.0, 0.0, 1.0);
+
+    vec3 r = rainbow(t);
+
+    vec4 c = vec4(r * decay, decay);
+
+    vec4 text = uTex.eval(fragCoord);
+    float m = text.a;
+    vec4 h = vec4(smoothstep(0.65,0.99, vUv.x) * vec4(0.0,0.203,0.529,1.0) * m);
+    text = addBlend(h, text);
+
+    vec4 color = addBlend(text, vec4(luminance(c.rgb) * 5.0 * m));
+    color = addBlend(color, c);
+
+    return color;
+}

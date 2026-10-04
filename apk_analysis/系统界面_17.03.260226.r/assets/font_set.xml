@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ratioMap>
+    <!--
+        ratio: 文本边界宽高比 (mTextBounds.width / mTextBounds.height)
+        value: wdth,hght,boundsWidthDp
+          - wdth: 字体宽度参数
+          - hght: 字体高度参数
+          - boundsWidthDp: 文本边界实际宽度（dp）
+
+        注意：ratio 已按升序排列
+        数据来源：wght=700, wdth=[100..10], hght=[100..10], textSize=100dp
+    -->
+
+    <entry ratio="0.537308673">
+        <value>10,100</value>
+        <value>69.2105478309,28.8096606453</value>
+    </entry>
+
+    <entry ratio="0.878198780">
+        <value>10,50</value>
+        <value>46.9513911171,3.4632843797</value>
+    </entry>
+
+    <entry ratio="1.403071814">
+        <value>10,30</value>
+        <value>46.9900988571,3.4929392014</value>
+    </entry>
+
+    <entry ratio="2.000354045">
+        <value>10,20</value>
+        <value>47.4347014889,3.7131529828</value>
+    </entry>
+
+    <entry ratio="2.677936646">
+        <value>10,14</value>
+        <value>47.5122634927,3.7421163281</value>
+    </entry>
+
+    <entry ratio="3.457419684">
+        <value>10,10</value>
+        <value>65.3666667099,216</value>
+    </entry>
+
+    <entry ratio="4.069352371">
+        <value>50,10</value>
+        <value>67.1575342474,223.2876712200</value>
+    </entry>
+
+    <entry ratio="4.813870474">
+        <value>100,10</value>
+    </entry>
+
+    <entry ratioColon="0.601084184">
+        <value>10,100</value>
+        <value>77.4254499229,28.8096609158</value>
+    </entry>
+
+    <entry ratioColon="0.982436024">
+        <value>10,50</value>
+        <value>52.551866435069,3.4913878881</value>
+    </entry>
+
+    <entry ratioColon="1.569115816">
+        <value>10,30</value>
+        <value>52.5907257423,3.5139800157</value>
+    </entry>
+
+    <entry ratioColon="2.236384021">
+        <value>10,20</value>
+        <value>53.0317164415,3.7131529932</value>
+    </entry>
+
+    <entry ratioColon="2.993917371">
+        <value>10,14</value>
+        <value>53.1184302593142,3.74211632352836</value>
+    </entry>
+
+    <entry ratioColon="3.865374809">
+        <value>10,10</value>
+        <value>65.3666667099,242.6666668486</value>
+    </entry>
+
+    <entry ratioColon="4.477307496">
+        <value>50,10</value>
+        <value>67.1575342474,250.6849314986</value>
+    </entry>
+
+    <entry ratioColon="5.221825599">
+        <value>100,10</value>
+    </entry>
+
+    <entry height = "10,14">
+        <value>7.135,26.7</value>
+    </entry>
+
+    <entry height = "14,20">
+        <value>7.147,26.54</value>
+    </entry>
+
+    <entry height = "20,30">
+        <value>7.143,26.61</value>
+    </entry>
+
+    <entry height = "30,50">
+        <value>7.142,26.64</value>
+    </entry>
+
+    <entry height = "50,100">
+        <value>4.8692,140.28</value>
+    </entry>
+
+</ratioMap>

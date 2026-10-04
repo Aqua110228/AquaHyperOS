@@ -1,0 +1,26 @@
+[
+  {"animals": [{"name": "orange_winged_amazon", "info": "amazon_orange_winged_info", "class": "class_bird", "item": "item_parrot", "branch": "branch_parrot", "image": "orange_winged_amazon", "path": "/system/media/audio/ui/Amazon/Orange-WingedAmazon.ogg"},
+    {"name": "blue_poison_dart_frog", "info": "dart_frog_info", "class": "class_amphibious", "item": "item_anura", "branch": "branch_dart_frog", "image": "blue_poison_dart_frog", "path": "/system/media/audio/ui/Amazon/BluePoisonDartFrog.ogg"},
+    {"name": "capybara", "info": "capybara_info", "class": "class_breast_feeding", "item": "item_rodentia", "branch": "branch_guinea_pig", "image": "capybara", "path": "/system/media/audio/ui/Amazon/Capybara.ogg"},
+    {"name": "toco_toucan", "info": "toucan_info", "class": "class_bird", "item": "item_liebird", "branch": "branch_ramphastos", "image": "toco_toucan", "path": "/system/media/audio/ui/Amazon/TocoToucan.ogg"},
+    {"name": "kinkajou", "info": "kinkajou_info", "class": "class_breast_feeding", "item": "item_meat", "branch": "branch_raccoon", "image": "kinkajou", "path": "/system/media/audio/ui/Amazon/Kinkajou.ogg"}
+  ]},
+  {"animals": [{"name": "cheetah", "info": "cheetah_info", "class": "class_breast_feeding", "item": "item_meat", "branch": "branch_cat", "image": "cheetah", "path": "/system/media/audio/ui/Africa/Cheetah.ogg"},
+    {"name": "black_headed_bulbul", "info": "black_head_bulbul_info", "class": "class_bird", "item": "item_passerine", "branch": "branch_bulbulidae", "image": "black_head_bulbul", "path": "/system/media/audio/ui/Africa/Black-HeadedBulbul.ogg"},
+    {"name": "black_rhinoceros", "info": "rhinoceros_info", "class": "class_breast_feeding", "item": "item_perissodactyla", "branch": "branch_rhinoceros", "image": "black_rhinoceros", "path": "/system/media/audio/ui/Africa/NorthWhiteRhinoceros.ogg"},
+    {"name": "marabou_stork", "info": "marabou_stork_info", "class": "class_bird", "item": "item_stork", "branch": "branch_stork", "image": "marabou_stork","path": "/system/media/audio/ui/Africa/MarabouStork.ogg"},
+    {"name": "common_ostrich", "info": "ostrich_info", "class": "class_bird", "item": "item_ostriches", "branch": "branch_ostriches", "image": "common_ostrich", "path": "/system/media/audio/ui/Africa/CommonOstrich.ogg"}
+  ]},
+  {"animals": [{"name": "platypus", "info": "platpus_info", "class": "class_breast_feeding", "item": "item_monopore", "branch": "branch_platypus", "image": "platypus", "path": "/system/media/audio/ui/Australia/Platypus.ogg"},
+    {"name": "laughing_kookaburra", "info": "laughing_kookaburra_info", "class": "class_bird", "item": "item_buddhism", "branch": "branch_kingfisher", "image": "laughing_kookaburra", "path": "/system/media/audio/ui/Australia/LaughingKookaburra.ogg"},
+    {"name": "tasmanian_native_hen", "info": "native_hen_info", "class": "class_bird", "item": "item_crane_form", "branch": "branch_crake", "image": "native_hen", "path": "/system/media/audio/ui/Australia/TasmanianNativeHen.ogg"},
+    {"name": "white_bellied_sea_eagle", "info": "sea_eagle_info", "class": "class_bird", "item": "item_eagle", "branch": "branch_eagle", "image": "sea_eagle", "path": "/system/media/audio/ui/Australia/White-BelliedSeaEagle.ogg"},
+    {"name": "whipbird_eastern_whipbird", "info": "whipbird_info", "class": "class_bird",  "item": "item_passerine", "branch": "branch_whipbird", "image": "eastern_whipbird", "path": "/system/media/audio/ui/Australia/Whipbird.ogg"}
+  ]},
+  {"animals": [{"name": "harp_seal", "info": "seal_info", "class": "class_breast_feeding", "item": "item_meat", "branch": "branch_seal", "image": "harp_seal", "path": "/system/media/audio/ui/PolarRegion/HarpSeal.ogg"},
+    {"name": "narwhal", "info": "narwhal_info", "class": "class_breast_feeding", "item": "item_whale", "branch": "branch_narwhal", "image": "narwhal", "path": "/system/media/audio/ui/PolarRegion/Narwhal.ogg"},
+    {"name": "willow_grouse", "info": "willow_grouse_info", "class": "class_bird", "item": "item_chick", "branch": "branch_grouse", "image": "willow_grouse", "path": "/system/media/audio/ui/PolarRegion/WillowGrouse.ogg"},
+    {"name": "norway_lemmings", "info": "norway_lemmings_info", "class": "class_breast_feeding", "item": "item_rodentia", "branch": "branch_lemmings", "image": "norway_lemmings", "path": "/system/media/audio/ui/PolarRegion/NorwayLemmings.ogg"},
+    {"name": "pomarine_jaeger", "info": "jaeger_info", "class": "class_bird", "item": "item_pluriformes", "branch": "branch_skua", "image": "pomarine_jaeger", "path": "/system/media/audio/ui/PolarRegion/PomarineJaeger.ogg"}
+  ]}
+]

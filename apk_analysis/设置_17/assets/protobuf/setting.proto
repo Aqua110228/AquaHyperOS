@@ -1,0 +1,39 @@
+package setting;
+
+option optimize_for = LITE_RUNTIME;
+option java_package = "com.android.settings.backup";
+option java_outer_classname = "SettingProtos";
+
+message SystemSetting {
+  optional string guid = 1;
+  optional string luid = 2;
+
+  optional string name = 3;
+  optional string value = 4;
+
+}
+
+message SecureSetting {
+  optional string guid = 1;
+  optional string luid = 2;
+
+  optional string name = 3;
+  optional string value = 4;
+
+}
+
+message LockSetting {
+  optional string guid = 1;
+  optional string luid = 2;
+
+  optional string name = 3;
+  optional sint64 value = 4;
+
+}
+
+message Settings {
+  repeated SystemSetting system = 1;
+  repeated SecureSetting secure = 2;
+  repeated LockSetting lock = 3;
+
+}

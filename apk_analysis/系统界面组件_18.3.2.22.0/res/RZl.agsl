@@ -1,0 +1,157 @@
+uniform vec2 uResolution;
+uniform shader uTex;// 图标
+uniform shader uChargingIconGlow;// 发光图标
+uniform float uTime;
+uniform vec2 uGlowSize;
+uniform float uGlowTime;
+uniform float uGlowOffset;
+
+uniform float uP11;
+uniform float uP12;
+uniform float uP21;
+uniform float uP22;
+
+float random(vec2 st) {
+    return fract(sin(dot(st.xy, vec2(12.9898, 78.233)))*43758.5453123);
+}
+
+// 2D noise based on Perlin's implementation
+float noise(vec2 st) {
+    vec2 i = floor(st);
+    vec2 f = fract(st);
+
+    // Four corners in 2D of a tile
+    float a = random(i);
+    float b = random(i + vec2(1.0, 0.0));
+    float c = random(i + vec2(0.0, 1.0));
+    float d = random(i + vec2(1.0, 1.0));
+
+    // Smooth interpolation using cubic Hermite curve
+    vec2 u = f * f * (3.0 - 2.0 * f);
+
+    // Mix 4 corners
+    return mix(a, b, u.x) + (c - a)* u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
+}
+
+float bezier(float t, vec2 p1, vec2 p2) {
+    // p1 and p2 are control points where:
+    // x component is the position (0-1)
+    // y component is the height (0-1)
+
+    float t2 = t * t;
+    float t3 = t2 * t;
+    float mt = 1.0 - t;
+    float mt2 = mt * mt;
+    float mt3 = mt2 * mt;
+
+    return mt3 * 0.0 +// P0 (0,0)
+    3.0 * mt2 * t * p1.y +// P1
+    3.0 * mt * t2 * p2.y +// P2
+    t3 * 1.0;// P3 (1,1)
+}
+
+vec4 lightenBlend(vec4 src, vec4 dst) {
+    vec3 color = max(src.rgb, dst.rgb);
+    float alpha = src.a + (1.0 - src.a) * dst.a;
+    return vec4(color, alpha);
+}
+
+float radial(in vec2 uv, in vec2 center, in float radius) {
+    float d = distance(uv, center);
+    return clamp(d / radius, 0.0, 1.0);
+}
+
+vec4 gradient(in float t) {
+    vec4 colors[3];// = vec4[3] (
+    colors[0] = vec4(1.000, 1.000, 1.000, 1.000);
+    colors[1] = vec4(0.620, 1.000, 0.796, 1.000);
+    colors[2] = vec4(0.000, 1.000, 0.459, 1.000);
+    // );
+
+    float stops[3];
+    stops[0] = 0.30;
+    stops[1] = 0.75;
+    stops[2] = 1.00;
+
+    vec4 color = vec4(0.0);
+
+    // Find the two stops to interpolate between
+    int i = 1;
+    for (int j = 1; j > -1; j--) {
+        i = j;
+        if (t > stops[j]) {
+            break;
+        }
+    }
+
+    float t0;
+    float t1;
+    vec4 c0;
+    vec4  c1;
+    if (i == 0)
+    {
+        t0 = stops[0];
+        t1 = stops[ 1];
+        c0 = colors[0];
+        c1 = colors[1];
+    } else {
+        t0 = stops[1];
+        t1 = stops[2];
+        c0 = colors[1];
+        c1 = colors[2];
+    }
+
+
+    // Linear interpolation
+    float factor = clamp((t - t0) / (t1 - t0), 0.0, 1.0);
+
+    return vec4(
+    mix(c0.rgb, c1.rgb, factor),
+    mix(c0.a, c1.a, factor)
+    );
+
+}
+
+vec4 main(vec2 fragCoord){
+    vec2 vUv = fragCoord / uResolution;
+    float t = fract(uGlowTime + uGlowOffset);
+    // t = min(smoothstep(uP11, uP12, t), 1.0 - smoothstep(uP21, uP22, t));
+
+    float t1 = clamp((t - uP11) / (uP12 - uP11), 0.0, 1.0);
+    float t2 = clamp((t - uP21) / (uP22 - uP21), 0.0, 1.0);
+
+    t = min(
+    mix(0.0, 1.0, bezier(t1, vec2(0.20, 0.00), vec2(0.20, 1.00))),
+    mix(1.0, 0.0, bezier(t2, vec2(0.33, 0.00), vec2(0.67, 1.00)))
+    );
+
+    // 1. icon
+    //    vec4 color = texture2D(uTex, vUv);
+    vec4 color = uTex.eval(fragCoord);
+    vec2 st = vUv;
+    float r = radial(st, vec2(0.5), 0.2941176471);
+    vec4 fill = mix(vec4(0.000, 1.000, 0.459, 1.000), gradient(r), t);
+    color = fill * color.a;
+
+    // 2. glow
+//    vec4 glow = texture2D(uChargingIconGlow, vUv);
+//    glow *= mix(0.7, 1.0, t);
+    //    vec4 glow = texture2D(uChargingIconGlow, vUv);
+//    vec2 uGlowPos = (uResolution - uGlowSize)/2.0;
+//    vec2 relCoord = fragCoord - uGlowPos;
+//    vec2 glowUv = relCoord / uGlowSize;
+//
+    vec4 glow = vec4(0.0);
+//    if(all(greaterThanEqual(relCoord, vec2(0.))) && all(lessThanEqual(relCoord, uGlowSize))){
+        glow = uChargingIconGlow.eval(vUv * uGlowSize);
+        glow *= mix(0.7, 1.0, t);
+//    }
+
+//    vec4 glow = uChargingIconGlow.eval(fragCoord);
+    // glow *= mix(0.8, 1.0, noise(vec2(0.1, uGlowTime) * 5.0));
+
+    color = lightenBlend(glow, color);
+
+//    color = vec4(1.,1.,1.,1.);
+    return color;
+}

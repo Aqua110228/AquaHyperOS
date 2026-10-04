@@ -1,0 +1,275 @@
+#version 310 es
+/*
+ * line emitter
+ * emitter负责初始化粒子以及控制粒子生命周期
+ */
+struct Particle {
+    float state;//0:born,1:wait,2:run,3:die
+    float costTime;
+    float duration;
+    float lifeTime;
+    float scaleFactor;
+    float alpha;
+    float rotateFactor;
+    float preWarmFactor;
+    vec4 param1;
+    vec4 param2;
+    mat4 matrix;
+};
+layout(local_size_x = 32, local_size_y = 1, local_size_z = 1) in;
+/*****************************************************************************************/
+layout(binding = 0, std430) buffer Particles {
+    Particle particles[];
+};
+layout(std140) uniform TimeParam {
+    float time;
+    float deltaTime;
+};
+//common uniform
+layout(std140) uniform EmitterParam {
+    float lifeMin;
+    float lifeMax;
+    int emitterType;//0:持续发射,1:一次发射
+    int loop;//是否循环
+    float frequency;//发射频率，个数/秒
+    float startSizeMin;
+    float startSizeMax;
+    vec3 scale;
+    int amount;//粒子数目
+    int reset;
+    float preWarmScale;
+};
+//emiter uniform
+layout(std140) uniform LineEmitterParam {
+    vec3 startPoint;
+    vec3 endPoint;
+};
+
+float mix3(float a, float b, float c, float y) {
+    float r = mix(a, b, mix(0.0, 1.0, clamp(y, 0.0, 0.5) * 2.0));
+    r = mix(r, c, mix(0.0, 1.0, (clamp(y, 0.5, 1.0) - 0.5) * 2.0));
+    return r;
+}
+
+float easeInCubic(float start, float end, float progress) {
+    end -= start;
+    return end * progress * progress * progress + start;
+}
+
+float easeInQuint(float start, float end, float progress) {
+    end -= start;
+    return end * progress * progress * progress * progress * progress + start;
+}
+
+float random(vec2 st) {
+    return fract(sin(dot(st.xy, vec2(12.9898, 78.233))) * 43758.5453123);
+}
+float hash12(vec2 p) {
+    vec3 p3  = fract(vec3(p.xyx) * .1031);
+    p3 += dot(p3, p3.yzx + 33.33);
+    return fract((p3.x + p3.y) * p3.z);
+}
+float random(uint index, float seed) {
+    float progress = float(index)/float(amount);
+    return hash12(vec2(progress, seed*10.87791));
+}
+
+float wang_hash(uint seed) {
+    uint s = seed;
+    s = (s ^ 61u) ^ (s >> 16);
+    s *= 9u;
+    s = s ^ (s >> 4);
+    s *= 0x27d4eb2du;
+    s = s ^ (s >> 15);
+    return float(s) / float(0xffffffffU);
+}
+
+#define STATE_BORN 0.0
+#define STATE_WAIT 1.0
+#define STATE_RUN 2.0
+#define STATE_DIE 3.0
+
+void switchToRun(uint index, float preWarmCost){
+    particles[index].state = STATE_RUN;
+    particles[index].costTime= 0.0;
+    particles[index].duration = particles[index].lifeTime;
+    particles[index].alpha = 1.;
+    particles[index].preWarmFactor = preWarmCost;
+}
+
+float updateRunState(uint index) {
+    particles[index].costTime += deltaTime;
+    if (preWarmScale>0.0) {
+        float left = lifeMax*preWarmScale - particles[index].preWarmFactor;
+        left = clamp(left, 0.0, particles[index].duration);
+        particles[index].costTime = left;
+        particles[index].preWarmFactor = left-deltaTime;
+    }
+    else {
+        particles[index].preWarmFactor = 0.0;
+    }
+
+//    float progress = particles[index].costTime/particles[index].duration;
+//    progress *= progress;
+//    particles[index].alpha = mix(1., 0., progress);
+
+//        float bornProgress = particles[index].costTime / particles[index].duration;
+//        bornProgress *= bornProgress;
+//        particles[index].alpha = mix(0., 1., bornProgress);
+
+    if (particles[index].matrix[3].y > 0.65) {
+        //switch to die
+        particles[index].state = STATE_DIE;
+        particles[index].costTime= 0.0;
+        if (emitterType == 1){
+            //单次发射模式需要等待同步
+            particles[index].duration = lifeMax - particles[index].duration;
+        }
+        else {
+            particles[index].duration = 0.;
+        }
+        return STATE_DIE;
+    }
+
+//    if (particles[index].costTime  >= particles[index].duration) {
+//        //switch to die
+//        particles[index].state = STATE_DIE;
+//        particles[index].costTime= 0.0;
+//        if (emitterType == 1){
+//            //单次发射模式需要等待同步
+//            particles[index].duration = lifeMax - particles[index].duration;
+//        }
+//        else {
+//            particles[index].duration = 0.;
+//        }
+//        return STATE_DIE;
+//    }
+    return STATE_RUN;
+}
+float updateDieState(uint index){
+    particles[index].costTime += deltaTime;
+    if (loop == 1 && particles[index].costTime  >= particles[index].duration) {
+        //switch to born
+        particles[index].costTime= 0.;
+        particles[index].state = STATE_BORN;
+        return STATE_BORN;
+    }
+    return STATE_DIE;
+}
+float updateBornState(uint index, bool isInit) {
+    //init life
+    float lifeRandomValue = random(index, fract(time+0.11));
+    float lifeRandomTime = mix(lifeMin, lifeMax, lifeRandomValue);
+    particles[index].lifeTime = lifeRandomTime;
+    //init transform
+    particles[index].matrix = mat4(1.0);
+    //alpha
+    particles[index].alpha = 0.;
+    //position
+    float posRandomValue = random(index, fract(time+0.33147)*float(index));
+    vec3 randomPosition = mix(startPoint, endPoint, vec3(posRandomValue));
+    particles[index].matrix[3].xyzw = vec4(randomPosition, 1.);
+    // 设置粒子y方向的随机起点
+    vec3 randomVal = vec3(
+    wang_hash(index + uint(amount) * 0u + uint(1000u * uint(time))),
+    wang_hash(index + uint(amount) * 1u + uint(1000u * uint(time))),
+    wang_hash(index + uint(amount) * 2u + uint(1000u * uint(time))));
+    particles[index].matrix[3].x = randomVal.x * 2.0 - 1.0;
+    particles[index].matrix[3].y = randomVal.y * randomVal.y * 0.65;
+
+    //设置粒子随机大小
+    float scaleRandomValue = random(index, fract(time));
+    float randomSize = mix(startSizeMin, startSizeMax, scaleRandomValue);
+    particles[index].scaleFactor = scaleRandomValue;
+//    particles[index].matrix[0].x= randomSize*scale.x;
+//    particles[index].matrix[1].y= randomSize*scale.y;
+//    particles[index].matrix[2].z= randomSize*scale.z;
+    float particleScale = pow(1.0 - abs((2.0 * randomVal.x - 1.0) / 6.2), 2.0) * (randomVal.z * 0.02 + 0.08) * 0.2;
+    // 此处scaleCoef可以修改粒子的大小，但是为了保证和网页版效果一致，需要在后面的shader中同时修改scaleCoef参数
+    // 全局搜索scaleCoef，全部进行改动即可，一共有4处，分别在
+    // particle_dust_emitter.comp、particle_dust.comp、
+    // particle_vertex_shader.glsl、particle_no_ssbo_vertex_shader.glsl
+    float scaleCoef = 0.25;
+    particles[index].matrix[0].x= particleScale*scale.x * scaleCoef;
+    particles[index].matrix[1].y= particleScale*scale.y * scaleCoef;
+    particles[index].matrix[2].z= particleScale*scale.z * scaleCoef;
+
+    //x speed
+    float xSpeedRandomValue = random(index, fract(time+0.8463));
+    particles[index].param1.x = xSpeedRandomValue * 1.7;
+
+    if (emitterType == 1){
+        //switch to run
+        switchToRun(index, 0.);
+        return STATE_RUN;
+    }
+    else {
+        float average = 1./frequency;
+        if (isInit) {
+            //switch to wait
+            particles[index].state = STATE_WAIT;
+            particles[index].costTime= 0.;
+            float waitTime = average * float(index);
+            float waitRandomValue = random(index, fract(time+0.11));
+            waitTime = mix(waitTime*0.5, waitTime*1.5, waitRandomValue);
+            particles[index].duration = waitTime;
+        }
+        else {
+            float ldf = particles[index].lifeTime/average;
+            float waitTime = 0.;
+            if (ldf>=1.){
+                float waitRandomValue = random(index, fract(time+0.11));
+                waitTime = mix(0., average * float(index), waitRandomValue);
+            }
+            else {
+                waitTime = average - particles[index].lifeTime;
+            }
+            //switch to wait
+            particles[index].state = STATE_WAIT;
+            particles[index].costTime= 0.;
+            particles[index].duration = waitTime;
+        }
+        return STATE_WAIT;
+    }
+}
+
+float updateWaitState(uint index) {
+    particles[index].costTime += deltaTime;
+    if (preWarmScale>0.0) {
+        particles[index].costTime = preWarmScale*lifeMax;
+    }
+    if (particles[index].costTime >= particles[index].duration){
+        //switch to run
+        switchToRun(index, particles[index].duration);
+        return STATE_RUN;
+    }
+    return STATE_WAIT;
+}
+
+void main(){
+    uint index = gl_GlobalInvocationID.x;
+    float state = particles[index].state;
+    bool isInit = false;
+    if (reset == 1) {
+        isInit = true;
+        particles[index].costTime = 0.;
+        particles[index].state = STATE_BORN;
+        state = STATE_BORN;
+    }
+    //born
+    if (state == STATE_BORN) {
+        state = updateBornState(index, isInit);
+    }
+    //wait
+    if (state == STATE_WAIT) {
+        state = updateWaitState(index);
+    }
+    //run
+    if (state == STATE_RUN) {
+        state = updateRunState(index);
+    }
+    //die
+    if (state == STATE_DIE) {
+        state = updateDieState(index);
+    }
+}

@@ -1,0 +1,766 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<appfunctions>
+    <appfunction>
+        <id>com.android.systemui.appfunctions.MultiTaskingFunctions#multiSplitAddApp</id>
+        <enabledByDefault>true</enabledByDefault>
+        <description>添加应用到多分屏：在已有的多分屏中新增一个应用。
+ 用户说"再加一个xx""多分屏里再开个xx"时调用。
+
+
+ 调用前建议先调用 splitScreenGetStatus 和 multiSplitGetStatus 查询当前分屏状态，
+ 避免误判（双分屏和多分屏可能互相切换，状态查询是准确判断的唯一可靠途径）。</description>
+        <parameters>
+            <dataTypeMetadata>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>8</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <isRequired>true</isRequired>
+            <name>packageName</name>
+            <description>要添加的应用包名，必填。须传应用包名（格式如 com.miui.gallery），不要传应用显示名。</description>
+        </parameters>
+        <response>
+            <id>unused</id>
+            <valueType>
+                <dataTypeReference>com.android.systemui.appfunctions.MultiTaskingResult</dataTypeReference>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>11</type>
+            </valueType>
+            <description>操作结果</description>
+        </response>
+        <functionId>com.android.systemui.appfunctions.MultiTaskingFunctions#multiSplitAddApp</functionId>
+    </appfunction>
+    <appfunction>
+        <id>com.android.systemui.appfunctions.MultiTaskingFunctions#multiSplitCloseWindow</id>
+        <enabledByDefault>true</enabledByDefault>
+        <description>关闭多分屏窗口：关闭多分屏中某一个窗口，其他窗口继续保持。
+ 用户说"关掉第三个""把xx关了"时调用。窗口数降到 2 时自动转为双分屏。
+ 这是关闭/移除多分屏窗口的专用函数：凡"关掉第 N 个""移除 xx""把某个窗口去掉"的需求都必须用本函数（原地移除、无闪屏），需关多个就多次调用。严禁改用 multiSplitStart 传入"剩余应用"来间接达成关闭——那会整体退出多分屏再重进，产生闪屏。
+
+
+ 调用前建议先调用 splitScreenGetStatus 和 multiSplitGetStatus 查询当前分屏状态，
+ 避免误判（双分屏和多分屏可能互相切换，状态查询是准确判断的唯一可靠途径）。</description>
+        <parameters>
+            <dataTypeMetadata>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>7</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <isRequired>true</isRequired>
+            <name>position</name>
+            <description>要关闭的窗口位置序号，必填整数，从 1 开始（1 表示第一个窗口）。</description>
+        </parameters>
+        <response>
+            <id>unused</id>
+            <valueType>
+                <dataTypeReference>com.android.systemui.appfunctions.MultiTaskingResult</dataTypeReference>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>11</type>
+            </valueType>
+            <description>操作结果</description>
+        </response>
+        <functionId>com.android.systemui.appfunctions.MultiTaskingFunctions#multiSplitCloseWindow</functionId>
+    </appfunction>
+    <appfunction>
+        <id>com.android.systemui.appfunctions.MultiTaskingFunctions#multiSplitExit</id>
+        <enabledByDefault>true</enabledByDefault>
+        <description>退出多分屏：退出多分屏模式回到桌面，可指定保留某个应用为全屏。
+ 用户说"退出多分屏""不分屏了""只留xx"时调用。
+
+
+ 调用前建议先调用 splitScreenGetStatus 和 multiSplitGetStatus 查询当前分屏状态，
+ 避免误判（双分屏和多分屏可能互相切换，状态查询是准确判断的唯一可靠途径）。</description>
+        <parameters>
+            <dataTypeMetadata>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>8</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <isRequired>true</isRequired>
+            <name>keepPackage</name>
+            <description>要保留为全屏的应用包名，此参数必须传入：保留某应用时传其包名；用户只说"退出多分屏"未指定保留应用时，必须传空字符串 ""（表示全部退出）。</description>
+        </parameters>
+        <response>
+            <id>unused</id>
+            <valueType>
+                <dataTypeReference>com.android.systemui.appfunctions.MultiTaskingResult</dataTypeReference>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>11</type>
+            </valueType>
+            <description>操作结果</description>
+        </response>
+        <functionId>com.android.systemui.appfunctions.MultiTaskingFunctions#multiSplitExit</functionId>
+    </appfunction>
+    <appfunction>
+        <id>com.android.systemui.appfunctions.MultiTaskingFunctions#multiSplitGetStatus</id>
+        <enabledByDefault>true</enabledByDefault>
+        <description>查询多分屏状态：返回设备是否支持多分屏、当前是否处于多分屏、是否在全览模式、以及所有窗口的应用包名。
+ 用户问"现在开了几个分屏""多分屏里有哪些应用"时调用。Agent 执行多分屏操作前应先调用此接口。
+
+
+ 调用前建议先调用 splitScreenGetStatus 和 multiSplitGetStatus 查询当前分屏状态，
+ 避免误判（双分屏和多分屏可能互相切换，状态查询是准确判断的唯一可靠途径）。</description>
+        <response>
+            <id>unused</id>
+            <valueType>
+                <dataTypeReference>com.android.systemui.appfunctions.MultiSplitStatus</dataTypeReference>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>11</type>
+            </valueType>
+            <description>多分屏状态信息</description>
+        </response>
+        <functionId>com.android.systemui.appfunctions.MultiTaskingFunctions#multiSplitGetStatus</functionId>
+    </appfunction>
+    <appfunction>
+        <id>com.android.systemui.appfunctions.MultiTaskingFunctions#multiSplitNewWindowInstance</id>
+        <enabledByDefault>true</enabledByDefault>
+        <description>新建应用窗口：让多分屏中某个应用多开一个新实例（以小窗形式启动）。
+ 用户说"再开一个xx窗口""xx多开一个"时调用。仅支持多实例的应用有效。
+
+ 调用前建议先调用 splitScreenGetStatus 和 multiSplitGetStatus 查询当前分屏状态，
+ 避免误判（双分屏和多分屏可能互相切换，状态查询是准确判断的唯一可靠途径）。</description>
+        <parameters>
+            <dataTypeMetadata>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>8</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <isRequired>true</isRequired>
+            <name>packageName</name>
+            <description>要多开的应用包名，必填。须传应用包名（格式如 com.miui.notes），不要传应用显示名。</description>
+        </parameters>
+        <response>
+            <id>unused</id>
+            <valueType>
+                <dataTypeReference>com.android.systemui.appfunctions.MultiTaskingResult</dataTypeReference>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>11</type>
+            </valueType>
+            <description>操作结果</description>
+        </response>
+        <functionId>com.android.systemui.appfunctions.MultiTaskingFunctions#multiSplitNewWindowInstance</functionId>
+    </appfunction>
+    <appfunction>
+        <id>com.android.systemui.appfunctions.MultiTaskingFunctions#multiSplitQuickViewToggle</id>
+        <enabledByDefault>true</enabledByDefault>
+        <description>全览模式切换：进入或退出多分屏的全览（QuickView）模式，所有窗口以卡片形式展示。
+ 用户说"看一下都开了什么""全览""展开看看"时调用。</description>
+        <parameters>
+            <dataTypeMetadata>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>8</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <isRequired>true</isRequired>
+            <name>mode</name>
+            <description>操作模式，必须传入以下三者之一：enter(进入全览)、exit(退出全览)、toggle(自动切换)。</description>
+        </parameters>
+        <response>
+            <id>unused</id>
+            <valueType>
+                <dataTypeReference>com.android.systemui.appfunctions.MultiTaskingResult</dataTypeReference>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>11</type>
+            </valueType>
+            <description>操作结果</description>
+        </response>
+        <functionId>com.android.systemui.appfunctions.MultiTaskingFunctions#multiSplitQuickViewToggle</functionId>
+    </appfunction>
+    <appfunction>
+        <id>com.android.systemui.appfunctions.MultiTaskingFunctions#multiSplitReorder</id>
+        <enabledByDefault>true</enabledByDefault>
+        <description>交换多分屏中两个窗口的位置：互换两个位置的应用。
+ 用户说"交换第1和第3个""把xx和yy换一下"时调用。
+ 若用户说应用名而非位置，请先调用 multiSplitGetStatus 获取 apps 列表
+ 找到对应位置（apps 数组下标 + 1），再调用本函数。
+
+
+ 调用前建议先调用 splitScreenGetStatus 和 multiSplitGetStatus 查询当前分屏状态，
+ 避免误判（双分屏和多分屏可能互相切换，状态查询是准确判断的唯一可靠途径）。</description>
+        <parameters>
+            <dataTypeMetadata>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>7</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <isRequired>true</isRequired>
+            <name>from</name>
+            <description>第一个窗口的位置序号，必填整数，从 1 开始。</description>
+        </parameters>
+        <parameters>
+            <dataTypeMetadata>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>7</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <isRequired>true</isRequired>
+            <name>to</name>
+            <description>第二个窗口的位置序号，必填整数，从 1 开始。</description>
+        </parameters>
+        <response>
+            <id>unused</id>
+            <valueType>
+                <dataTypeReference>com.android.systemui.appfunctions.MultiTaskingResult</dataTypeReference>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>11</type>
+            </valueType>
+            <description>操作结果</description>
+        </response>
+        <functionId>com.android.systemui.appfunctions.MultiTaskingFunctions#multiSplitReorder</functionId>
+    </appfunction>
+    <appfunction>
+        <id>com.android.systemui.appfunctions.MultiTaskingFunctions#multiSplitReplaceApp</id>
+        <enabledByDefault>true</enabledByDefault>
+        <description>替换多分屏中的应用：把多分屏中某个位置的应用替换成另一个应用。
+ 用户说"把第二个换成xx""多分屏里的xx换成yy"时调用。
+
+
+ 调用前建议先调用 splitScreenGetStatus 和 multiSplitGetStatus 查询当前分屏状态，
+ 避免误判（双分屏和多分屏可能互相切换，状态查询是准确判断的唯一可靠途径）。</description>
+        <parameters>
+            <dataTypeMetadata>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>8</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <isRequired>true</isRequired>
+            <name>packageName</name>
+            <description>新应用的包名，必填。须传应用包名（格式如 com.android.browser），不要传应用显示名。</description>
+        </parameters>
+        <parameters>
+            <dataTypeMetadata>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>7</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <isRequired>true</isRequired>
+            <name>position</name>
+            <description>要替换的窗口位置序号，必填整数，从 1 开始（1 表示第一个窗口）。</description>
+        </parameters>
+        <response>
+            <id>unused</id>
+            <valueType>
+                <dataTypeReference>com.android.systemui.appfunctions.MultiTaskingResult</dataTypeReference>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>11</type>
+            </valueType>
+            <description>操作结果</description>
+        </response>
+        <functionId>com.android.systemui.appfunctions.MultiTaskingFunctions#multiSplitReplaceApp</functionId>
+    </appfunction>
+    <appfunction>
+        <id>com.android.systemui.appfunctions.MultiTaskingFunctions#multiSplitSetFocus</id>
+        <enabledByDefault>true</enabledByDefault>
+        <description>切换焦点窗口：让多分屏中指定应用成为焦点窗口（放大居中）。
+ 用户说"重点看xx""放大xx"时调用。
+
+
+ 调用前建议先调用 splitScreenGetStatus 和 multiSplitGetStatus 查询当前分屏状态，
+ 避免误判（双分屏和多分屏可能互相切换，状态查询是准确判断的唯一可靠途径）。</description>
+        <parameters>
+            <dataTypeMetadata>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>7</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <isRequired>true</isRequired>
+            <name>position</name>
+            <description>要设为焦点的窗口位置序号，必填整数，从 1 开始（对应 multiSplitGetStatus 返回的 apps 列表顺序）。若用户说的是应用名，请先调用 multiSplitGetStatus 获取 apps 列表，找到该应用的位置（数组下标+1）再调用本函数。</description>
+        </parameters>
+        <response>
+            <id>unused</id>
+            <valueType>
+                <dataTypeReference>com.android.systemui.appfunctions.MultiTaskingResult</dataTypeReference>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>11</type>
+            </valueType>
+            <description>操作结果</description>
+        </response>
+        <functionId>com.android.systemui.appfunctions.MultiTaskingFunctions#multiSplitSetFocus</functionId>
+    </appfunction>
+    <appfunction>
+        <id>com.android.systemui.appfunctions.MultiTaskingFunctions#multiSplitStart</id>
+        <enabledByDefault>true</enabledByDefault>
+        <description>进入多分屏：同时启动 3-6 个应用进入多分屏模式。
+ 用户说"把xx、xx、xx一起开""三屏分屏""多个一起用"时调用。
+
+ **重要**：调用前必须先查询当前分屏状态（splitScreenGetStatus 和 multiSplitGetStatus），
+ 因为执行时会严格按 packages 列表展示——packages 中没有的应用会被退出分屏。
+ 用户说"加入xx"时，应包含当前分屏中的所有应用 + 新加入的应用，否则原有应用会被退出。
+ 注意：packages 之外的应用被退出只是"进入/重组"多分屏的副作用，不是关闭窗口的手段。
+ 若只是要关掉/移除某个窗口（如"关掉第3个""去掉 xx"），必须用 multiSplitCloseWindow（原地移除、无闪屏），不要用本函数重组剩余应用。</description>
+        <parameters>
+            <dataTypeMetadata>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <itemType>
+                    <id>unused</id>
+                    <isNullable>false</isNullable>
+                    <type>8</type>
+                </itemType>
+                <type>10</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <isRequired>true</isRequired>
+            <name>packages</name>
+            <description>要进入多分屏的应用包名列表，必填，须含 3-6 个应用包名（格式如 com.miui.notes，不要传应用显示名）。 严格按此列表展示分屏，列表外的应用会被退出。</description>
+        </parameters>
+        <response>
+            <id>unused</id>
+            <valueType>
+                <dataTypeReference>com.android.systemui.appfunctions.MultiTaskingResult</dataTypeReference>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>11</type>
+            </valueType>
+            <description>操作结果</description>
+        </response>
+        <functionId>com.android.systemui.appfunctions.MultiTaskingFunctions#multiSplitStart</functionId>
+    </appfunction>
+    <appfunction>
+        <id>com.android.systemui.appfunctions.MultiTaskingFunctions#splitScreenExit</id>
+        <enabledByDefault>true</enabledByDefault>
+        <description>退出分屏：结束当前分屏状态，可选择保留哪一侧应用全屏显示。
+ 用户说"退出分屏""关掉分屏"时调用。
+
+
+ 调用前建议先调用 splitScreenGetStatus 和 multiSplitGetStatus 查询当前分屏状态，
+ 避免误判（双分屏和多分屏可能互相切换，状态查询是准确判断的唯一可靠途径）。</description>
+        <parameters>
+            <dataTypeMetadata>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>8</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <isRequired>true</isRequired>
+            <name>keepPosition</name>
+            <description>保留哪侧应用全屏，必须传入以下三者之一：top_or_left(保留左/上侧全屏)、bottom_or_right(保留右/下侧全屏)、none(全部退出不保留)。用户只说"退出分屏"未指定保留侧时传 none。</description>
+        </parameters>
+        <response>
+            <id>unused</id>
+            <valueType>
+                <dataTypeReference>com.android.systemui.appfunctions.MultiTaskingResult</dataTypeReference>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>11</type>
+            </valueType>
+            <description>操作结果</description>
+        </response>
+        <functionId>com.android.systemui.appfunctions.MultiTaskingFunctions#splitScreenExit</functionId>
+    </appfunction>
+    <appfunction>
+        <id>com.android.systemui.appfunctions.MultiTaskingFunctions#splitScreenGetStatus</id>
+        <enabledByDefault>true</enabledByDefault>
+        <description>查询分屏状态：返回设备是否支持分屏、当前是否处于分屏、以及分屏中的两个应用包名。
+ 用户问"现在是不是分屏""分屏里是哪两个应用"时调用。
+
+
+ 调用前建议先调用 splitScreenGetStatus 和 multiSplitGetStatus 查询当前分屏状态，
+ 避免误判（双分屏和多分屏可能互相切换，状态查询是准确判断的唯一可靠途径）。</description>
+        <response>
+            <id>unused</id>
+            <valueType>
+                <dataTypeReference>com.android.systemui.appfunctions.SplitScreenStatus</dataTypeReference>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>11</type>
+            </valueType>
+            <description>分屏状态信息</description>
+        </response>
+        <functionId>com.android.systemui.appfunctions.MultiTaskingFunctions#splitScreenGetStatus</functionId>
+    </appfunction>
+    <appfunction>
+        <id>com.android.systemui.appfunctions.MultiTaskingFunctions#splitScreenReplaceApp</id>
+        <enabledByDefault>true</enabledByDefault>
+        <description>替换分屏中某侧的应用：保持分屏状态，将指定位置的应用替换为新应用。
+ 用户说"把左边换成xx""右边打开xx"时调用。
+
+
+ 调用前建议先调用 splitScreenGetStatus 和 multiSplitGetStatus 查询当前分屏状态，
+ 避免误判（双分屏和多分屏可能互相切换，状态查询是准确判断的唯一可靠途径）。</description>
+        <parameters>
+            <dataTypeMetadata>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>8</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <isRequired>true</isRequired>
+            <name>packageName</name>
+            <description>新应用的包名，必填。须传应用包名（格式如 com.android.browser），不要传应用显示名。</description>
+        </parameters>
+        <parameters>
+            <dataTypeMetadata>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>8</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <isRequired>true</isRequired>
+            <name>position</name>
+            <description>替换哪一侧，必须传入以下二者之一：top_or_left(左/上侧)、bottom_or_right(右/下侧)。</description>
+        </parameters>
+        <response>
+            <id>unused</id>
+            <valueType>
+                <dataTypeReference>com.android.systemui.appfunctions.MultiTaskingResult</dataTypeReference>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>11</type>
+            </valueType>
+            <description>操作结果</description>
+        </response>
+        <functionId>com.android.systemui.appfunctions.MultiTaskingFunctions#splitScreenReplaceApp</functionId>
+    </appfunction>
+    <appfunction>
+        <id>com.android.systemui.appfunctions.MultiTaskingFunctions#splitScreenResize</id>
+        <enabledByDefault>true</enabledByDefault>
+        <description>调整分屏比例：改变两个应用的大小比例。
+ 用户说"把左边调大一点""分屏比例调成1比2"时调用。
+
+
+ 调用前建议先调用 splitScreenGetStatus 和 multiSplitGetStatus 查询当前分屏状态，
+ 避免误判（双分屏和多分屏可能互相切换，状态查询是准确判断的唯一可靠途径）。</description>
+        <parameters>
+            <dataTypeMetadata>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>8</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <isRequired>true</isRequired>
+            <name>ratio</name>
+            <description>分屏比例，必填。绝对值(设为固定比例)：equal(1:1)、left_larger(2:1)、right_larger(1:2)、left_max(9:1)、right_max(1:9)；相对值(在当前基础上调整一档)：larger(左侧放大一档)、smaller(左侧缩小一档)。返回结果的 message 会告知调整后的实际比例；部分设备只支持 3 档比例(equal/left_max/right_max)，会自动归到最接近的受支持档；相对值已到该方向最大/最小档时保持不变并在 message 中告知已达极限。</description>
+        </parameters>
+        <response>
+            <id>unused</id>
+            <valueType>
+                <dataTypeReference>com.android.systemui.appfunctions.MultiTaskingResult</dataTypeReference>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>11</type>
+            </valueType>
+            <description>操作结果</description>
+        </response>
+        <functionId>com.android.systemui.appfunctions.MultiTaskingFunctions#splitScreenResize</functionId>
+    </appfunction>
+    <appfunction>
+        <id>com.android.systemui.appfunctions.MultiTaskingFunctions#splitScreenStart</id>
+        <enabledByDefault>true</enabledByDefault>
+        <description>启动分屏：将两个应用以分屏方式同时显示。
+ 用户说"把xx和xx分屏""两个应用一起用"时调用。
+
+
+ 调用前建议先调用 splitScreenGetStatus 和 multiSplitGetStatus 查询当前分屏状态，
+ 避免误判（双分屏和多分屏可能互相切换，状态查询是准确判断的唯一可靠途径）。</description>
+        <parameters>
+            <dataTypeMetadata>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>8</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <isRequired>true</isRequired>
+            <name>app1</name>
+            <description>第一个应用（左侧/上侧）的包名，必填。须传应用包名（格式如 com.miui.notes），不要传应用显示名（如"笔记"）。</description>
+        </parameters>
+        <parameters>
+            <dataTypeMetadata>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>8</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <isRequired>true</isRequired>
+            <name>app2</name>
+            <description>第二个应用（右侧/下侧）的包名，必填。须传应用包名（格式如 com.miui.gallery），不要传应用显示名（如"相册"）。</description>
+        </parameters>
+        <parameters>
+            <dataTypeMetadata>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>8</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <isRequired>true</isRequired>
+            <name>direction</name>
+            <description>分屏方向，必须传入以下三者之一：auto(跟随当前屏幕方向)、left_right(强制左右分屏)、top_bottom(强制上下分屏)。用户未指定方向时传 auto；说"左右分屏"传 left_right；说"上下分屏"传 top_bottom。</description>
+        </parameters>
+        <response>
+            <id>unused</id>
+            <valueType>
+                <dataTypeReference>com.android.systemui.appfunctions.MultiTaskingResult</dataTypeReference>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>11</type>
+            </valueType>
+            <description>操作结果</description>
+        </response>
+        <functionId>com.android.systemui.appfunctions.MultiTaskingFunctions#splitScreenStart</functionId>
+    </appfunction>
+    <appfunction>
+        <id>com.android.systemui.appfunctions.MultiTaskingFunctions#splitScreenSwap</id>
+        <enabledByDefault>true</enabledByDefault>
+        <description>交换分屏位置：将左右（或上下）两个应用互换位置。
+ 用户说"交换分屏""把两个应用换个位置"时调用。
+
+
+ 调用前建议先调用 splitScreenGetStatus 和 multiSplitGetStatus 查询当前分屏状态，
+ 避免误判（双分屏和多分屏可能互相切换，状态查询是准确判断的唯一可靠途径）。</description>
+        <response>
+            <id>unused</id>
+            <valueType>
+                <dataTypeReference>com.android.systemui.appfunctions.MultiTaskingResult</dataTypeReference>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>11</type>
+            </valueType>
+            <description>操作结果</description>
+        </response>
+        <functionId>com.android.systemui.appfunctions.MultiTaskingFunctions#splitScreenSwap</functionId>
+    </appfunction>
+    <appfunction>
+        <id>com.android.systemui.appfunctions.MultiTaskingFunctions#splitToFreeform</id>
+        <enabledByDefault>true</enabledByDefault>
+        <description>分屏转小窗：将分屏中某侧的应用变为悬浮小窗。
+ 用户说"把左边变成小窗""右边的应用转小窗"时调用。
+
+ 调用前建议先调用 splitScreenGetStatus 和 multiSplitGetStatus 查询当前分屏状态，
+ 避免误判（双分屏和多分屏可能互相切换，状态查询是准确判断的唯一可靠途径）。</description>
+        <parameters>
+            <dataTypeMetadata>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>8</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <isRequired>true</isRequired>
+            <name>position</name>
+            <description>哪一侧转小窗，必须传入以下二者之一：top_or_left(左/上侧)、bottom_or_right(右/下侧)。</description>
+        </parameters>
+        <response>
+            <id>unused</id>
+            <valueType>
+                <dataTypeReference>com.android.systemui.appfunctions.MultiTaskingResult</dataTypeReference>
+                <id>unused</id>
+                <isNullable>false</isNullable>
+                <type>11</type>
+            </valueType>
+            <description>操作结果</description>
+        </response>
+        <functionId>com.android.systemui.appfunctions.MultiTaskingFunctions#splitToFreeform</functionId>
+    </appfunction>
+    <AppFunctionComponentMetadataDocument>
+        <dataTypes>
+            <dataTypeMetadata>
+                <id>unused</id>
+                <isNullable>true</isNullable>
+                <objectQualifiedName>com.android.systemui.appfunctions.MultiSplitStatus</objectQualifiedName>
+                <description>
+ 多分屏状态信息。
+
+ @property supported 设备是否支持多分屏
+ @property active 当前是否处于多分屏状态
+ @property inQuickView 当前是否处于全览模式（一期不支持，需先退出全览）
+ @property isDocked 当前是否处于 docker 模式（一期不支持，需先退出 docker）
+ @property apps 多分屏中的应用包名列表（按位置顺序）
+</description>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <type>1</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>supported</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <type>1</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>active</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <type>1</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>inQuickView</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <type>1</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>isDocked</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <itemType>
+                            <id>unused</id>
+                            <isNullable>false</isNullable>
+                            <type>8</type>
+                        </itemType>
+                        <type>10</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>apps</name>
+                </properties>
+                <required>supported</required>
+                <required>active</required>
+                <required>inQuickView</required>
+                <required>isDocked</required>
+                <required>apps</required>
+                <type>3</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <name>com.android.systemui.appfunctions.MultiSplitStatus</name>
+        </dataTypes>
+        <dataTypes>
+            <dataTypeMetadata>
+                <id>unused</id>
+                <isNullable>true</isNullable>
+                <objectQualifiedName>com.android.systemui.appfunctions.MultiTaskingResult</objectQualifiedName>
+                <description>
+ 多任务操作统一返回结果。
+
+ @property success 操作是否成功
+ @property message 面向 LLM 的人类可读说明
+</description>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <type>1</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>success</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <type>8</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>message</name>
+                </properties>
+                <required>success</required>
+                <required>message</required>
+                <type>3</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <name>com.android.systemui.appfunctions.MultiTaskingResult</name>
+        </dataTypes>
+        <dataTypes>
+            <dataTypeMetadata>
+                <id>unused</id>
+                <isNullable>true</isNullable>
+                <objectQualifiedName>com.android.systemui.appfunctions.SplitScreenStatus</objectQualifiedName>
+                <description>
+ 分屏状态信息。
+
+ @property supported 设备是否支持分屏
+ @property active 当前是否处于分屏状态
+ @property topOrLeftApp 左侧/上侧应用包名，未分屏时为空
+ @property bottomOrRightApp 右侧/下侧应用包名，未分屏时为空
+ @property ratio 当前分屏比例：equal(1:1)、left_larger(左/上侧大)、right_larger(右/下侧大)、left_max(左/上侧接近全屏)、right_max(右/下侧接近全屏)；未分屏时为空
+ @property direction 当前分屏的实际布局方向：left_right(左右分屏，topOrLeftApp 在左、bottomOrRightApp 在右)、top_bottom(上下分屏，topOrLeftApp 在上、bottomOrRightApp 在下)；未分屏时为空。描述分屏布局时须以此字段为准，不要用设备横竖姿态推断方向。
+</description>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <type>1</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>supported</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <type>1</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>active</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <type>8</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>topOrLeftApp</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <type>8</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>bottomOrRightApp</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <type>8</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>ratio</name>
+                </properties>
+                <properties>
+                    <dataTypeMetadata>
+                        <id>unused</id>
+                        <isNullable>false</isNullable>
+                        <type>8</type>
+                    </dataTypeMetadata>
+                    <id>unused</id>
+                    <name>direction</name>
+                </properties>
+                <required>supported</required>
+                <required>active</required>
+                <required>topOrLeftApp</required>
+                <required>bottomOrRightApp</required>
+                <required>ratio</required>
+                <required>direction</required>
+                <type>3</type>
+            </dataTypeMetadata>
+            <id>unused</id>
+            <name>com.android.systemui.appfunctions.SplitScreenStatus</name>
+        </dataTypes>
+        <id>unused</id>
+    </AppFunctionComponentMetadataDocument>
+</appfunctions>

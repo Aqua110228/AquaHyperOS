@@ -1,0 +1,92 @@
+uniform vec2 uResolution;
+uniform vec2 uRippleOrigin;
+uniform shader uTex;
+uniform float uAlpha;
+
+uniform float uTime;
+uniform float ds;
+
+vec4 lightenBlend(vec4 src, vec4 dst) {
+    vec3 color = max(src.rgb, dst.rgb);
+    float alpha = src.a + (1.0 - src.a) * dst.a;
+    return vec4(color, alpha);
+}
+
+vec4 addBlend(vec4 src, vec4 dst) {
+    vec3 color = src.rgb + dst.rgb;
+    float alpha = src.a + (1.0 - src.a) + dst.a;
+    return vec4(color, alpha);
+}
+
+vec4 alphaBlend(vec4 src, vec4 dst) {
+    vec3 color = src.rgb + 1. * dst.rgb;
+    float alpha = src.a + dst.a * (1.0 - src.a);
+    return vec4(color, src.a);
+}
+
+float luminance(vec3 color) {
+    return dot(color, vec3(0.299, 0.587, 0.114));
+}
+
+// 0 pe    pf pr
+//    ______          vp
+//   /      \
+//  /        \______  vr
+// /                  vi
+
+float pulse( float x, float pe, float pf, float pr, float vi, float vr, float vp) {
+    float v = min(vp, mix(vi, vp, smoothstep(0.0, pe, x)));
+    v = min(v, mix(vp, vr, smoothstep(pf, pr, x)));
+    v += vi;
+    return v;
+}
+
+vec3 rainbow(float t) {
+    return pow(vec3(0.0, 1.0, 0.38), vec3(2.2)) * pulse(t, 0.3, 0.4, 1.0, 0.0, 0.0, 0.8);
+}
+
+float bezier(float t, vec2 p1, vec2 p2) {
+    float t2 = t * t;
+    float t3 = t2 * t;
+    float mt = 1.0 - t;
+    float mt2 = mt * mt;
+    float mt3 = mt2 * mt;
+
+    return mt3 * 0.0 +                // P0 (0,0)
+    3.0 * mt2 * t * p1.y +     // P1
+    3.0 * mt * t2 * p2.y +     // P2
+    t3 * 1.0;                  // P3 (1,1)
+}
+
+vec4 main(vec2 fragCoord){
+    vec2 vUv = fragCoord / uResolution;
+    vec2 position = vUv;
+
+    position -= uRippleOrigin / uResolution;
+    position.x *= uResolution.x / uResolution.y;
+
+    position /= uResolution.x / uResolution.y;
+
+    vec2 origin = vec2(0.0);
+
+    float d = distance(origin, position);
+    d *= 1.5;
+
+    float decay = exp(-d * 4.);
+    decay *= smoothstep(0.05, 0.22, d);
+
+    float time = fract(uTime / 2.0);
+    time = bezier(time, vec2(0.2, 0.0), vec2(0.2, 1.0));
+
+    float t = fract(d - time + 0.2);
+    t = 1.0 - clamp(t * 8.0, 0.0, 1.0);
+
+    vec4 c = vec4(rainbow(t) * decay, decay);
+    vec4 bg = uTex.eval(fragCoord);
+
+
+    //    vec4 fragColor = mix(c, bg, bg.a);
+    vec4 fragColor = alphaBlend(bg, c);
+    fragColor *= uAlpha;
+    return fragColor;
+}

@@ -1,0 +1,61 @@
+{
+  "version": "1.0.0",
+  "features": {
+    "statusBar": {
+      "enabled": true,
+      "customIcons": true,
+      "iconColor": "#FFFFFF",
+      "batteryStyle": "percentage"
+    },
+    "corePatch": {
+      "enabled": true,
+      "bypassSignature": true,
+      "unlockPermissions": false
+    },
+    "launcher": {
+      "enabled": true,
+      "customGrid": true,
+      "gridRows": 6,
+      "gridColumns": 5
+    }
+  },
+  "advanced": {
+    "debug": false,
+    "logLevel": "info"
+  },
+  "settings": {
+    "injectionEnabled": true,
+    "showInMainSettings": true,
+    "settingsPosition": "top",
+    "showSearchIndex": true
+  },
+  "controlCenter": {
+    "largeTile": false,
+    "squareTile": false,
+    "customIconColor": false,
+    "iconColor": "#FFFFFF",
+    "enable5GSwitch": false
+  },
+  "theme": {
+    "forceBlur": false,
+    "notificationFocusBlur": false,
+    "notificationHeadsUpBlur": false
+  },
+  "lockscreen": {
+    "hideFingerprintIcon": false,
+    "hideFingerprintAnimation": false,
+    "showNavigationBar": false
+  },
+  "settingsApp": {
+    "hideBenefits": false,
+    "hideBenefitsStore": false
+  },
+  "dynamicIslandLyrics": {
+    "enabled": false,
+    "position": "center",
+    "textSize": 14,
+    "font": "default",
+    "useAlbumColor": false,
+    "color": "#FFFFFF"
+  }
+}

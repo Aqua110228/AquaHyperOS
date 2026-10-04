@@ -1,0 +1,12 @@
+<!-- 添加到 Settings.apk 的 res/xml/dashboard_main.xml 或 top_level_settings.xml -->
+<!-- 放在文件开头，order="0" 确保显示在第一位 -->
+
+<Preference
+    android:key="aqua_hyperos_settings"
+    android:title="AquaHyperOS"
+    android:summary="HyperOS 深度定制模块"
+    android:order="0">
+    <intent
+        android:targetPackage="com.aqua.hyperos"
+        android:targetClass="com.aqua.hyperos.ui.SettingsActivity" />
+</Preference>

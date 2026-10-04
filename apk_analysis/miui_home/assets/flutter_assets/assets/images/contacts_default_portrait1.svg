@@ -1,0 +1,26 @@
+<svg width="24dp" height="24dp" viewBox="0 0 156 156">
+    <defs>
+        <linearGradient
+            id="grad1"
+            x1="78" y1="0.970941" x2="78" y2="155.1477"
+            gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#FEC112" stop-opacity="1" />
+            <stop offset="100%" stop-color="#FEDE14" stop-opacity="1" />
+        </linearGradient>
+    </defs>
+    <path
+        d="M78,78m-78,0a78,78 0,1 1,156 0a78,78 0,1 1,-156 0"
+        fill="url(#grad1)"
+        stroke="rgba(0,0,0,0)"
+        stroke-width="1" />
+    <path
+        d="M52.127,86.509L103.873,86.509A11,11 0,0 1,114.873 97.509L114.873,106.709A11,11 0,0 1,103.873 117.709L52.127,117.709A11,11 0,0 1,41.127 106.709L41.127,97.509A11,11 0,0 1,52.127 86.509z"
+        fill="#FFFFFF"
+        stroke="rgba(0,0,0,0)"
+        stroke-width="1" />
+    <path
+        d="M78,58.145m-19.855,0a19.855,19.855 0,1 1,39.709 0a19.855,19.855 0,1 1,-39.709 0"
+        fill="#FFFFFF"
+        stroke="rgba(0,0,0,0)"
+        stroke-width="1" />
+</svg>

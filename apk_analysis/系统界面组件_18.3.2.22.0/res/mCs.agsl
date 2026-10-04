@@ -1,0 +1,444 @@
+uniform vec2 uResolution;
+uniform shader uTex;
+uniform shader uFlashlightUiIconTex;
+uniform shader uFlashlightUiGlowTex;
+uniform float uTime;
+const float canvas_scale = 1.0;
+uniform vec2 uIconSize;
+uniform vec2 uGlowSize;
+
+uniform vec2  uBeam1PointF;
+uniform float uBeam1LineY;
+uniform float uBeam1E;
+uniform float uBeam1Highband;
+uniform vec3  uBeam1Color;
+uniform float uBeam1Alpha;
+uniform float uBeam1ScaleX;
+uniform float uBeam1Shift;
+uniform float uBeam1Dispersion;
+uniform vec2  uBeam5PointF;
+uniform float uBeam5LineY;
+uniform float uBeam5E;
+uniform float uBeam5Highband;
+uniform vec3  uBeam5Color;
+uniform float uBeam5Alpha;
+uniform float uBeam5ScaleX;
+uniform float uBeam5Shift;
+uniform float uBeam5Dispersion;
+uniform vec2  uBeam6PointF;
+uniform float uBeam6LineY;
+uniform float uBeam6E;
+uniform float uBeam6Highband;
+uniform vec3  uBeam6Color;
+uniform float uBeam6Alpha;
+uniform float uBeam6ScaleX;
+uniform float uBeam6Shift;
+uniform float uBeam6Dispersion;
+uniform vec2  uOffset;
+uniform int uRTL;
+
+
+uniform float uEffectProgress;
+
+struct Beam {
+    vec2 point_f;
+    float line_y;
+    float e;
+    float highband;
+    vec3 color;
+    float alpha;
+    float scale_x;
+    float shift;
+    float dispersion;
+};
+
+
+vec4 getValue(vec4 value[5], int index){
+    if (index == 0)
+    return value[0];
+    if (index == 1)
+    return value[1];
+    if (index == 2)
+    return value[2];
+    if (index == 3)
+    return value[3];
+    if (index == 4)
+    return value[4];
+    return vec4(0.0);
+}
+
+float getFloatValue(float[5] value, int index){
+    if (index == 0)
+    return value[0];
+    if (index == 1)
+    return value[1];
+    if (index == 2)
+    return value[2];
+    if (index == 3)
+    return value[3];
+    if (index == 4)
+    return value[4];
+    return 0.0;
+}
+
+vec4 addBlend(vec4 src, vec4 dst) {
+    vec3 color = min(src.rgb + dst.rgb, vec3(1.0));
+    float alpha = src.a + (1.0 - src.a) * dst.a;
+    return vec4(color, alpha);
+}
+
+vec4 alphaBlend2(vec4 src, vec4 dst) {
+    vec3 c = src.rgb + dst.rgb * (1.0 - src.a);
+    float a = src.a + dst.a * (1.0 - src.a);
+    return vec4(c, a);
+}
+
+vec4 alphaBlend(vec4 base, vec4 blend) {
+    return vec4(base.rgb * (1.0 - blend.a) + blend.rgb * blend.a, blend.a + base.a * (1.0 - blend.a));
+}
+
+float calc_mask(vec2 uv, vec2 scale) {
+    vec2 texcoord = uv * uResolution;
+
+    vec2 stl = texcoord - vec2(0.74, 0.5) * uResolution;
+    // stl /= vec2(0.3046875, 1.0) * scale;
+    float left = (atan(stl.y, stl.x) / 3.1415926536 * 0.5 + 0.5);
+
+    vec2 str = texcoord - vec2(0.26, 0.5) * uResolution;
+    str.x = 1.0 - str.x;
+    // str /= vec2(0.3046875, 1.0) * scale;
+    float right = (atan(str.y, str.x) / 3.1415926536 * 0.5 + 0.5);
+
+    float t = mix(right, left, step(0.5, uv.x));
+
+    t = smoothstep(0.0, 1.0,(t - 0.5) / 0.1);
+
+    return sqrt(t);
+}
+
+vec4 beam(vec2 uv, Beam beam, vec2 scale) {
+    vec2 resolution = vec2(1080.0, 2400.0) * scale;
+    vec2 coord = uv * resolution;
+
+    vec2 point_f = vec2(beam.point_f.x, beam.point_f.y) / vec2(392.0, 871.0) * resolution;
+    float line_y = beam.line_y / 871.0 * resolution.y;
+    float e = beam.e;
+    float highband = beam.highband;
+    float scale_x = beam.scale_x;
+    vec2 transformed_coord = coord;
+    transformed_coord.x -= resolution.x / 2.0;
+    transformed_coord.x *= scale_x;
+    transformed_coord.x += resolution.x / 2.0;
+
+    float pf = length(point_f + vec2(0.0, line_y) - transformed_coord);
+    float pp = transformed_coord.y - line_y;
+    float a = max(1.0 - (pf / pp) / e, 0.0) * step(line_y, transformed_coord.y);
+
+    if (a < highband) {
+        a = a / highband;
+    } else {
+        a = pow(1.0 - (a - highband) / (1.0 - highband), 3.0);
+    }
+
+    a = smoothstep(0.0, 1.0, a);
+
+    a *= exp(-pf / 1080.0 * 2.0);
+
+    // dispersion
+    float x = mod(a + beam.shift, 1.0) * 3.0;
+    vec3 band = vec3(0.5);
+    if (x < 1.0) {
+        band.r += 1.0 - x;
+        band.g += x;
+    } else if (x < 2.0) {
+        x -= 1.0;
+        band.g += 1.0 - x;
+        band.b += x;
+    } else {
+        x -= 2.0;
+        band.b += 1.0 - x;
+        band.r += x;
+    }
+
+    band = mix(vec3(1.0), band, beam.dispersion);
+
+    return vec4(band * beam.color * a * beam.alpha, a * beam.alpha);
+}
+
+
+
+float pfv(float a, float b, float t) {
+    return mix(a, b, t);
+}
+
+float cpfv(float a, float b, float t) {
+    return pfv(a, b, clamp(t, 0.0, 1.0));
+}
+
+// -------------------- Helpers -------------------- //
+vec4 interpolate_color_bright(float t) {
+    // Define the color stops
+    const int numStops = 5;
+    vec4 color_stops[numStops];
+    color_stops[0] = vec4(0.612, 0.612, 0.612, 0.00);
+    color_stops[1] = vec4(0.612, 0.612, 0.612, 0.30);
+    color_stops[2] = vec4(0.000, 0.000, 0.000, 0.76);
+    color_stops[3] = vec4(0.039, 0.039, 0.039, 0.99);
+    color_stops[4] = vec4(0.000, 0.000, 0.000, 1.00);
+
+    float stops[numStops];
+    stops[0] = 0.00;
+    stops[1] = 0.38;
+    stops[2] = 0.80;
+    stops[3] = 0.89;
+    stops[4] = 1.00;
+
+    // Find the two stops to interpolate between
+    int i = 0;
+    for (int j = numStops -2; j > -1; j--) {
+        if (t > stops[j]) {
+            i = j;
+            break;
+        }
+    }
+
+    float t0 = getFloatValue(stops, i);
+    float t1 = getFloatValue(stops, i + 1);
+    vec4 color0 = getValue(color_stops, i);
+    vec4 color1 = getValue(color_stops, i + 1);
+
+    // Linear interpolation
+    float factor = (t - t0) / (t1 - t0);
+
+    return vec4(
+    mix(color0.rgb, color1.rgb, factor),
+    mix(color0.a, color1.a, factor)
+    );
+}
+
+vec4 interpolate_color_dark(float t) {
+    // Define the color stops
+    const int numStops = 5;
+    vec4 color_stops[numStops];
+    color_stops[0] = vec4(0.561, 0.561, 0.561, 0.10);
+    color_stops[1] = vec4(0.271, 0.271, 0.271, 0.28);
+    color_stops[2] = vec4(0.000, 0.000, 0.000, 0.76);
+    color_stops[3] = vec4(0.039, 0.039, 0.039, 0.99);
+    color_stops[4] = vec4(0.000, 0.000, 0.000, 1.00);
+
+    float stops[numStops];
+    stops[0] = 0.00;
+    stops[1] = 0.45;
+    stops[2] = 0.79;
+    stops[3] = 0.89;
+    stops[4] = 1.00;
+
+    // Find the two stops to interpolate between
+    int i = 0;
+    for (int j = numStops -2; j > -1; j--) {
+        if (t > stops[j]) {
+            i = j;
+            break;
+        }
+    }
+
+    float t0 = getFloatValue(stops, i);
+    float t1 = getFloatValue(stops, i + 1);
+    vec4 color0 = getValue(color_stops, i);
+    vec4 color1 = getValue(color_stops, i + 1);
+
+    // Linear interpolation
+    float factor = (t - t0) / (t1 - t0);
+
+    return vec4(
+    mix(color0.rgb, color1.rgb, factor),
+    mix(color0.a, color1.a, factor)
+    );
+}
+
+vec4 draw_flashlight_shadow(vec2 uv, vec2 scale) {
+    // float level = min((uBeam1Alpha + uBeam2Alpha + uBeam3Alpha + uBeam4Alpha + uBeam5Alpha + uBeam6Alpha) / 6.0, 1.0);
+    float level = 1.0;
+
+    vec2 texcoord = uv * uResolution;
+
+    // vec2 nst = uv;
+    // nst.x *= uResolution.x / uResolution.y;
+    // nst *= 20.0;
+    // float n = texture(uNoiseBwTex, nst).r;
+    // c.rgb = mix(c.rgb, c.rgb + vec3(10. / 255.), n);
+
+    vec2 stl = texcoord - vec2(0.74, 0.5) * uResolution;
+    stl /= vec2(0.3046875, 1.0) * scale;
+    float left = 1.0 - (atan(stl.y, stl.x) / 3.1415926536 * 0.5 + 0.5);
+    // left = mix(left, left+0.02, n);
+
+    vec2 str = texcoord - vec2(0.26, 0.5) * uResolution;
+    str.x = 1.0 - str.x;
+    str /= vec2(0.3046875, 1.0) * scale;
+    float right = 1.0 - (atan(str.y, str.x) / 3.1415926536 * 0.5 + 0.5);
+    // right = mix(right, right+0.02, n);
+
+    float t = mix(right, left, step(0.5, uv.x));
+
+    float a_bright = 0.42;
+    vec4 c_bright = interpolate_color_bright(t);
+    c_bright.a *= a_bright;
+    vec4 r_bright = c_bright;
+    // vec4 r_bright = blendAlpha(vec4(c_bright.rgb * c_bright.a, c_bright.a), vec4(0.0, 0.0, 0.0, 0.2));
+
+    float a_dark = 0.32;
+    vec4 c_dark = interpolate_color_dark(t);
+    c_dark.a *= a_dark;
+    vec4 r_dark = alphaBlend(vec4(c_dark.rgb * c_dark.a, c_dark.a), vec4(0.0, 0.0, 0.0, 0.13));
+    r_dark.rgb *= a_dark;
+
+    return mix(r_dark, r_bright, level);
+    // return vec4(r.rgb * r.a, r.a);
+}
+//float tanh(float x) {
+//    float e2x = exp(2.0 * x);
+//    return (e2x - 1.0) / (e2x + 1.0);
+//}
+
+float tanhmy(float x) {
+    x = clamp(x, -3.0, 3.0); // 限制输入范围
+    float x2 = x * x;
+    return x * (27.0 + x2) / (27.0 + 9.0 * x2);
+}
+vec4 main_beam(vec2 uv, Beam beam, vec2 scale) {
+    vec2 resolution = vec2(1080.0, 2400.0) * scale;
+    vec2 coord = uv * resolution;
+
+    vec2 point_f = vec2(beam.point_f.x, beam.point_f.y) / vec2(392.0, 871.0) * resolution;
+    float line_y = beam.line_y / 871.0 * resolution.y;
+    float e = beam.e;
+    float highband = beam.highband;
+    float scale_x = beam.scale_x;
+    vec2 transformed_coord = coord;
+    transformed_coord.x -= resolution.x / 2.0;
+    transformed_coord.x *= scale_x;
+    transformed_coord.x += resolution.x / 2.0;
+
+    float pf = length(point_f + vec2(0.0, line_y) - transformed_coord);
+    float pp = transformed_coord.y - line_y;
+    float a = max(1.0 - (pf / pp) / e, 0.0) * step(line_y, transformed_coord.y);
+
+    if (a < highband) {
+        a = a / highband;
+    } else {
+        a = pow(1.0 - (a - highband) / (1.0 - highband), 3.0);
+    }
+
+    // dispersion
+    float x = mod(a + beam.shift, 1.0) * 3.0;
+    vec3 band = vec3(0.5);
+    if (x < 1.0) {
+        band.r += 1.0 - x;
+        band.g += x;
+    } else if (x < 2.0) {
+        x -= 1.0;
+        band.g += 1.0 - x;
+        band.b += x;
+    } else {
+        x -= 2.0;
+        band.b += 1.0 - x;
+        band.r += x;
+    }
+
+    band = mix(vec3(1.0), band, beam.dispersion);
+
+    a = tanhmy(a);
+
+    a *= exp(-pf / 1080.0 * 2.0);
+
+    return vec4(band * beam.color * beam.alpha, a * beam.alpha);
+}
+
+vec4 screenBlend(vec4 src, vec4 dst) {
+    return vec4(
+    1.0 - (1.0 - src.r) * (1.0 - dst.r),
+    1.0 - (1.0 - src.g) * (1.0 - dst.g),
+    1.0 - (1.0 - src.b) * (1.0 - dst.b),
+    src.a + dst.a * (1.0 - src.a)
+    );
+}
+
+
+vec4 main(vec2 fragCoord){
+    vec2 vUv = fragCoord / uResolution;
+    vUv.y = 1. - vUv.y;  // 先反转UV到GL坐标，之后需要AGSL采样时再翻转
+    vUv.x = uRTL == 0? vUv.x:1. - vUv.x;
+    vec2 uv = vUv - uOffset;
+    vec2 uv2 = uv;
+    vec2 scale = vec2(1.0);
+    if (uResolution.y / uResolution.x > 2400.0 / 1080.0) {
+        scale.y *= uResolution.y / uResolution.x / (2400.0 / 1080.0);
+    } else {
+        scale.x *= uResolution.x / uResolution.y / (1080.0 / 2400.0);
+    }
+
+    uv2 -= 0.5;
+    uv2 *= scale;
+    uv2 /= canvas_scale;
+    uv2 += 0.5;
+
+    vec4 col = vec4(0.0);
+
+    float mask = calc_mask(uv2, scale);
+
+    col = draw_flashlight_shadow(uv2, scale) * mask;
+
+    vec2 st = uv;
+    st -= 0.5;
+    st /= canvas_scale;
+    st += 0.5;
+
+    Beam beam1 = Beam( uBeam1PointF, uBeam1LineY, uBeam1E, uBeam1Highband, uBeam1Color, uBeam1Alpha, uBeam1ScaleX, uBeam1Shift, uBeam1Dispersion );
+    Beam beam5 = Beam( uBeam5PointF, uBeam5LineY, uBeam5E, uBeam5Highband, uBeam5Color, uBeam5Alpha, uBeam5ScaleX, uBeam5Shift, uBeam5Dispersion );
+    Beam mainBeam = Beam( uBeam6PointF, uBeam6LineY, uBeam6E, uBeam6Highband, uBeam6Color, uBeam6Alpha, uBeam6ScaleX, uBeam6Shift, uBeam6Dispersion );
+
+    // beam #1
+    vec4 b1 = beam(st, beam1, scale) * mask;
+    col = addBlend(col, b1);
+
+    // beam #5
+    vec4 b5 = beam(st, beam5, scale) * mask;
+    col = addBlend(col, b5);
+
+    // main beam
+    vec4 bm = main_beam(st, mainBeam, scale) * mask * 0.9;
+
+    col = alphaBlend(col, bm);
+
+//    vec4 icon = uFlashlightUiIconTex.eval(vec2(vUv.x - uOffset.x - 0.11, 1.0 - (vUv.y - uOffset.y + 0.15)) * uIconSize);
+
+    vec2 uv4 = vUv - (uOffset - vec2(-0.11, 0.15));
+    uv4.x -= 0.39;
+    uv4.x *= (uResolution.x / uResolution.y) / (108.0 / 84.0);
+    uv4.x += 0.39;
+
+    vec4 icon = uFlashlightUiIconTex.eval(vec2(uv4.x, 1.0 - uv4.y) * uIconSize);
+
+//    col = alphaBlend(col, icon);
+    if (icon.a > 0.01) { icon.rgb /= icon.a; }
+    col = alphaBlend2(icon, col);
+
+    col = clamp(col, 0.0, 1.0);
+    col.rgb *= col.a;
+
+    vec2 uv3 = vUv - (uOffset - vec2(-0.11, 0.15));
+
+    uv3.x -= 0.39;
+    uv3.x *= (uResolution.x / uResolution.y) / (108.0 / 84.0);
+    uv3.x += 0.39;
+
+    uv3.x = (uv3.x + 0.26) / (1.04 + 0.26);
+    uv3.y = (uv3.y - 0.10) / (1.52 - 0.10);
+
+    uv3.y -= mix(-0.2, 0.0, uEffectProgress);
+
+    vec4 glow = uFlashlightUiGlowTex.eval(vec2(uv3.x, 1.0 - uv3.y) * uGlowSize)*uEffectProgress;
+    col = screenBlend(glow, col);
+    return col;
+}

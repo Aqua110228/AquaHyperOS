@@ -1,0 +1,16 @@
+<svg width="128" height="96" viewBox="0 0 128 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="2" y="3" width="124" height="88" rx="15" stroke="#666666" stroke-width="4"/>
+<path d="M25 73.44C25 71.162 25 70.0231 25.4503 69.1561C25.8298 68.4255 26.4255 67.8298 27.1561 67.4503C28.0231 67 29.162 67 31.44 67H97.56C99.838 67 100.977 67 101.844 67.4503C102.574 67.8298 103.17 68.4255 103.55 69.1561C104 70.0231 104 71.162 104 73.44V76.56C104 78.838 104 79.9769 103.55 80.8439C103.17 81.5745 102.574 82.1702 101.844 82.5497C100.977 83 99.838 83 97.56 83H31.44C29.162 83 28.0231 83 27.1561 82.5497C26.4255 82.1702 25.8298 81.5745 25.4503 80.8439C25 79.9769 25 78.838 25 76.56V73.44Z" fill="#424242"/>
+<path d="M59 96H69V62.5H59L59 96Z" fill="url(#paint0_linear_429_39830)" fill-opacity="0.3"/>
+<foreignObject x="55.7179" y="54.7179" width="16.5641" height="16.5641"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(0.64px);clip-path:url(#bgblur_0_429_39830_clip_path);height:100%;width:100%"></div></foreignObject><ellipse data-figma-bg-blur-radius="1.28205" cx="64" cy="63" rx="7" ry="7" transform="rotate(90 64 63)" fill="#3482FF" fill-opacity="0.15"/>
+<foreignObject x="39" y="38" width="50" height="50"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(10px);clip-path:url(#bgblur_1_429_39830_clip_path);height:100%;width:100%"></div></foreignObject><circle data-figma-bg-blur-radius="20" cx="5" cy="5" r="5" transform="matrix(1 0 0 -1 59 68)" fill="#3482FF" fill-opacity="0.8"/>
+<defs>
+<clipPath id="bgblur_0_429_39830_clip_path" transform="translate(-55.7179 -54.7179)"><ellipse cx="64" cy="63" rx="7" ry="7" transform="rotate(90 64 63)"/>
+</clipPath><clipPath id="bgblur_1_429_39830_clip_path" transform="translate(-39 -38)"><circle cx="5" cy="5" r="5" transform="matrix(1 0 0 -1 59 68)"/>
+</clipPath><linearGradient id="paint0_linear_429_39830" x1="64" y1="60.4694" x2="63.9651" y2="96" gradientUnits="userSpaceOnUse">
+<stop offset="0.0362492" stop-color="#3482FF" stop-opacity="0.04"/>
+<stop offset="0.118213" stop-color="#3482FF" stop-opacity="0.8"/>
+<stop offset="1" stop-color="#3482FF" stop-opacity="0"/>
+</linearGradient>
+</defs>
+</svg>

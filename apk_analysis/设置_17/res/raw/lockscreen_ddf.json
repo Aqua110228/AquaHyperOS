@@ -1,0 +1,163 @@
+{
+  "type": "urn:aiot-spec-v3:com.mi.phones:device:phone:0:1.0",
+  "description": "",
+  "protocol-version": "3.0",
+  "class": "MiPhone",
+  "dynamic": -1,
+  "ddfid": 11927553,
+  "data-type-defs":
+  {
+    "file-info":
+    {
+      "data-type": "struct",
+      "fields":
+      {
+        "autoLockScreenTimeEntry":
+        {
+          "format": "String",
+          "description": "锁屏时间名"
+        },
+        "autoLockScreenTimeValue":
+        {
+          "format": "String",
+          "description": "锁屏时间值"
+        },
+        "selected":
+        {
+          "format": "bool",
+          "description": "是否选中"
+        }
+      }
+    },
+    "file-list":
+    {
+      "data-type": "array",
+      "items":
+      {
+        "item":
+        {
+          "format": "$ref/data-type-defs/file-info"
+        }
+      }
+    }
+  },
+  "modules": [
+    {
+      "iid": 1,
+      "type": "urn:aiot-spec-v3:com.mi.phones:module:[com.android.settings]:0:1.0",
+      "description": "settings module",
+      "name": "com.android.settings",
+      "services": [
+        {
+          "iid": 1,
+          "type": "urn:aiot-spec-v3:com.mi.phones:service:[com.android.settings/lockscreen]:0:1.0",
+          "description": "lockscreen service",
+          "name": "lockscreen",
+          "actions": [
+            {
+              "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/lockscreen/openlockscreensettings]:0:1.0",
+              "description": "打开锁屏设置页面",
+              "in": [
+              ],
+              "out": [
+                {
+                  "format": "int32",
+                  "name": "status",
+                  "description": "执行状态",
+                  "value-list": [
+                    {
+                      "value": 0,
+                      "description": "打开成功"
+                    },
+                    {
+                      "value": -1,
+                      "description": "打开失败"
+                    },
+                    {
+                      "value": -10,
+                      "description": "已在锁屏设置页面"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/lockscreen/setlockscreentime]:0:1.0",
+              "description": "设置锁屏时间",
+              "in":
+              [
+                {
+                  "format": "String",
+                  "name": "autoLockScreenTime",
+                  "description": "锁屏时间"
+                }
+              ],
+              "out":
+              [
+                {
+                  "format": "int32",
+                  "name": "status",
+                  "description": "执行状态",
+                  "value-list":
+                  [
+                    {
+                      "value": 0,
+                      "description": "执行成功"
+                    },
+                    {
+                      "value": -1,
+                      "description": "执行失败"
+                    },
+                    {
+                      "value": -10,
+                      "description": "已经是该锁屏时间"
+                    },
+                    {
+                      "value": -100,
+                      "description": "锁屏时间无效"
+                    }
+                  ]
+                },
+                {
+                  "format": "$ref/data-type-defs/file-list",
+                  "name": "list",
+                  "description": "支持的锁屏时间列表"
+                }
+              ]
+            },
+            {
+              "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/lockscreen/getlockscreentime]:0:1.0",
+              "description": "查询锁屏时间",
+              "in": [
+              ],
+              "out":
+              [
+                {
+                  "format": "int32",
+                  "name": "status",
+                  "description": "执行状态",
+                  "value-list":
+                  [
+                    {
+                      "value": 0,
+                      "description": "执行成功"
+                    },
+                    {
+                      "value": -1,
+                      "description": "执行失败"
+                    }
+                  ]
+                },
+                {
+                  "format": "$ref/data-type-defs/file-list",
+                  "name": "list",
+                  "description": "支持的锁屏时间列表"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="118" height="133" viewBox="0 0 118 133">
+  <defs>
+    <linearGradient id="g5983cc48" x1="78.1682" y1="124.4616" x2="46.9982" y2="124.2312" gradientUnits="userSpaceOnUse">
+      <stop offset="0.0362492" stop-color="#0D84FF" stop-opacity="0.0392" />
+      <stop offset="0.118213" stop-color="#0D84FF" stop-opacity="0.8000" />
+      <stop offset="1" stop-color="#0D84FF" stop-opacity="0.0000" />
+    </linearGradient>
+  </defs>
+  <path d="M8,1.5L110,1.5A6.5,6.5 0,0 1,116.5 8L116.5,125A6.5,6.5 0,0 1,110 131.5L8,131.5A6.5,6.5 0,0 1,1.5 125L1.5,8A6.5,6.5 0,0 1,8 1.5z" fill="#ffffff" fill-opacity="0.15" />
+  <path d="M8,1.5L110,1.5A6.5,6.5 0,0 1,116.5 8L116.5,125A6.5,6.5 0,0 1,110 131.5L8,131.5A6.5,6.5 0,0 1,1.5 125L1.5,8A6.5,6.5 0,0 1,8 1.5z" fill="#000000" fill-opacity="0.0" stroke="#585858" stroke-width="3" />
+  <path d="M44,123L74,123A1,1 0,0 1,75 124L75,124A1,1 0,0 1,74 125L44,125A1,1 0,0 1,43 124L43,124A1,1 0,0 1,44 123z" fill="#878787" />
+  <path d="M-11,11L70,11A3,3 0,0 1,73 14L73,107A3,3 0,0 1,70 110L-11,110A3,3 0,0 1,-14 107L-14,14A3,3 0,0 1,-11 11z" fill="#494949" fill-opacity="0.48" />
+  <path d="M85,15L161,15A3,3 0,0 1,164 18L164,103A3,3 0,0 1,161 106L85,106A3,3 0,0 1,82 103L82,18A3,3 0,0 1,85 15z" fill="#494949" fill-opacity="0.25" />
+  <path d="M77,118l-0,12l-30,0l-0,-12z" fill="url(#g5983cc48)" fill-opacity="0.3" />
+  <path d="M77,124m0,6a6,6 0,1 1,0 -12a6,6 0,1 1,0 12" fill="#0D84FF" fill-opacity="0.8" />
+</svg>

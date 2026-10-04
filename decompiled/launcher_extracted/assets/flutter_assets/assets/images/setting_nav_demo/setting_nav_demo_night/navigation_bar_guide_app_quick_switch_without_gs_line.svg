@@ -1,0 +1,15 @@
+<svg width="64" height="142" viewBox="0 0 64 142" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="1.5" y="1.5" width="61" height="135" rx="12" stroke="#666666" stroke-width="3"/>
+<path d="M22 29.66C22 26.2431 22 24.5346 22.6755 23.2342C23.2448 22.1383 24.1383 21.2448 25.2342 20.6755C26.5346 20 28.2431 20 31.66 20H61V118H31.66C28.2431 118 26.5346 118 25.2342 117.324C24.1383 116.755 23.2448 115.862 22.6755 114.766C22 113.465 22 111.757 22 108.34V29.66Z" fill="#424242"/>
+<path d="M3 20H8.84003C12.257 20 13.9654 20 15.2659 20.6755C16.3617 21.2448 17.2553 22.1383 17.8245 23.2342C18.5 24.5346 18.5 26.2431 18.5 29.66V108.34C18.5 111.757 18.5 113.465 17.8245 114.766C17.2553 115.862 16.3617 116.755 15.2659 117.324C13.9654 118 12.257 118 8.84003 118H3V20Z" fill="#424242"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M45.7805 119.57C35.9673 123.475 28.1525 131.346 24.322 141.196L15.002 137.571C19.8393 125.132 29.6919 115.209 42.083 110.278L45.7805 119.57Z" fill="url(#paint0_linear_4275_35093)"/>
+<foreignObject x="26.25" y="97.5" width="35" height="35"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(6.25px);clip-path:url(#bgblur_0_4275_35093_clip_path);height:100%;width:100%"></div></foreignObject><circle data-figma-bg-blur-radius="12.5" cx="43.75" cy="115" r="5" transform="rotate(90 43.75 115)" fill="#3482FF" fill-opacity="0.8"/>
+<defs>
+<clipPath id="bgblur_0_4275_35093_clip_path" transform="translate(-26.25 -97.5)"><circle cx="43.75" cy="115" r="5" transform="rotate(90 43.75 115)"/>
+</clipPath><linearGradient id="paint0_linear_4275_35093" x1="45.7805" y1="116.976" x2="21.3267" y2="132.147" gradientUnits="userSpaceOnUse">
+<stop stop-color="#3482FF" stop-opacity="0.21"/>
+<stop offset="0.0765267" stop-color="#3482FF" stop-opacity="0.415563"/>
+<stop offset="1" stop-color="#3482FF" stop-opacity="0"/>
+</linearGradient>
+</defs>
+</svg>

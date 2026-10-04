@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#CDDC39"
+    android:orientation="horizontal"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        tools:srcCompat="@drawable/flutter_logo" />
+
+    <LinearLayout
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:background="#FFC107"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_a"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="#4CAF50"
+            android:padding="10dp"
+            android:text="Text A" />
+
+        <Button
+            android:id="@+id/btn_a"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ButtonA" />
+
+    </LinearLayout>
+</LinearLayout>

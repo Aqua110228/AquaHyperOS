@@ -1,0 +1,67 @@
+{
+    "type": "urn:aiot-spec-v3:com.mi.phones:device:phones:0:1.0",
+    "description": "",
+    "protocol-version": "3.0",
+    "class": "MiPhone",
+    "dynamic": 0,
+    "ddfid": 7798786,
+    "modules": [
+      {
+      "iid": 1,
+      "type": "urn:aiot-spec-v3:com.mi.phones:module:[com.android.settings]:0:1.0",
+      "description": "settings module",
+      "name": "com.android.settings",
+      "services": [
+        {
+        "iid": 1,
+        "type": "urn:aiot-spec-v3:com.mi.phones:service:[com.android.settings/wifi]:0:1.0",
+        "description": "wifi service",
+        "name": "wifi",
+        "actions": [
+            {
+                "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/wifi/easywificonnect]:0:1.0",
+                "description": "一键连接Wi-Fi",
+                "in": [
+                  {
+                    "format": "string",
+                    "name": "ssid",
+                    "description": "Wi-Fi名称"
+                  },
+                  {
+                    "format": "string",
+                    "name": "password",
+                    "description": "Wi-Fi密码"
+                  }
+                ],
+                "out": [
+                  {
+                    "format": "int32",
+                    "name": "status",
+                    "description": "执行状态",
+                    "value-list": [
+                      {
+                        "value": 0,
+                        "description": "连接成功"
+                      },
+                      {
+                        "value": -1,
+                        "description": "连接失败，超时或其他失败异常"
+                      },
+                      {
+                        "value": -2,
+                        "description": "连接失败，Wi-Fi未找到，无效的Wi-Fi名称"
+                      },
+                      {
+                        "value": -10,
+                        "description": "连接失败，当前Wi-Fi已经连接"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+    }
+   ]
+ }

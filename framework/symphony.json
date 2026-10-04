@@ -1,0 +1,47 @@
+{
+  "name": "AquaHyperOS",
+  "packageName": "com.aqua.hyperos",
+  "versionName": "1.0.0",
+  "versionCode": 100,
+  "minFrameworkVersion": "1.0.0",
+  "description": "澎湃OS官改核心模块",
+  "author": "AquaHyperOS Team",
+  "scope": [
+    "com.android.systemui",
+    "android",
+    "com.miui.home",
+    "com.android.settings"
+  ],
+  "hooks": [
+    {
+      "name": "StatusBarHook",
+      "enabled": true,
+      "targetPackage": "com.android.systemui",
+      "description": "状态栏图标和样式修改"
+    },
+    {
+      "name": "CorePatchHook",
+      "enabled": true,
+      "targetPackage": "android",
+      "description": "系统核心破解功能"
+    },
+    {
+      "name": "LauncherHook",
+      "enabled": true,
+      "targetPackage": "com.miui.home",
+      "description": "桌面启动器增强"
+    },
+    {
+      "name": "SettingsInjectionHook",
+      "enabled": true,
+      "targetPackage": "com.android.settings",
+      "description": "设置页面注入 - 添加配置入口"
+    },
+    {
+      "name": "SettingsUIHook",
+      "enabled": true,
+      "targetPackage": "com.android.settings",
+      "description": "设置界面 - 配置功能实现"
+    }
+  ]
+}

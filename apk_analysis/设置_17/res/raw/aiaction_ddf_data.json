@@ -1,0 +1,433 @@
+{
+  "type": "urn:aiot-spec-v3:com.mi.phones:device:phones:0:1.0",
+  "description": "settings ddf",
+  "protocol-version": "3.0",
+  "class": "MiPhone",
+  "dynamic": 0,
+  "ddfid": 8126468,
+  "data-type-defs": {
+  },
+  "modules": [
+    {
+      "iid": 1,
+      "type": "urn:aiot-spec-v3:com.mi.phones:module:[com.android.settings]:0:1.0",
+      "description": "Settings module",
+      "name": "com.android.settings",
+      "services": [
+        {
+          "iid": 1,
+          "type": "urn:aiot-spec-v3:com.mi.phones:service:[com.android.settings/uimode]:0:1.0",
+          "description": "uimode service",
+          "name": "uimode",
+          "actions": [
+            {
+              "iid": 1,
+              "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/uimode/night_switch]:0:1.0",
+              "description": "系统深色模式开关",
+              "in": [
+                {
+                  "name": "enable",
+                  "description": "开关激活状态",
+                  "format": "boolean"
+                }
+              ],
+              "out": [
+                {
+                  "name": "status",
+                  "description": "切换状态",
+                  "format": "int32",
+                  "value-list": [
+                    {
+                      "value": 0,
+                      "description": "切换成功"
+                    },
+                    {
+                      "value": -1,
+                      "description": "切换失败，开关已是目标状态"
+                    },
+                    {
+                      "value": -2,
+                      "description": "切换失败，分身空间的深色模式跟随主空间"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "iid": 2,
+              "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/uimode/night_auto_switch]:0:1.0",
+              "description": "自动深色模式开关",
+              "in": [
+                {
+                  "name": "enable",
+                  "description": "开关激活状态",
+                  "format": "boolean"
+                }
+              ],
+              "out": [
+                {
+                  "name": "status",
+                  "description": "切换状态",
+                  "format": "int32",
+                  "value-list": [
+                    {
+                      "value": 0,
+                      "description": "切换成功"
+                    },
+                    {
+                      "value": -1,
+                      "description": "切换失败，开关已是目标状态"
+                    },
+                    {
+                      "value": -2,
+                      "description": "切换失败，分身空间的深色模式跟随主空间"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "iid": 3,
+              "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/uimode/jump_night_mode_settings]:0:1.0",
+              "description": "跳转至深色模式设置页",
+              "in": [],
+              "out": [
+                {
+                  "name": "status",
+                  "description": "跳转状态",
+                  "format": "int32",
+                  "value-list": [
+                    {
+                      "value": 0,
+                      "description": "跳转成功"
+                    },
+                    {
+                      "value": -1,
+                      "description": "跳转失败"
+                    },
+                    {
+                      "value": -10,
+                      "description": "已处于当前页面"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "iid": 4,
+              "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/uimode/query_uimode]:0:1.0",
+              "description": "查询系统深色模式状态",
+              "in": [],
+              "out": [
+                {
+                  "name": "status",
+                  "description": "执行状态",
+                  "format": "int32",
+                  "value-list": [
+                    {
+                      "value": 0,
+                      "description": "执行成功"
+                    },
+                    {
+                      "value": -1,
+                      "description": "执行失败"
+                    }
+                  ]
+                },
+                {
+                  "name": "data",
+                  "description": "深色模式状态",
+                  "format": "int32",
+                  "value-list": [
+                    {
+                      "value": 0,
+                      "description": "浅色模式"
+                    },
+                    {
+                      "value": 1,
+                      "description": "深色模式"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "iid": 2,
+          "type": "urn:aiot-spec-v3:com.mi.phones:service:[com.android.settings/surfaceflinger]:0:1.0",
+          "description": "surfaceflinger service",
+          "name": "surfaceflinger",
+          "actions": [
+            {
+              "iid": 1,
+              "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/surfaceflinger/advanced_textures_switch]:0:1.0",
+              "description": "高级材质开关",
+              "in": [
+                {
+                  "name": "enable",
+                  "description": "开关激活状态",
+                  "format": "boolean"
+                }
+              ],
+              "out": [
+                {
+                  "name": "status",
+                  "description": "切换状态",
+                  "format": "int32",
+                  "value-list": [
+                    {
+                      "value": 0,
+                      "description": "切换成功"
+                    },
+                    {
+                      "value": -1,
+                      "description": "切换失败，开关已是目标状态"
+                    },
+                    {
+                      "value": -2,
+                      "description": "此设备不支持高级材质"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "iid": 3,
+          "type": "urn:aiot-spec-v3:com.mi.phones:service:[com.android.settings/display]:0:1.0",
+          "description": "display service",
+          "name": "display",
+          "actions": [
+            {
+              "iid": 1,
+              "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/display/auto_brightness_switch]:0:1.0",
+              "description": "自动亮度开关",
+              "in": [
+                {
+                  "name": "enable",
+                  "description": "开关激活状态",
+                  "format": "boolean"
+                }
+              ],
+              "out": [
+                {
+                  "description": "执行状态",
+                  "name":"status",
+                  "format": "int32",
+                  "value-list": [
+                    {
+                      "value": 0,
+                      "description": "执行成功"
+                    },
+                    {
+                      "value": -1,
+                      "description": "执行失败，当前自动亮度已为目标状态"
+                    },
+                    {
+                      "value": -2,
+                      "description": "执行失败，当前状态不支持开/关自动亮度"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "iid": 2,
+              "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/display/sunlight_mode_switch]:0:1.0",
+              "description": "阳光模式开关",
+              "in": [
+                {
+                  "name": "enable",
+                  "description": "开关激活状态",
+                  "format": "boolean"
+                }
+              ],
+              "out": [
+                {
+                  "description": "执行状态",
+                  "name":"status",
+                  "format": "int32",
+                  "value-list": [
+                    {
+                      "value": 0,
+                      "description": "执行成功"
+                    },
+                    {
+                      "value": -1,
+                      "description": "执行失败，当前阳光模式已为目标状态"
+                    },
+                    {
+                      "value": -2,
+                      "description": "执行失败，当前状态不支持开/关阳光模式"
+                    },
+                    {
+                      "value": -3,
+                      "description": "执行失败，关闭自动亮度后才能开/关阳光模式"
+                    },
+                    {
+                      "value": -4,
+                      "description": "执行失败，低电状态无法开/关阳光模式"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "iid": 3,
+              "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/display/set_screen_brightness]:0:1.0",
+              "description": "设置屏幕亮度",
+              "in": [
+                {
+                  "name": "value",
+                  "description": "屏幕亮度设置值",
+                  "value-range": [
+                      0,
+                      100,
+                      1
+                  ],
+                  "format": "int32"
+                }
+              ],
+              "out": [
+                {
+                  "description": "执行状态",
+                  "name":"status",
+                  "format": "int32",
+                  "value-list": [
+                    {
+                      "value": 0,
+                      "description": "执行成功"
+                    },
+                    {
+                      "value": -1,
+                      "description": "执行失败，当前屏幕亮度已为目标亮度"
+                    },
+                    {
+                      "value": -2,
+                      "description": "执行失败，当前状态不支持亮度设置"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "iid": 4,
+              "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/display/query_screen_brightness]:0:1.0",
+              "description": "查询屏幕亮度",
+              "in": [
+              ],
+              "out": [
+                {
+                  "description": "执行状态",
+                  "name":"status",
+                  "format": "int32",
+                  "value-list": [
+                    {
+                      "value": 0,
+                      "description": "执行成功"
+                    },
+                    {
+                      "value": -1,
+                      "description": "执行失败"
+                    }
+                  ]
+                },
+                {
+                  "description": "屏幕亮度查询结果",
+                  "name":"data",
+                  "format": "int32",
+                  "value-range": [
+                    0,
+                    100,
+                    1
+                  ]
+                }
+              ]
+            },
+            {
+              "iid": 5,
+              "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/display/on_off_display]:0:1.0",
+              "description": "亮灭屏操作",
+              "in": [
+                {
+                  "name": "value",
+                  "description": "亮灭屏操作",
+                  "format": "int32",
+                  "value-list": [
+                    {
+                      "value": 0,
+                      "description": "关闭后排控制屏"
+                    },
+                    {
+                      "value": 1,
+                      "description": "打开后排控制屏"
+                    }
+                  ]
+                }
+              ],
+              "out": [
+                {
+                  "name": "status",
+                  "value": "执行状态",
+                  "description": "action执行结果",
+                  "format": "int32",
+                  "value-list": [
+                    {
+                      "value": 0,
+                      "description": "执行成功"
+                    },
+                    {
+                      "value": -1,
+                      "description": "执行失败,已经处于目标状态"
+                    },
+                    {
+                      "value": -2,
+                      "description": "执行失败，当前状态不支持开/关亮屏"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "iid": 4,
+          "type": "urn:aiot-spec-v3:com.mi.phones:service:[com.android.settings/settings]:0:1.0",
+          "description": "settings service",
+          "name": "settings",
+          "actions": [
+            {
+              "iid": 1,
+              "type": "urn:aiot-spec-v3:com.mi.phones:action:[com.android.settings/settings/jump_display_settings]:0:1.0",
+              "description": "跳转到显示与亮度设置页",
+              "in": [],
+              "out": [
+                {
+                  "name": "status",
+                  "description": "跳转状态",
+                  "format": "int32",
+                  "value-list": [
+                    {
+                      "value": 0,
+                      "description": "跳转成功"
+                    },
+                    {
+                      "value": -1,
+                      "description": "跳转失败"
+                    },
+                    {
+                      "value": -10,
+                      "description": "已处于当前页面"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

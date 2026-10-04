@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+  <circle cx="10.866" cy="10.991" r="10.5" fill="#ffffff"/>
+  <circle cx="10.866" cy="10.991" r="10.318" fill="none" stroke="#000000" stroke-opacity="0.1" stroke-width="0.363636"/>
+  <defs>
+    <linearGradient id="g1" x1="7.589" y1="6.11" x2="7.589" y2="12.919" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7986F9"/>
+      <stop offset="1" stop-color="#BA8FFF"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="15.328" y1="7.373" x2="15.328" y2="13.712" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#D4E632"/>
+      <stop offset="1" stop-color="#40E6E6"/>
+    </linearGradient>
+    <linearGradient id="g3" x1="11.381" y1="13.539" x2="11.381" y2="17.717" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FF6996"/>
+      <stop offset="1" stop-color="#FFC281"/>
+    </linearGradient>
+  </defs>
+  <circle cx="7.589" cy="9.515" r="3.405" fill="url(#g1)"/>
+  <circle cx="15.328" cy="10.443" r="2.476" fill="url(#g2)"/>
+  <circle cx="11.381" cy="15.628" r="2.089" fill="url(#g3)"/>
+</svg>
