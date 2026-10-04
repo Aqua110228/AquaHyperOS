@@ -29,7 +29,7 @@ jobs:
       run: yes | sdkmanager --licenses || true
     
     - name: 构建 Release APK
-      run: ./gradlew assembleRelease --stacktrace
+      run: ./gradlew assembleRelease --stacktrace --gradle-version=8.2
     
     - name: 获取版本号
       id: version
