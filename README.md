@@ -104,6 +104,12 @@ app/src/main/java/com/aqua/hyperos/
 
 ## 版本历史
 
+### 26w40d (2024-10-04)
+- 添加 LSPosed 默认作用域配置
+- 自动勾选 android、systemui、settings 作用域
+- 无需手动选择，安装后直接可用
+- 优化用户体验
+
 ### 26w40c (2024-10-04)
 - 修复 xposed_init 文件格式问题
 - 优化 APK 打包流程，确保 assets 正确包含

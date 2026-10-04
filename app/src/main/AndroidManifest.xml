@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.aqua.hyperos"
-    android:versionCode="3"
-    android:versionName="26w40c">
+    android:versionCode="4"
+    android:versionName="26w40d">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -31,6 +31,11 @@
         <meta-data
             android:name="xposedminversion"
             android:value="93" />
+        
+        <!-- LSPosed 默认作用域 -->
+        <meta-data
+            android:name="xposedscope"
+            android:resource="@array/xposed_scope" />
 
     </application>
 

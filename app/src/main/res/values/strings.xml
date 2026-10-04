@@ -1,4 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">AquaHyperOS</string>
     <string name="module_desc">HyperOS 深度定制模块</string>
+    
+    <!-- LSPosed 默认作用域 -->
+    <string-array name="xposed_scope">
+        <item>android</item>
+        <item>com.android.systemui</item>
+        <item>com.android.settings</item>
+    </string-array>
 </resources>
