@@ -152,15 +152,30 @@ jobs:
       run: |
         mkdir -p build/apk
         cd build/apk
+        
+        # 复制 DEX
         cp ../dex/classes.dex .
-        cp ../../app/src/main/AndroidManifest.xml .
-        mkdir -p res
-        cp -r ../../app/src/main/res/* res/ 2>/dev/null || true
-        zip -r AquaHyperOS-unsigned.apk classes.dex AndroidManifest.xml res/
-        zipalign -f 4 AquaHyperOS-unsigned.apk AquaHyperOS-aligned.apk
+        
+        # 使用 aapt 打包资源和 Manifest
+        $ANDROID_HOME/build-tools/30.0.3/aapt package -f -M ../../app/src/main/AndroidManifest.xml -S ../../app/src/main/res -I $ANDROID_HOME/platforms/android-30/android.jar -F base.apk
+        
+        # 添加 DEX 到 APK
+        $ANDROID_HOME/build-tools/30.0.3/aapt add base.apk classes.dex
+        
+        # 对齐
+        zipalign -f 4 base.apk AquaHyperOS-aligned.apk
+        
+        # 生成签名密钥
         keytool -genkey -v -keystore release.keystore -alias release -keyalg RSA -keysize 2048 -validity 10000 -storepass android -keypass android -dname "CN=AquaHyperOS"
-        apksigner sign --ks release.keystore --ks-pass pass:android --key-pass pass:android --out AquaHyperOS.apk AquaHyperOS-aligned.apk
+        
+        # 签名（指定 minSdkVersion）
+        apksigner sign --ks release.keystore --ks-pass pass:android --key-pass pass:android --min-sdk-version 30 --out AquaHyperOS.apk AquaHyperOS-aligned.apk
+        
+        # 移动到 build 目录
         mv AquaHyperOS.apk ../../
+        
+        # 验证 APK
+        ls -lh ../../AquaHyperOS.apk
     
     - name: 上传 APK
       uses: actions/upload-artifact@v4
