@@ -22,24 +22,16 @@ android {
     }
     
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     
     kotlinOptions {
-        jvmTarget = '17'
-    }
-
-    sourceSets {
-        main {
-            java.srcDirs = ['src/main/java', 'src/main/kotlin', '../module']
-            manifest.srcFile 'src/main/AndroidManifest.xml'
-            res.srcDirs = ['src/main/res', '../module/res']
-        }
+        jvmTarget = '1.8'
     }
 }
 
 dependencies {
     compileOnly 'de.robv.android.xposed:api:82'
-    implementation 'androidx.preference:preference-ktx:1.2.1'
+    implementation 'androidx.preference:preference:1.1.1'
 }
