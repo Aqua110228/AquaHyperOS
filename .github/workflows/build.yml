@@ -181,13 +181,13 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: AquaHyperOS-APK
-        path: build/AquaHyperOS.apk
+        path: AquaHyperOS.apk
         retention-days: 90
     
     - name: 上传 APK 到 Release
       uses: softprops/action-gh-release@v1
       with:
         tag_name: beta-26w01a
-        files: build/AquaHyperOS.apk
+        files: AquaHyperOS.apk
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
