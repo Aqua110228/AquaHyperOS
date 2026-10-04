@@ -150,14 +150,19 @@ jobs:
     
     - name: 打包 APK
       run: |
-        mkdir -p build/apk
+        mkdir -p build/apk/assets
         cd build/apk
         
         # 复制 DEX
         cp ../dex/classes.dex .
         
+        # 复制 xposed_init 到 assets
+        cp ../../app/src/main/assets/xposed_init assets/
+        echo "✅ xposed_init 已复制"
+        cat assets/xposed_init
+        
         # 使用 aapt 打包资源和 Manifest
-        $ANDROID_HOME/build-tools/30.0.3/aapt package -f -M ../../app/src/main/AndroidManifest.xml -S ../../app/src/main/res -I $ANDROID_HOME/platforms/android-30/android.jar -F base.apk
+        $ANDROID_HOME/build-tools/30.0.3/aapt package -f -M ../../app/src/main/AndroidManifest.xml -S ../../app/src/main/res -A assets -I $ANDROID_HOME/platforms/android-30/android.jar -F base.apk
         
         # 添加 DEX 到 APK
         $ANDROID_HOME/build-tools/30.0.3/aapt add base.apk classes.dex
