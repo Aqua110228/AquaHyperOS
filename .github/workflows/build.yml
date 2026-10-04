@@ -37,10 +37,25 @@ jobs:
         echo "$ANDROID_HOME/platform-tools" >> $GITHUB_PATH
         echo "$ANDROID_HOME/build-tools/30.0.3" >> $GITHUB_PATH
     
+    - name: 下载依赖
+      run: |
+        mkdir -p libs
+        
+        # 下载 Xposed API
+        wget https://api-github.jitpack.io/com/github/rovo89/XposedBridge/82/XposedBridge-82.jar -O libs/xposed-api.jar
+        
+        # 下载 AndroidX Preference
+        wget https://repo1.maven.org/maven2/androidx/preference/preference/1.1.1/preference-1.1.1.aar -O libs/preference.aar
+        
+        # 解压 AAR 获取 classes.jar
+        cd libs
+        unzip -q preference.aar classes.jar
+        mv classes.jar preference.jar
+    
     - name: 下载 Kotlin 编译器
       run: |
         wget https://github.com/JetBrains/kotlin/releases/download/v1.8.0/kotlin-compiler-1.8.0.zip
-        unzip kotlin-compiler-1.8.0.zip
+        unzip -q kotlin-compiler-1.8.0.zip
         export PATH=$PATH:$PWD/kotlinc/bin
         echo "$PWD/kotlinc/bin" >> $GITHUB_PATH
     
@@ -50,8 +65,9 @@ jobs:
         
         # 编译所有 Kotlin 文件
         kotlinc \
-          -classpath "$ANDROID_HOME/platforms/android-30/android.jar" \
+          -classpath "$ANDROID_HOME/platforms/android-30/android.jar:libs/xposed-api.jar:libs/preference.jar" \
           -d build/classes \
+          -jvm-target 1.8 \
           $(find app/src/main/java -name "*.kt")
     
     - name: 编译 DEX
