@@ -1,50 +1,39 @@
-# AquaHyperOS Changelog
+# AquaHyperOS 更新日志
 
 ## v26w40f (2026-10-05)
 
-### Fixed
-- Fixed app crash on startup
-- Removed storage permissions (no longer needed)
-- Silent Root permission check (automatic, no popup)
-- Removed Logger dependency that caused crashes
-- Improved app stability
+### 修复
+- 修复应用启动崩溃问题
+- 移除所有权限申请（不再请求存储权限）
+- 移除日志功能以提升稳定性
 
-### Changed
-- Root permission now obtained silently
-- Show Root permission page if Root unavailable
-- Simplified permission model
-- Version updated to 26w40f
+### 变更
+- Root 权限静默检查（无弹窗）
+- 版本更新至 26w40f
 
-### Technical
-- Removed WRITE_EXTERNAL_STORAGE permission
-- Removed READ_EXTERNAL_STORAGE permission
-- Silent su command execution
-- No more permission popups
+### 技术细节
+- 移除 Logger 依赖
+- AndroidManifest 无 uses-permission
+- 优化启动流程
 
 ---
 
 ## v26w40e (2026-10-04)
 
-### Added
-- Desktop launcher mode
-- Full Xposed module support
-- LSPosed integration
-- Status bar customization
-- Control center customization
-- Lock screen customization
-- Theme blur effects
-- Core patches
+### 新增
+- 桌面启动模式
+- Xposed 模块支持
+- LSPosed 集成
+- 状态栏自定义
+- 控制中心自定义
+- 锁屏自定义
+- 主题模糊效果
+- 核心补丁
 
-### Features
-- Signature verification bypass
-- Permission check bypass
-- Custom status bar background
-- Large tiles in control center
-- Hide fingerprint icon
-- Force blur glass effect
-
-### Technical
-- Xposed API 93 compatibility
-- LSPosed scope configuration
-- Shared preferences for settings
-- Activity-based UI
+### 功能
+- 签名验证绕过
+- 权限检查绕过
+- 自定义状态栏背景
+- 控制中心大磁贴
+- 隐藏指纹图标
+- 强制模糊玻璃效果

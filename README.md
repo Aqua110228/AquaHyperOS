@@ -10,7 +10,6 @@
 - 主题模糊效果
 - 核心系统补丁
 - 签名验证绕过
-- 权限管理
 
 ## 系统要求
 
@@ -28,13 +27,6 @@
 5. 选择作用域：android, com.android.systemui
 6. 重启设备
 
-## 构建
-
-```bash
-# GitHub Actions 自动构建 APK
-# 查看：https://github.com/Aqua110228/AquaHyperOS/actions
-```
-
 ## 版本
 
 26w40f (2026-10-05)
@@ -42,10 +34,6 @@
 ## 更新日志
 
 查看 CHANGELOG.md 了解详细变更。
-
-## 许可证
-
-开源项目。
 
 ## 支持
 

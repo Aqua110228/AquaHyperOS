@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.*
-import com.aqua.hyperos.utils.Logger
+// Logger removed to fix crashes
 
 class SettingsActivity : Activity() {
     
@@ -18,12 +18,7 @@ class SettingsActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
-        // 初始化日志
-        try {
-            Logger.init(this)
-        } catch (e: Exception) {
-            // 日志初始化失败不影响界面
-        }
+        // Logger removed to prevent crashes
         
         // 检测 LSPosed 状态
         isLSPosedActive = checkLSPosedActive()
@@ -124,16 +119,7 @@ class SettingsActivity : Activity() {
         // Module Status
         addStatusRow(card, "模块状态", if (isLSPosedActive) "✓ 已激活" else "✗ 未激活", isLSPosedActive)
         
-        // Log Status
-        try {
-            val logPath = Logger.getLogPath()
-            val logSize = Logger.getLogSize()
-            if (logPath != null) {
-                addStatusRow(card, "日志文件", "${logSize / 1024} KB", logSize > 0)
-            }
-        } catch (e: Exception) {
-            // 忽略
-        }
+        // Log feature removed for stability
         
         mainLayout.addView(card)
     }
@@ -235,11 +221,7 @@ class SettingsActivity : Activity() {
             setOnCheckedChangeListener { _, isChecked ->
                 prefs.edit().putBoolean(setting.key, isChecked).apply()
                 
-                try {
-                    Logger.i("设置", "配置变更: ${setting.key} = $isChecked")
-                } catch (e: Exception) {
-                    // 忽略
-                }
+                // Logger removed
                 
                 if (isLSPosedActive) {
                     Toast.makeText(context, "已保存，重启生效", Toast.LENGTH_SHORT).show()
@@ -282,11 +264,7 @@ class SettingsActivity : Activity() {
                     val value = (seekBar?.progress ?: 0) + setting.min
                     prefs.edit().putInt(setting.key, value).apply()
                     
-                    try {
-                        Logger.i("设置", "配置变更: ${setting.key} = $value")
-                    } catch (e: Exception) {
-                        // 忽略
-                    }
+                    // Logger removed
                     
                     Toast.makeText(context, "已保存", Toast.LENGTH_SHORT).show()
                 }
@@ -323,11 +301,7 @@ class SettingsActivity : Activity() {
                     val color = text.toString()
                     prefs.edit().putString(setting.key, color).apply()
                     
-                    try {
-                        Logger.i("设置", "配置变更: ${setting.key} = $color")
-                    } catch (e: Exception) {
-                        // 忽略
-                    }
+                    // Logger removed
                 }
             }
             
@@ -353,21 +327,11 @@ class SettingsActivity : Activity() {
     }
     
     private fun viewLogs() {
-        try {
-            val logs = Logger.getLogs(200)
-            
-            AlertDialog.Builder(this)
-                .setTitle("最近日志 (200行)")
-                .setMessage(logs)
-                .setPositiveButton("关闭", null)
-                .setNeutralButton("清空日志") { _, _ ->
-                    Logger.clearLogs()
-                    Toast.makeText(this, "日志已清空", Toast.LENGTH_SHORT).show()
-                }
-                .show()
-        } catch (e: Exception) {
-            Toast.makeText(this, "无法读取日志: ${e.message}", Toast.LENGTH_SHORT).show()
-        }
+        AlertDialog.Builder(this)
+            .setTitle("日志功能")
+            .setMessage("日志功能已移除以提升稳定性")
+            .setPositiveButton("确定", null)
+            .show()
     }
     
     private fun showAbout() {
