@@ -1,0 +1,209 @@
+name: Build APK Fixed
+
+on:
+  push:
+    branches: [ main ]
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+        
+    - name: Install Android SDK
+      run: |
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip
+        unzip -q commandlinetools-linux-9477386_latest.zip
+        mkdir -p $HOME/android-sdk/cmdline-tools
+        mv cmdline-tools $HOME/android-sdk/cmdline-tools/latest
+        
+        export ANDROID_HOME=$HOME/android-sdk
+        export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
+        
+        yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
+        $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
+        
+        echo "ANDROID_HOME=$ANDROID_HOME" >> $GITHUB_ENV
+        echo "$ANDROID_HOME/platform-tools" >> $GITHUB_PATH
+        echo "$ANDROID_HOME/build-tools/34.0.0" >> $GITHUB_PATH
+    
+    - name: Install kotlinc
+      run: |
+        wget -q https://github.com/JetBrains/kotlin/releases/download/v1.9.10/kotlin-compiler-1.9.10.zip
+        unzip -q kotlin-compiler-1.9.10.zip
+        sudo mv kotlinc /opt/
+        echo "/opt/kotlinc/bin" >> $GITHUB_PATH
+        
+    - name: Verify tools
+      run: |
+        /opt/kotlinc/bin/kotlinc -version
+        which aapt
+        which apksigner
+        
+    - name: Create Xposed stubs
+      run: |
+        mkdir -p stubs/de/robv/android/xposed
+        
+        cat > stubs/de/robv/android/xposed/IXposedHookLoadPackage.java << 'JAVA'
+        package de.robv.android.xposed;
+        public interface IXposedHookLoadPackage {
+            void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable;
+        }
+        JAVA
+        
+        cat > stubs/de/robv/android/xposed/XC_LoadPackage.java << 'JAVA'
+        package de.robv.android.xposed;
+        public class XC_LoadPackage {
+            public static class LoadPackageParam {
+                public String packageName;
+                public ClassLoader classLoader;
+            }
+        }
+        JAVA
+        
+        cat > stubs/de/robv/android/xposed/XposedHelpers.java << 'JAVA'
+        package de.robv.android.xposed;
+        public class XposedHelpers {
+            public static Object callMethod(Object obj, String methodName, Object... args) { return null; }
+            public static Object getObjectField(Object obj, String fieldName) { return null; }
+            public static void setObjectField(Object obj, String fieldName, Object value) {}
+            public static Class<?> findClass(String className, ClassLoader classLoader) { return Object.class; }
+        }
+        JAVA
+        
+        cat > stubs/de/robv/android/xposed/XC_MethodHook.java << 'JAVA'
+        package de.robv.android.xposed;
+        public abstract class XC_MethodHook {
+            public static class MethodHookParam {
+                public Object thisObject;
+                public Object[] args;
+                public Object getResult() { return null; }
+                public void setResult(Object result) {}
+            }
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {}
+            protected void afterHookedMethod(MethodHookParam param) throws Throwable {}
+        }
+        JAVA
+        
+        cat > stubs/de/robv/android/xposed/XposedBridge.java << 'JAVA'
+        package de.robv.android.xposed;
+        public class XposedBridge {
+            public static void log(String text) {}
+        }
+        JAVA
+        
+        cd stubs
+        javac de/robv/android/xposed/*.java
+        jar cf ../xposed-api.jar de/
+        cd ..
+        ls -lh xposed-api.jar
+        
+    - name: Compile Kotlin
+      run: |
+        find app/src/main/java -name "*.kt" > sources.txt
+        echo "Found $(wc -l < sources.txt) Kotlin files"
+        
+        /opt/kotlinc/bin/kotlinc @sources.txt \
+          -classpath xposed-api.jar:$ANDROID_HOME/platforms/android-34/android.jar \
+          -d classes.jar \
+          -include-runtime
+          
+        ls -lh classes.jar
+        
+    - name: Build APK
+      run: |
+        mkdir -p build/apk
+        cd build/apk
+        
+        # Extract classes
+        jar xf ../../classes.jar
+        
+        # Copy manifest
+        cp ../../app/src/main/AndroidManifest.xml AndroidManifest.xml
+        
+        # Create res
+        mkdir -p res/values
+        echo '<?xml version="1.0" encoding="utf-8"?><resources><string name="app_name">AquaHyperOS</string></resources>' > res/values/strings.xml
+        
+        # Create arrays for scope
+        mkdir -p res/values
+        cat > res/values/arrays.xml << 'XML'
+        <?xml version="1.0" encoding="utf-8"?>
+        <resources>
+            <string-array name="xposed_scope">
+                <item>android</item>
+                <item>com.android.systemui</item>
+            </string-array>
+        </resources>
+        XML
+        
+        cd ..
+        
+        # Package
+        $ANDROID_HOME/build-tools/34.0.0/aapt package \
+          -f -m \
+          -M apk/AndroidManifest.xml \
+          -S apk/res \
+          -I $ANDROID_HOME/platforms/android-34/android.jar \
+          -F AquaHyperOS-unaligned.apk \
+          apk
+          
+        cd apk
+        zip -r ../AquaHyperOS-unaligned.apk . -x "AndroidManifest.xml" "res/*"
+        cd ..
+        
+        # Align
+        $ANDROID_HOME/build-tools/34.0.0/zipalign -f 4 AquaHyperOS-unaligned.apk AquaHyperOS-aligned.apk
+        
+        # Sign
+        keytool -genkey -v -keystore release.keystore \
+          -alias release -keyalg RSA -keysize 2048 -validity 10000 \
+          -storepass android -keypass android \
+          -dname "CN=AquaHyperOS,OU=Dev,O=AquaHyperOS,L=CN,S=CN,C=CN"
+          
+        $ANDROID_HOME/build-tools/34.0.0/apksigner sign \
+          --ks release.keystore \
+          --ks-pass pass:android \
+          --key-pass pass:android \
+          --out AquaHyperOS-26w40f.apk \
+          AquaHyperOS-aligned.apk
+          
+        ls -lh AquaHyperOS-26w40f.apk
+        
+        # Verify
+        $ANDROID_HOME/build-tools/34.0.0/apksigner verify AquaHyperOS-26w40f.apk
+        echo "APK verified!"
+        
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: AquaHyperOS-26w40f
+        path: build/AquaHyperOS-26w40f.apk
+        retention-days: 90
+        
+    - name: Upload to Release
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: softprops/action-gh-release@v1
+      with:
+        files: build/AquaHyperOS-26w40f.apk
+        body_path: RELEASE_26W40F.md
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Success
+      run: |
+        echo "==========================================="
+        echo "BUILD SUCCESS!"
+        echo "APK: AquaHyperOS-26w40f.apk"
+        echo "Size: $(du -h build/AquaHyperOS-26w40f.apk | cut -f1)"
+        echo "==========================================="
