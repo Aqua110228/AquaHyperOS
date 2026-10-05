@@ -1,0 +1,76 @@
+name: Build APK
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+        
+    - name: Install Kotlin compiler
+      run: |
+        wget -q https://github.com/JetBrains/kotlin/releases/download/v1.9.10/kotlin-compiler-1.9.10.zip
+        unzip -q kotlin-compiler-1.9.10.zip
+        echo "$PWD/kotlinc/bin" >> $GITHUB_PATH
+        
+    - name: Verify Kotlin installation
+      run: kotlinc -version
+      
+    - name: Create build directories
+      run: |
+        mkdir -p build/classes
+        mkdir -p build/apk
+        
+    - name: Compile Xposed module
+      run: |
+        echo "Compiling Xposed hooks..."
+        find xposed/src/main/java -name "*.kt" > sources.txt
+        kotlinc @sources.txt -include-runtime -d build/classes/xposed.jar
+        echo "Compilation successful!"
+        
+    - name: Create APK structure
+      run: |
+        mkdir -p build/apk/META-INF
+        mkdir -p build/apk/assets
+        mkdir -p build/apk/res
+        cp -r xposed/src/main/assets/* build/apk/assets/ || true
+        cp xposed/src/main/AndroidManifest.xml build/apk/AndroidManifest.xml
+        
+    - name: Package APK
+      run: |
+        cd build/apk
+        jar cvf ../AquaHyperOS-26w40f.apk *
+        cd ../..
+        
+    - name: Sign APK (debug)
+      run: |
+        keytool -genkey -v -keystore debug.keystore -alias androiddebugkey \
+          -keyalg RSA -keysize 2048 -validity 10000 -storepass android \
+          -keypass android -dname "CN=Debug,OU=Debug,O=Debug,L=Debug,S=Debug,C=US"
+        jarsigner -verbose -keystore debug.keystore -storepass android \
+          -keypass android build/AquaHyperOS-26w40f.apk androiddebugkey
+          
+    - name: Upload APK
+      uses: actions/upload-artifact@v3
+      with:
+        name: AquaHyperOS-APK
+        path: build/AquaHyperOS-26w40f.apk
+        
+    - name: Build summary
+      run: |
+        echo "Build completed successfully!"
+        ls -lh build/AquaHyperOS-26w40f.apk
+        echo "APK ready for download"
