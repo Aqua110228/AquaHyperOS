@@ -4,8 +4,6 @@
     android:versionCode="6"
     android:versionName="26w40f">
 
-
-
     <application
         android:allowBackup="true"
         android:label="@string/app_name"
