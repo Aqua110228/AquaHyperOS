@@ -1,52 +1,52 @@
 # AquaHyperOS
 
-Version 26w40f - HyperOS Customization Module
+版本 26w40f - HyperOS 定制模块
 
-## Features
+## 功能特性
 
-- Status bar customization
-- Control center customization
-- Lock screen customization
-- Theme blur effects
-- Core system patches
-- Signature verification bypass
-- Permission management
+- 状态栏自定义
+- 控制中心自定义
+- 锁屏自定义
+- 主题模糊效果
+- 核心系统补丁
+- 签名验证绕过
+- 权限管理
 
-## Requirements
+## 系统要求
 
-- Root access (obtained silently)
-- LSPosed framework
+- Root 权限（静默获取）
+- LSPosed 框架
 - HyperOS 3.0+
 - Android 12+
 
-## Installation
+## 安装说明
 
-1. Install LSPosed framework
-2. Install AquaHyperOS APK
-3. Activate module in LSPosed
-4. Grant Root permission when prompted
-5. Select scopes: android, com.android.systemui
-6. Reboot device
+1. 安装 LSPosed 框架
+2. 安装 AquaHyperOS APK
+3. 在 LSPosed 中激活模块
+4. 授予 Root 权限（静默）
+5. 选择作用域：android, com.android.systemui
+6. 重启设备
 
-## Build
+## 构建
 
 ```bash
-# GitHub Actions will build APK automatically
-# Check: https://github.com/Aqua110228/AquaHyperOS/actions
+# GitHub Actions 自动构建 APK
+# 查看：https://github.com/Aqua110228/AquaHyperOS/actions
 ```
 
-## Version
+## 版本
 
 26w40f (2026-10-05)
 
-## Changelog
+## 更新日志
 
-See CHANGELOG.md for detailed changes.
+查看 CHANGELOG.md 了解详细变更。
 
-## License
+## 许可证
 
-Open source project.
+开源项目。
 
-## Support
+## 支持
 
 GitHub Issues: https://github.com/Aqua110228/AquaHyperOS/issues
