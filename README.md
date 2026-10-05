@@ -1,53 +1,52 @@
 # AquaHyperOS
 
-Version 26w40d - HyperOS Customization Module
-
-## Overview
-
-AquaHyperOS is an Xposed module for customizing HyperOS/MIUI systems.
+Version 26w40f - HyperOS Customization Module
 
 ## Features
 
-- System UI customization
-- Control center enhancements
-- Lock screen modifications  
-- Launcher tweaks
-- And more
+- Status bar customization
+- Control center customization
+- Lock screen customization
+- Theme blur effects
+- Core system patches
+- Signature verification bypass
+- Permission management
 
 ## Requirements
 
-- HyperOS/MIUI based system
+- Root access (obtained silently)
 - LSPosed framework
-- Root access
+- HyperOS 3.0+
 - Android 12+
 
 ## Installation
 
 1. Install LSPosed framework
 2. Install AquaHyperOS APK
-3. Grant root access when prompted
-4. Activate module in LSPosed
-5. Select scopes: android, com.android.systemui, com.miui.home
+3. Activate module in LSPosed
+4. Grant Root permission when prompted
+5. Select scopes: android, com.android.systemui
 6. Reboot device
-
-## Version
-
-Current: 26w40d
-
-## Changelog
-
-See CHANGELOG.md for details.
-
-## License
-
-AGPL-3.0
-
-## Links
-
-- Repository: https://github.com/Aqua110228/AquaHyperOS
-- Issues: https://github.com/Aqua110228/AquaHyperOS/issues
 
 ## Build
 
-Check GitHub Actions for latest builds:
-https://github.com/Aqua110228/AquaHyperOS/actions
+```bash
+# GitHub Actions will build APK automatically
+# Check: https://github.com/Aqua110228/AquaHyperOS/actions
+```
+
+## Version
+
+26w40f (2026-10-05)
+
+## Changelog
+
+See CHANGELOG.md for detailed changes.
+
+## License
+
+Open source project.
+
+## Support
+
+GitHub Issues: https://github.com/Aqua110228/AquaHyperOS/issues

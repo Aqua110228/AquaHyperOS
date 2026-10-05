@@ -1,26 +1,50 @@
 # AquaHyperOS Changelog
 
-## v26w40d (2026-10-05)
+## v26w40f (2026-10-05)
 
 ### Fixed
-- Fixed crash on startup
-- Removed unnecessary permission requests
-- Added silent root access check
-- Show proper error screen when root is not available
+- Fixed app crash on startup
+- Removed storage permissions (no longer needed)
+- Silent Root permission check (automatic, no popup)
+- Removed Logger dependency that caused crashes
+- Improved app stability
 
 ### Changed
-- App now silently checks for root access on startup
-- No more runtime permission dialogs
-- Clean loading screen while checking root
-- Improved user experience
+- Root permission now obtained silently
+- Show Root permission page if Root unavailable
+- Simplified permission model
+- Version updated to 26w40f
 
 ### Technical
-- Removed INTERNET, READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE permissions
-- Added root check coroutine
-- Proper error handling for non-rooted devices
+- Removed WRITE_EXTERNAL_STORAGE permission
+- Removed READ_EXTERNAL_STORAGE permission
+- Silent su command execution
+- No more permission popups
 
 ---
 
-## Previous Versions
+## v26w40e (2026-10-04)
 
-See git history for older versions.
+### Added
+- Desktop launcher mode
+- Full Xposed module support
+- LSPosed integration
+- Status bar customization
+- Control center customization
+- Lock screen customization
+- Theme blur effects
+- Core patches
+
+### Features
+- Signature verification bypass
+- Permission check bypass
+- Custom status bar background
+- Large tiles in control center
+- Hide fingerprint icon
+- Force blur glass effect
+
+### Technical
+- Xposed API 93 compatibility
+- LSPosed scope configuration
+- Shared preferences for settings
+- Activity-based UI
