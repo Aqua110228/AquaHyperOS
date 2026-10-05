@@ -104,6 +104,12 @@ app/src/main/java/com/aqua/hyperos/
 
 ## 版本历史
 
+### 26w40e (2024-10-04)
+- 改为桌面显示图标，独立应用模式
+- 类似 HyperCeiler 的使用方式
+- 移除从系统设置调用的方式
+- 更符合 Root 工具的使用习惯
+
 ### 26w40d (2024-10-04)
 - 添加 LSPosed 默认作用域配置
 - 自动勾选 android、systemui、settings 作用域

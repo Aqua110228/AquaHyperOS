@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.aqua.hyperos"
-    android:versionCode="4"
-    android:versionName="26w40d">
+    android:versionCode="5"
+    android:versionName="26w40e">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -12,13 +12,16 @@
         android:label="@string/app_name"
         android:theme="@android:style/Theme.DeviceDefault.Settings">
 
-        <!-- 设置 Activity - 从系统设置调用 -->
+        <!-- 主界面 Activity - 桌面启动 -->
         <activity
-            android:name=".ui.SettingsActivity"
+            android:name=".ui.MainActivity"
             android:label="@string/app_name"
             android:exported="true"
             android:launchMode="singleTask">
-            <!-- 不添加 LAUNCHER，不在桌面显示图标 -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <!-- Xposed 入口点 -->

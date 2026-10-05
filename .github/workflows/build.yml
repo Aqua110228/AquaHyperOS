@@ -193,6 +193,7 @@ jobs:
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
+        tag_name: ${{ github.ref_name }}
         files: AquaHyperOS.apk
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
